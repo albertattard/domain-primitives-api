@@ -20,7 +20,7 @@ public class DomainObject<T> {
       return true;
     }
 
-    if (object != null && getClass() != object.getClass()) {
+    if (object != null && getClass() == object.getClass()) {
       @SuppressWarnings("rawtypes")
       final DomainObject other = (DomainObject) object;
       return value.equals(other.value);
