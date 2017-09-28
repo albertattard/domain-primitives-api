@@ -7,7 +7,7 @@ public class ValidatedDomainObject extends StringBasedDomainObject {
 
   private final ValidationState validationState;
 
-  protected ValidatedDomainObject(final String value, final ValidationState validationState)
+  protected ValidatedDomainObject(final Optional<String> value, final ValidationState validationState)
       throws NullPointerException {
     super(value);
     this.validationState = Objects.requireNonNull(validationState);
