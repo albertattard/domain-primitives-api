@@ -38,6 +38,10 @@ public class DomainObject<T> {
     return value.hashCode();
   }
 
+  public T toNullable() {
+    return value.orElse(null);
+  }
+
   @Override
   public String toString() {
     return value.toString();
