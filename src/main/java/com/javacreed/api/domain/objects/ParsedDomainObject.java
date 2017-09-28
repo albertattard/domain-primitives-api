@@ -20,4 +20,8 @@ public class ParsedDomainObject<T> extends ValidatedDomainObject {
   public boolean hasObject() {
     return object.isPresent();
   }
+
+  public T toNullableObject() {
+    return object.orElse(null);
+  }
 }
