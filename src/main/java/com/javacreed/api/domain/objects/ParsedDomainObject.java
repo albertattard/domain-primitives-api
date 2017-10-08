@@ -13,15 +13,15 @@ public class ParsedDomainObject<T> extends ValidatedDomainObject {
     this.object = Objects.requireNonNull(object);
   }
 
+  public T getNullableObject() {
+    return object.orElse(null);
+  }
+
   public Optional<T> getObject() {
     return object;
   }
 
   public boolean hasObject() {
     return object.isPresent();
-  }
-
-  public T toNullableObject() {
-    return object.orElse(null);
   }
 }

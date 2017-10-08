@@ -29,6 +29,16 @@ public class DomainObject<T> {
     return false;
   }
 
+  /**
+   * Returns the value if one is present, otherwise <code>null</code>. Note that this method may return
+   * <code>null</code>
+   *
+   * @return the value if one is present, otherwise <code>null</code>
+   */
+  public T getNullable() {
+    return value.orElse(null);
+  }
+
   public Optional<T> getValue() {
     return value;
   }
@@ -38,8 +48,13 @@ public class DomainObject<T> {
     return value.hashCode();
   }
 
-  public T toNullable() {
-    return value.orElse(null);
+  /**
+   * Returns <code>true</code> if there is a value present, otherwise <code>false</code>.
+   *
+   * @return <code>true</code> if there is a value present, otherwise <code>false</code>
+   */
+  public boolean isValuePresent() {
+    return value.isPresent();
   }
 
   @Override
