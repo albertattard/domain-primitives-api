@@ -30,6 +30,6 @@ public class StringBasedDomainObject extends DomainObject<String> implements Com
 
   @Override
   public String toString() {
-    return String.valueOf(value);
+    return value.orElse("empty");
   }
 }
