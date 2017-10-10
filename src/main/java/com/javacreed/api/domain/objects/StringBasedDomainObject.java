@@ -4,15 +4,16 @@ import java.util.Optional;
 
 public class StringBasedDomainObject extends DomainObject<String> implements Comparable<StringBasedDomainObject> {
 
+  @FunctionalInterface
+  public static interface StringComparator {
+    int compare(String a, String b);
+  }
+
   protected StringBasedDomainObject(final Optional<String> value) throws NullPointerException {
     super(value);
   }
 
-  @Override
-  public int compareTo(final StringBasedDomainObject other) {
-    final String a = getNullable();
-    final String b = other.getNullable();
-
+  protected int compare(final String a, final String b, final StringComparator comparator) {
     if (a == b) {
       return 0;
     }
@@ -25,7 +26,17 @@ public class StringBasedDomainObject extends DomainObject<String> implements Com
       return 1;
     }
 
-    return a.compareTo(b);
+    return comparator.compare(a, b);
+
+  }
+
+  @Override
+  public int compareTo(final StringBasedDomainObject other) {
+    return compare(getNullable(), other.getNullable(), (a, b) -> a.compareTo(b));
+  }
+
+  public int compareToIgnoreCase(final StringBasedDomainObject other) {
+    return compare(getNullable(), other.getNullable(), (a, b) -> a.compareToIgnoreCase(b));
   }
 
   @Override
