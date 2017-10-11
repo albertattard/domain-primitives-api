@@ -1,17 +1,37 @@
 package com.javacreed.api.domain.objects;
 
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class DomainObject<T> {
+public class ObjectBasedDomainObject<T> {
 
   protected final Optional<T> value;
 
-  protected DomainObject(final Optional<T> value) throws NullPointerException {
+  protected ObjectBasedDomainObject(final Optional<T> value) throws NullPointerException {
     this.value = Objects.requireNonNull(value);
+  }
+
+  protected int compareTo(final ObjectBasedDomainObject<T> other, final Comparator<T> comparator) {
+    final T a = getNullable();
+    final T b = other.getNullable();
+
+    if (a == b) {
+      return 0;
+    }
+
+    if (a == null) {
+      return -1;
+    }
+
+    if (b == null) {
+      return 1;
+    }
+
+    return comparator.compare(a, b);
   }
 
   @Override
@@ -22,7 +42,7 @@ public class DomainObject<T> {
 
     if (object != null && getClass() == object.getClass()) {
       @SuppressWarnings("rawtypes")
-      final DomainObject other = (DomainObject) object;
+      final ObjectBasedDomainObject other = (ObjectBasedDomainObject) object;
       return value.equals(other.value);
     }
 

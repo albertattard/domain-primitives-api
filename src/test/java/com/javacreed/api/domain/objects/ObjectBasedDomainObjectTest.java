@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DomainObjectTest {
+public class ObjectBasedDomainObjectTest {
 
-  public static class T extends DomainObject<String> {
+  public static class T extends ObjectBasedDomainObject<String> {
 
     public static T ofNullable(final String value) {
       return new T(Optional.ofNullable(value));
