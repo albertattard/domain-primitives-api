@@ -1,19 +1,28 @@
 package com.javacreed.api.domain.objects;
 
+import java.util.Comparator;
 import java.util.Optional;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public class StringBasedDomainObject extends DomainObject<String> implements Comparable<StringBasedDomainObject> {
 
-  @FunctionalInterface
-  public static interface StringComparator {
-    int compare(String a, String b);
-  }
+  public static final Comparator<StringBasedDomainObject> CASE_INSENSITIVE = (a, b) -> a.compareToIgnoreCase(b);
 
   protected StringBasedDomainObject(final Optional<String> value) throws NullPointerException {
     super(value);
   }
 
-  protected int compare(final String a, final String b, final StringComparator comparator) {
+  @Override
+  public int compareTo(final StringBasedDomainObject other) {
+    return compareTo(other, (a, b) -> a.compareTo(b));
+  }
+
+  protected int compareTo(final StringBasedDomainObject other, final Comparator<String> comparator) {
+    final String a = getNullable();
+    final String b = other.getNullable();
+
     if (a == b) {
       return 0;
     }
@@ -30,17 +39,7 @@ public class StringBasedDomainObject extends DomainObject<String> implements Com
 
   }
 
-  @Override
-  public int compareTo(final StringBasedDomainObject other) {
-    return compare(getNullable(), other.getNullable(), (a, b) -> a.compareTo(b));
-  }
-
   public int compareToIgnoreCase(final StringBasedDomainObject other) {
-    return compare(getNullable(), other.getNullable(), (a, b) -> a.compareToIgnoreCase(b));
-  }
-
-  @Override
-  public String toString() {
-    return value.orElse("empty");
+    return compareTo(other, (a, b) -> a.compareToIgnoreCase(b));
   }
 }

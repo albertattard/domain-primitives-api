@@ -59,6 +59,6 @@ public class DomainObject<T> {
 
   @Override
   public String toString() {
-    return value.toString();
+    return value.map(v -> v.toString()).orElse("empty");
   }
 }
