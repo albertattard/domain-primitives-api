@@ -2,6 +2,9 @@ package com.javacreed.api.domain.objects;
 
 import java.util.Comparator;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject> {
 
   public static final Comparator<ShortBasedDomainObject> DESCENDING_ORDER = (a, b) -> Short.compare(b.getValue(),

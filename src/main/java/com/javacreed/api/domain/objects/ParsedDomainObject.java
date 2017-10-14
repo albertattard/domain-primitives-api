@@ -3,6 +3,9 @@ package com.javacreed.api.domain.objects;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public class ParsedDomainObject<T> extends ValidatedDomainObject {
 
   protected final Optional<T> object;

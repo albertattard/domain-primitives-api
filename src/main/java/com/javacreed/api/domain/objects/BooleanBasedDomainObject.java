@@ -2,6 +2,9 @@ package com.javacreed.api.domain.objects;
 
 import java.util.Comparator;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public class BooleanBasedDomainObject implements Comparable<BooleanBasedDomainObject> {
 
   public static final Comparator<BooleanBasedDomainObject> DESCENDING_ORDER = (a, b) -> Boolean.compare(b.getValue(),
@@ -37,7 +40,7 @@ public class BooleanBasedDomainObject implements Comparable<BooleanBasedDomainOb
 
   @Override
   public int hashCode() {
-    return value ? 1 : 0;
+    return value ? 1231 : 1237;
   }
 
   @Override

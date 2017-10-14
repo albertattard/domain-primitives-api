@@ -3,6 +3,9 @@ package com.javacreed.api.domain.objects;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public class ValidatedDomainObject extends StringBasedDomainObject {
 
   private final ValidationState validationState;
@@ -15,6 +18,10 @@ public class ValidatedDomainObject extends StringBasedDomainObject {
 
   public Optional<String> getInvalidMessage() {
     return validationState.getInvalidMessage();
+  }
+
+  public String getNullableInvalidMessage() {
+    return validationState.getNullableInvalidMessage();
   }
 
   public boolean isInvalid() {

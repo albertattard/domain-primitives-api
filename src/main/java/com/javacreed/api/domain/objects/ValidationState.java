@@ -3,6 +3,9 @@ package com.javacreed.api.domain.objects;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public class ValidationState {
 
   private static final ValidationState VALID = new ValidationState(true, Optional.empty());
@@ -25,8 +28,35 @@ public class ValidationState {
     this.invalidMessage = Objects.requireNonNull(invalidMessage);
   }
 
+  @Override
+  public boolean equals(final Object object) {
+    if (this == object) {
+      return true;
+    }
+
+    if (object != null && getClass() == object.getClass()) {
+      final ValidationState other = (ValidationState) object;
+      return valid == other.valid && invalidMessage.equals(other.invalidMessage);
+    }
+
+    return false;
+  }
+
   public Optional<String> getInvalidMessage() {
     return invalidMessage;
+  }
+
+  public String getNullableInvalidMessage() {
+    return invalidMessage.orElse(null);
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + invalidMessage.hashCode();
+    result = prime * result + (valid ? 1231 : 1237);
+    return result;
   }
 
   public boolean isInvalid() {
@@ -35,5 +65,10 @@ public class ValidationState {
 
   public boolean isValid() {
     return valid;
+  }
+
+  @Override
+  public String toString() {
+    return valid ? "Valid" : invalidMessage.orElse("Invalid");
   }
 }

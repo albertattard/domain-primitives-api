@@ -2,6 +2,9 @@ package com.javacreed.api.domain.objects;
 
 import java.util.Comparator;
 
+import javax.annotation.concurrent.Immutable;
+
+@Immutable
 public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject> {
 
   public static final Comparator<FloatBasedDomainObject> DESCENDING_ORDER = (a, b) -> Float.compare(b.getValue(),
