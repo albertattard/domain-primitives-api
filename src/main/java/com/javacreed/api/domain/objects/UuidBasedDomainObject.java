@@ -26,6 +26,10 @@ public class UuidBasedDomainObject extends ComparableBasedDomainObject<UUID> {
     return value.map(UuidUtils::toBytes);
   }
 
+  public Optional<String> getFormatted() {
+    return value.map(UUID::toString);
+  }
+
   /**
    * This method is a shortcut to <code>getBytes().orElse(null)</code>
    * <p>
@@ -39,5 +43,9 @@ public class UuidBasedDomainObject extends ComparableBasedDomainObject<UUID> {
    */
   public byte[] getNullableBytes() {
     return getBytes().orElse(null);
+  }
+
+  public String getNullableFormatted() {
+    return getFormatted().orElse(null);
   }
 }
