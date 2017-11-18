@@ -77,6 +77,17 @@ public class ObjectBasedDomainObject<T> {
     return value.isPresent();
   }
 
+  /**
+   * Returns the value if present, otherwise return <code>other</code>.
+   *
+   * @param other
+   *          the value to be returned if there is no value present, may be <code>null</code>
+   * @return the value, if present, otherwise <code>other</code>
+   */
+  public T orElse(final T other) {
+    return value.orElse(other);
+  }
+
   @Override
   public String toString() {
     return value.map(v -> v.toString()).orElse("empty");
