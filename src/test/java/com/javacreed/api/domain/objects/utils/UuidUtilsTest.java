@@ -20,6 +20,17 @@ public class UuidUtilsTest {
     Assert.assertNotEquals(expected, incompatible);
   }
 
+  @Test
+  public void isValid() {
+    Assert.assertTrue(UuidUtils.isValid(UUID.randomUUID().toString()));
+
+    Assert.assertFalse(UuidUtils.isValid("0123456-89ab-cdef-0123-456789abcedf"));
+    Assert.assertFalse(UuidUtils.isValid("01234567-89a-cdef-0123-456789abcedf"));
+    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cde-0123-456789abcedf"));
+    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cdef-012-456789abcedf"));
+    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cdef-0123-456789abced"));
+  }
+
   /**
    * Verifies that whatever is converted to bytes can be converted back to the same UUID
    */

@@ -2,6 +2,7 @@ package com.javacreed.api.domain.objects.utils;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import com.google.common.base.Preconditions;
 
@@ -12,6 +13,30 @@ import com.google.common.base.Preconditions;
  * @see UUID
  */
 public class UuidUtils {
+
+  private static final Pattern REGEX = Pattern
+      .compile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
+
+  public static String checkArgument(final String value) throws NullPointerException, IllegalArgumentException {
+    return UuidUtils.checkArgument(value, "UUID value");
+  }
+
+  public static String checkArgument(final String value, final String name)
+      throws NullPointerException, IllegalArgumentException {
+    Preconditions.checkNotNull(value, name + " is null");
+    Preconditions.checkArgument(value.length() == 36, name + " is of invalid length");
+    Preconditions.checkArgument(UuidUtils.REGEX.matcher(value).matches(),
+        name + " contains invalid letters or is in invalid format");
+    return value;
+  }
+
+  public static boolean isValid(final String value) {
+    if (value == null || value.length() != 36) {
+      return false;
+    }
+
+    return UuidUtils.REGEX.matcher(value).matches();
+  }
 
   /**
    * Converts the given UUID to bytes. Note that this is incompatible with the {@link UUID#nameUUIDFromBytes()}. The
