@@ -3,8 +3,11 @@ package com.javacreed.api.domain.objects;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 import javax.annotation.concurrent.Immutable;
+
+import com.google.common.base.Preconditions;
 
 @Immutable
 public class ObjectBasedDomainObject<T> {
@@ -75,6 +78,24 @@ public class ObjectBasedDomainObject<T> {
    */
   public boolean isValuePresent() {
     return value.isPresent();
+  }
+
+  /**
+   * If a value is present, apply the provided mapping function to it, and if the result is non-null, return an
+   * {@link Optional} describing the result. Otherwise return an empty {@link Optional}.
+   *
+   * @param <U>
+   *          The type of the result of the mapping function
+   * @param mapper
+   *          a mapping function to apply to the value, if present (which cannot be <code>null</code>)
+   * @return an {@link Optional} describing the result of applying a mapping function to the value of this
+   *         {@link Optional}, if a value is present, otherwise an empty {@link Optional}
+   * @throws NullPointerException
+   *           if the mapping function is <code>null</code>
+   */
+  public <U> Optional<U> map(final Function<? super T, ? extends U> mapper) throws NullPointerException {
+    Preconditions.checkNotNull(mapper);
+    return value.map(mapper);
   }
 
   /**
