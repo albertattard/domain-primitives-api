@@ -1,4 +1,4 @@
-package com.javacreed.api.domain.objects;
+package com.javacreed.api.domain.objects.optional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -23,11 +23,11 @@ public class UuidBasedDomainObject extends ComparableBasedDomainObject<UUID> {
    * @see UuidUtils#toBytes(UUID)
    */
   public Optional<byte[]> getBytes() {
-    return value.map(UuidUtils::toBytes);
+    return map(UuidUtils::toBytes);
   }
 
   public Optional<String> getFormatted() {
-    return value.map(UUID::toString);
+    return map(UUID::toString);
   }
 
   /**

@@ -1,9 +1,10 @@
-package com.javacreed.api.domain.objects;
+package com.javacreed.api.domain.objects.optional;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
+
+import com.google.common.base.Preconditions;
 
 @Immutable
 public class ValidationState {
@@ -25,7 +26,7 @@ public class ValidationState {
 
   private ValidationState(final boolean valid, final Optional<String> invalidMessage) throws NullPointerException {
     this.valid = valid;
-    this.invalidMessage = Objects.requireNonNull(invalidMessage);
+    this.invalidMessage = Preconditions.checkNotNull(invalidMessage);
   }
 
   @Override

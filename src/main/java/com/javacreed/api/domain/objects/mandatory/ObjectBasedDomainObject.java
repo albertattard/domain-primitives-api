@@ -1,4 +1,4 @@
-package com.javacreed.api.domain.objects.optional;
+package com.javacreed.api.domain.objects.mandatory;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -11,15 +11,15 @@ import com.google.common.base.Preconditions;
 @Immutable
 public class ObjectBasedDomainObject<T> {
 
-  protected final Optional<T> value;
+  protected final T value;
 
-  protected ObjectBasedDomainObject(final Optional<T> value) throws NullPointerException {
+  protected ObjectBasedDomainObject(final T value) throws NullPointerException {
     this.value = Preconditions.checkNotNull(value);
   }
 
   protected int compareTo(final ObjectBasedDomainObject<T> other, final Comparator<T> comparator) {
-    final T a = getNullable();
-    final T b = other.getNullable();
+    final T a = getValue();
+    final T b = other.getValue();
 
     if (a == b) {
       return 0;
@@ -51,32 +51,13 @@ public class ObjectBasedDomainObject<T> {
     return false;
   }
 
-  /**
-   * Returns the value if one is present, otherwise <code>null</code>. Note that this method may return
-   * <code>null</code>
-   *
-   * @return the value if one is present, otherwise <code>null</code>
-   */
-  public T getNullable() {
-    return orElse(null);
-  }
-
-  public Optional<T> getValue() {
+  public T getValue() {
     return value;
   }
 
   @Override
   public int hashCode() {
     return value.hashCode();
-  }
-
-  /**
-   * Returns <code>true</code> if there is a value present, otherwise <code>false</code>.
-   *
-   * @return <code>true</code> if there is a value present, otherwise <code>false</code>
-   */
-  public boolean isValuePresent() {
-    return value.isPresent();
   }
 
   /**
@@ -92,24 +73,13 @@ public class ObjectBasedDomainObject<T> {
    * @throws NullPointerException
    *           if the mapping function is <code>null</code>
    */
-  public <U> Optional<U> map(final Function<? super T, ? extends U> mapper) throws NullPointerException {
+  public <U> U map(final Function<? super T, ? extends U> mapper) throws NullPointerException {
     Preconditions.checkNotNull(mapper);
-    return value.map(mapper);
-  }
-
-  /**
-   * Returns the value if present, otherwise return <code>other</code>.
-   *
-   * @param other
-   *          the value to be returned if there is no value present, may be <code>null</code>
-   * @return the value, if present, otherwise <code>other</code>
-   */
-  public T orElse(final T other) {
-    return value.orElse(other);
+    return mapper.apply(value);
   }
 
   @Override
   public String toString() {
-    return map(v -> v.toString()).orElse("empty");
+    return String.valueOf(value);
   }
 }

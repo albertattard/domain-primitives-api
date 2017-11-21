@@ -1,4 +1,4 @@
-package com.javacreed.api.domain.objects;
+package com.javacreed.api.domain.objects.optional;
 
 import java.util.Optional;
 

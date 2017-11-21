@@ -1,6 +1,4 @@
-package com.javacreed.api.domain.objects.optional;
-
-import java.util.Optional;
+package com.javacreed.api.domain.objects.mandatory;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -8,7 +6,7 @@ import javax.annotation.concurrent.Immutable;
 public class ComparableBasedDomainObject<T extends Comparable<T>> extends ObjectBasedDomainObject<T>
     implements Comparable<ComparableBasedDomainObject<T>> {
 
-  protected ComparableBasedDomainObject(final Optional<T> value) throws NullPointerException {
+  protected ComparableBasedDomainObject(final T value) throws NullPointerException {
     super(value);
   }
 

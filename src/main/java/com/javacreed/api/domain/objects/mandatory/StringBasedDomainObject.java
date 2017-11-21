@@ -1,7 +1,6 @@
-package com.javacreed.api.domain.objects.optional;
+package com.javacreed.api.domain.objects.mandatory;
 
 import java.util.Comparator;
-import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -10,7 +9,7 @@ public class StringBasedDomainObject extends ComparableBasedDomainObject<String>
 
   public static final Comparator<StringBasedDomainObject> CASE_INSENSITIVE = (a, b) -> a.compareToIgnoreCase(b);
 
-  protected StringBasedDomainObject(final Optional<String> value) throws NullPointerException {
+  protected StringBasedDomainObject(final String value) throws NullPointerException {
     super(value);
   }
 

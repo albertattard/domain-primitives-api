@@ -1,9 +1,10 @@
-package com.javacreed.api.domain.objects;
+package com.javacreed.api.domain.objects.optional;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
+
+import com.google.common.base.Preconditions;
 
 @Immutable
 public class ParsedDomainObject<T> extends ValidatedDomainObject {
@@ -13,7 +14,7 @@ public class ParsedDomainObject<T> extends ValidatedDomainObject {
   protected ParsedDomainObject(final Optional<String> value, final ValidationState validationState,
       final Optional<T> object) throws NullPointerException {
     super(value, validationState);
-    this.object = Objects.requireNonNull(object);
+    this.object = Preconditions.checkNotNull(object);
   }
 
   public T getNullableObject() {

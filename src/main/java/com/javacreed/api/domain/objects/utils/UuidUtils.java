@@ -15,7 +15,8 @@ import com.google.common.base.Preconditions;
 public class UuidUtils {
 
   private static final Pattern REGEX = Pattern
-      .compile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
+                                              .compile(
+                                                  "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
 
   public static String checkArgument(final String value) throws NullPointerException, IllegalArgumentException {
     return UuidUtils.checkArgument(value, "UUID value");

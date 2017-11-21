@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Optional;
 
-import com.javacreed.api.domain.objects.ByteBasedDomainObject;
-import com.javacreed.api.domain.objects.IntBasedDomainObject;
-import com.javacreed.api.domain.objects.LongBasedDomainObject;
-import com.javacreed.api.domain.objects.ShortBasedDomainObject;
-import com.javacreed.api.domain.objects.StringBasedDomainObject;
-import com.javacreed.api.domain.objects.UuidBasedDomainObject;
+import com.javacreed.api.domain.objects.optional.StringBasedDomainObject;
+import com.javacreed.api.domain.objects.optional.UuidBasedDomainObject;
+import com.javacreed.api.domain.objects.primitives.ByteBasedDomainObject;
+import com.javacreed.api.domain.objects.primitives.IntBasedDomainObject;
+import com.javacreed.api.domain.objects.primitives.LongBasedDomainObject;
+import com.javacreed.api.domain.objects.primitives.ShortBasedDomainObject;
 
 public class PreparedStatementUtils {
 

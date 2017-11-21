@@ -1,9 +1,10 @@
-package com.javacreed.api.domain.objects;
+package com.javacreed.api.domain.objects.optional;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
+
+import com.google.common.base.Preconditions;
 
 @Immutable
 public class ValidatedDomainObject extends StringBasedDomainObject {
@@ -13,7 +14,7 @@ public class ValidatedDomainObject extends StringBasedDomainObject {
   protected ValidatedDomainObject(final Optional<String> value, final ValidationState validationState)
       throws NullPointerException {
     super(value);
-    this.validationState = Objects.requireNonNull(validationState);
+    this.validationState = Preconditions.checkNotNull(validationState);
   }
 
   public Optional<String> getInvalidMessage() {
