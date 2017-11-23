@@ -16,4 +16,8 @@ public class StringBasedDomainObject extends ComparableBasedDomainObject<String>
   public int compareToIgnoreCase(final StringBasedDomainObject other) {
     return compareTo(other, (a, b) -> a.compareToIgnoreCase(b));
   }
+
+  public boolean equalsIgnoreCase(final StringBasedDomainObject other) {
+    return value.equalsIgnoreCase(other.value);
+  }
 }
