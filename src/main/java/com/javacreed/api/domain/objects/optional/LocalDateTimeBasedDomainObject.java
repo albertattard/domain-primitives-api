@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.google.common.base.Preconditions;
+
 @Immutable
 public class LocalDateTimeBasedDomainObject extends ObjectBasedDomainObject<LocalDateTime>
     implements Comparable<LocalDateTimeBasedDomainObject> {
@@ -21,12 +23,26 @@ public class LocalDateTimeBasedDomainObject extends ObjectBasedDomainObject<Loca
     return compareTo(other, LocalDateTime::compareTo);
   }
 
-  public Optional<String> format(final DateTimeFormatter formatter) {
+  public Optional<String> format() {
+    return format(LocalDateTimeBasedDomainObject.DEFAULT_FORMATTER);
+  }
+
+  public Optional<String> format(final DateTimeFormatter formatter) throws NullPointerException {
+    Preconditions.checkNotNull(formatter);
     return map(formatter::format);
   }
 
-  public Optional<String> formatted() {
-    return format(LocalDateTimeBasedDomainObject.DEFAULT_FORMATTER);
+  /**
+   *
+   * @param pattern
+   * @return
+   * @throws NullPointerException
+   * @throws IllegalArgumentException
+   *           if the pattern is invalid
+   */
+  public Optional<String> format(final String pattern) throws NullPointerException, IllegalArgumentException {
+    Preconditions.checkNotNull(pattern);
+    return format(DateTimeFormatter.ofPattern(pattern));
   }
 
 }
