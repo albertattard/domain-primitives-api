@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 public class CharBasedDomainObject implements Comparable<CharBasedDomainObject> {
 
   public static final Comparator<CharBasedDomainObject> DESCENDING_ORDER = (a, b) -> Character.compare(b.getValue(),
-      a.getValue());
+                                                                                                       a.getValue());
 
   protected final char value;
 
