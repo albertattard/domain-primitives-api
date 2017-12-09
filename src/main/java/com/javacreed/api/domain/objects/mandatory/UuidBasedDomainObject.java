@@ -21,11 +21,11 @@ public class UuidBasedDomainObject extends ComparableBasedDomainObject<UUID> {
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes
    * @see UuidUtils#toBytes(UUID)
    */
-  public byte[] getBytes() {
+  public byte[] toBytes() {
     return map(UuidUtils::toBytes);
   }
 
-  public String getFormatted() {
+  public String toFormattedString() {
     return map(UUID::toString);
   }
 }
