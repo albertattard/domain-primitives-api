@@ -12,7 +12,7 @@ import com.google.common.base.Preconditions;
 public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<ZonedDateTime>
     implements Comparable<ZonedDateTimeBasedDomainObject> {
 
-  private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
 
   protected ZonedDateTimeBasedDomainObject(final ZonedDateTime value) throws NullPointerException {
     super(value);
