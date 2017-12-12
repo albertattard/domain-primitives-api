@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.objects.optional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -14,6 +15,8 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
     implements Comparable<ZonedDateTimeBasedDomainObject> {
 
   private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
+
+  private static final ZoneId ZONE_UTC = ZoneId.of("UTC");
 
   protected ZonedDateTimeBasedDomainObject(final Optional<ZonedDateTime> value) throws NullPointerException {
     super(value);
@@ -46,7 +49,8 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
     return format(DateTimeFormatter.ofPattern(pattern));
   }
 
-  public Optional<LocalDateTime> toLocalDateTime() {
-    return value.map(ZonedDateTime::toLocalDateTime);
+  public Optional<LocalDateTime> toUtcLocalDateTime() {
+    return value.map(z -> z.withZoneSameInstant(ZonedDateTimeBasedDomainObject.ZONE_UTC))
+                .map(ZonedDateTime::toLocalDateTime);
   }
 }
