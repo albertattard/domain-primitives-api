@@ -14,7 +14,7 @@ public class ObjectBasedDomainObject<T> {
   protected final T value;
 
   protected ObjectBasedDomainObject(final T value) throws NullPointerException {
-    this.value = Preconditions.checkNotNull(value);
+    this.value = Preconditions.checkNotNull(value, "Value of " + getClass().getSimpleName() + " cannot be null");
   }
 
   protected int compareTo(final ObjectBasedDomainObject<T> other, final Comparator<T> comparator) {
