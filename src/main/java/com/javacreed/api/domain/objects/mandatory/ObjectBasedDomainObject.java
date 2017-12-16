@@ -42,13 +42,13 @@ public class ObjectBasedDomainObject<T> {
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      @SuppressWarnings("rawtypes")
-      final ObjectBasedDomainObject other = (ObjectBasedDomainObject) object;
-      return value.equals(other.value);
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    @SuppressWarnings("rawtypes")
+    final ObjectBasedDomainObject other = (ObjectBasedDomainObject) object;
+    return value.equals(other.value);
   }
 
   public T getValue() {
