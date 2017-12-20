@@ -44,6 +44,10 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
     return format(DateTimeFormatter.ofPattern(pattern));
   }
 
+  public boolean isInPast() {
+    return value.isBefore(ZonedDateTime.now(value.getZone()));
+  }
+
   public String toFormattedString() {
     return format(ZonedDateTimeBasedDomainObject.DEFAULT_FORMATTER);
   }
