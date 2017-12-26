@@ -1,5 +1,6 @@
 package com.javacreed.api.domain.objects.optional;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -27,30 +28,39 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
     return compareTo(other, ZonedDateTime::compareTo);
   }
 
-  public Optional<String> format() {
-    return format(ZonedDateTimeBasedDomainObject.DEFAULT_FORMATTER);
-  }
-
   public Optional<String> format(final DateTimeFormatter formatter) throws NullPointerException {
     Preconditions.checkNotNull(formatter);
     return map(formatter::format);
   }
 
-  /**
-   *
-   * @param pattern
-   * @return
-   * @throws NullPointerException
-   * @throws IllegalArgumentException
-   *           if the pattern is invalid
-   */
   public Optional<String> format(final String pattern) throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(pattern);
     return format(DateTimeFormatter.ofPattern(pattern));
+  }
+
+  public Optional<Boolean> isInPast() {
+    return value.map(v -> v.isBefore(ZonedDateTime.now(v.getZone())));
+  }
+
+  public Optional<String> toFormattedString() {
+    return format(ZonedDateTimeBasedDomainObject.DEFAULT_FORMATTER);
   }
 
   public Optional<LocalDateTime> toUtcLocalDateTime() {
     return value.map(z -> z.withZoneSameInstant(ZonedDateTimeBasedDomainObject.ZONE_UTC))
                 .map(ZonedDateTime::toLocalDateTime);
   }
+
+  /**
+   * Returns the timestamp at the UTC time zone. This is equivalent as creating the
+   * {@link Timestamp#valueOf(LocalDateTime)} and passing the {@link #toUtcLocalDateTime()} as parameter
+   *
+   * @return the timestamo at the UTC time zone
+   * @see #toUtcLocalDateTime()
+   * @see Timestamp#valueOf(LocalDateTime)
+   */
+  public Optional<Timestamp> toUtcTimestamp() {
+    return toUtcLocalDateTime().map(Timestamp::valueOf);
+  }
+
 }

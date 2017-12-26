@@ -1,5 +1,6 @@
 package com.javacreed.api.domain.objects.mandatory;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -31,14 +32,6 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
     return map(formatter::format);
   }
 
-  /**
-   *
-   * @param pattern
-   * @return
-   * @throws NullPointerException
-   * @throws IllegalArgumentException
-   *           if the pattern is invalid
-   */
   public String format(final String pattern) throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(pattern);
     return format(DateTimeFormatter.ofPattern(pattern));
@@ -54,5 +47,17 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
 
   public LocalDateTime toUtcLocalDateTime() {
     return value.withZoneSameInstant(ZonedDateTimeBasedDomainObject.ZONE_UTC).toLocalDateTime();
+  }
+
+  /**
+   * Returns the timestamp at the UTC time zone. This is equivalent as creating the
+   * {@link Timestamp#valueOf(LocalDateTime)} and passing the {@link #toUtcLocalDateTime()} as parameter
+   *
+   * @return the timestamo at the UTC time zone
+   * @see #toUtcLocalDateTime()
+   * @see Timestamp#valueOf(LocalDateTime)
+   */
+  public Timestamp toUtcTimestamp() {
+    return Timestamp.valueOf(toUtcLocalDateTime());
   }
 }
