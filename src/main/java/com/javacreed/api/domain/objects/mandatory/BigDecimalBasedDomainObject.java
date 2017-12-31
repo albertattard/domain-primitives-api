@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.objects.mandatory;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import javax.annotation.concurrent.Immutable;
@@ -29,5 +30,9 @@ public class BigDecimalBasedDomainObject extends ObjectBasedDomainObject<BigDeci
   public String format(final NumberFormat format) throws NullPointerException {
     Preconditions.checkNotNull(format);
     return map(format::format);
+  }
+
+  public String format(final String pattern) throws NullPointerException, IllegalArgumentException {
+    return format(new DecimalFormat(pattern));
   }
 }
