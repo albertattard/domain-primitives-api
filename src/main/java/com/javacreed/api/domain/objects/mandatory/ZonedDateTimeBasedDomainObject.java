@@ -2,6 +2,8 @@ package com.javacreed.api.domain.objects.mandatory;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +37,14 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
   public String format(final String pattern) throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(pattern);
     return format(DateTimeFormatter.ofPattern(pattern));
+  }
+
+  public Month getMonth() {
+    return value.getMonth();
+  }
+
+  public Year getYear() {
+    return Year.of(value.getYear());
   }
 
   public boolean isEqual(final ZonedDateTimeBasedDomainObject other) {
