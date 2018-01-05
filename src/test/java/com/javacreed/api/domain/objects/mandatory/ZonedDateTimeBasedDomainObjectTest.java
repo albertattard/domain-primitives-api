@@ -31,4 +31,13 @@ public class ZonedDateTimeBasedDomainObjectTest {
       Assert.assertTrue(new Testable(timeB).isInPast());
     }
   }
+
+  @Test
+  public void isAfter() {
+    final Testable a = new Testable(ZonedDateTime.of(2018, 1, 5, 10, 0, 0, 0, ZoneId.of("Europe/Malta")));
+    final Testable b = new Testable(ZonedDateTime.of(2018, 1, 5, 9, 30, 0, 0, ZoneId.of("Europe/London")));
+
+    Assert.assertFalse(a.isAfter(b));
+    Assert.assertTrue(b.isAfter(a));
+  }
 }

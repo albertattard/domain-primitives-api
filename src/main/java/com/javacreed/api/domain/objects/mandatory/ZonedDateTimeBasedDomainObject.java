@@ -47,6 +47,24 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
     return Year.of(value.getYear());
   }
 
+  /**
+   * Checks if the instant of this date-time is after that of the specified date-time.
+   * <p/>
+   * This method differs from the comparison in {@link #compareTo} in that it only compares the instant of the
+   * date-time. This is equivalent to using {@code dateTime1.toInstant().isAfter(dateTime2.toInstant());}.
+   * <p/>
+   * This default implementation performs the comparison based on the epoch-second and nano-of-second.
+   *
+   * @param other
+   *          the other date-time to compare to (which cannot be <code>null</code>)
+   * @return true if this is after the specified date-time
+   * @throws NullPointerException
+   *           if the given time is <code>null</code>
+   */
+  public boolean isAfter(final ZonedDateTimeBasedDomainObject other) {
+    return value.isAfter(other.value);
+  }
+
   public boolean isEqual(final ZonedDateTimeBasedDomainObject other) {
     return value.isEqual(other.value);
   }
