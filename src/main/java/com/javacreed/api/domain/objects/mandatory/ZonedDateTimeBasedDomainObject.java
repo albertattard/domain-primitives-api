@@ -7,6 +7,7 @@ import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -47,6 +48,10 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
     return Year.of(value.getYear());
   }
 
+  public ZoneId getZone() {
+    return value.getZone();
+  }
+
   /**
    * Checks if the instant of this date-time is after that of the specified date-time.
    * <p/>
@@ -71,6 +76,10 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
 
   public boolean isInPast() {
     return value.isBefore(ZonedDateTime.now(value.getZone()));
+  }
+
+  public Date toDate() {
+    return Date.from(value.toInstant());
   }
 
   public String toFormattedString() {
