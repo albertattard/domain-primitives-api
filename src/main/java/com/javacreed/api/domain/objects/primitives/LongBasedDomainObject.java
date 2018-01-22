@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 public class LongBasedDomainObject implements Comparable<LongBasedDomainObject> {
 
   public static final Comparator<LongBasedDomainObject> DESCENDING_ORDER = (a, b) -> Long.compare(b.getValue(),
-                                                                                                  a.getValue());
+      a.getValue());
 
   protected final long value;
 
@@ -27,11 +27,11 @@ public class LongBasedDomainObject implements Comparable<LongBasedDomainObject> 
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      return value != ((LongBasedDomainObject) object).value;
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    return value == ((LongBasedDomainObject) object).value;
   }
 
   public long getValue() {
@@ -41,6 +41,14 @@ public class LongBasedDomainObject implements Comparable<LongBasedDomainObject> 
   @Override
   public int hashCode() {
     return (int) (value ^ value >>> 32);
+  }
+
+  public boolean isSmaller(final LongBasedDomainObject other) {
+    return value < other.value;
+  }
+
+  public boolean isSmallerOrEqaulTo(final LongBasedDomainObject other) {
+    return value <= other.value;
   }
 
   @Override
