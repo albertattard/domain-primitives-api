@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 public class IntBasedDomainObject implements Comparable<IntBasedDomainObject> {
 
   public static final Comparator<IntBasedDomainObject> DESCENDING_ORDER = (a, b) -> Integer.compare(b.getValue(),
-      a.getValue());
+                                                                                                    a.getValue());
 
   protected final int value;
 

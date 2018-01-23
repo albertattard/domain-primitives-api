@@ -25,4 +25,8 @@ public class StringBasedDomainObject extends ComparableBasedDomainObject<String>
 
     return false;
   }
+
+  public String orBlank() {
+    return orElse("");
+  }
 }
