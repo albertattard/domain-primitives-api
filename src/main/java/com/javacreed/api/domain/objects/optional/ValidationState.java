@@ -1,5 +1,6 @@
 package com.javacreed.api.domain.objects.optional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
@@ -21,7 +22,6 @@ public class ValidationState {
   }
 
   private final boolean valid;
-
   private final Optional<String> invalidMessage;
 
   private ValidationState(final boolean valid, final Optional<String> invalidMessage) throws NullPointerException {
@@ -35,12 +35,12 @@ public class ValidationState {
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      final ValidationState other = (ValidationState) object;
-      return valid == other.valid && invalidMessage.equals(other.invalidMessage);
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    final ValidationState other = (ValidationState) object;
+    return valid == other.valid && invalidMessage.equals(other.invalidMessage);
   }
 
   public Optional<String> getInvalidMessage() {
@@ -53,11 +53,7 @@ public class ValidationState {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + invalidMessage.hashCode();
-    result = prime * result + (valid ? 1231 : 1237);
-    return result;
+    return Objects.hash(valid, invalidMessage);
   }
 
   public boolean isInvalid() {

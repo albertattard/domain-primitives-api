@@ -11,6 +11,18 @@ public class ParsedDomainObject<T> extends ValidatedDomainObject {
 
   protected final Optional<T> object;
 
+  protected ParsedDomainObject(final Optional<String> value, final ParseResult<T> parseResult)
+      throws NullPointerException {
+    super(value, parseResult.getValidationState());
+    this.object = Preconditions.checkNotNull(parseResult.getObject());
+  }
+
+  /**
+   * @Deprecated The parse result simplifies the parsing of objects and should be preferred over this method. This
+   *             method has nothing wrong and archives the same result. It is included here simply to remind me that
+   *             there may be a simpler option
+   */
+  @Deprecated
   protected ParsedDomainObject(final Optional<String> value, final ValidationState validationState,
       final Optional<T> object) throws NullPointerException {
     super(value, validationState);
