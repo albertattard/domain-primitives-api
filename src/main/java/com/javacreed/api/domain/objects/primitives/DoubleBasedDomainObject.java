@@ -29,11 +29,11 @@ public class DoubleBasedDomainObject implements Comparable<DoubleBasedDomainObje
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      return longBits == ((DoubleBasedDomainObject) object).longBits;
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    return longBits == ((DoubleBasedDomainObject) object).longBits;
   }
 
   public double getValue() {
@@ -43,6 +43,14 @@ public class DoubleBasedDomainObject implements Comparable<DoubleBasedDomainObje
   @Override
   public int hashCode() {
     return (int) (longBits ^ longBits >>> 32);
+  }
+
+  public boolean isSmaller(final DoubleBasedDomainObject other) {
+    return value < other.value;
+  }
+
+  public boolean isSmallerOrEqaulTo(final DoubleBasedDomainObject other) {
+    return value <= other.value;
   }
 
   @Override

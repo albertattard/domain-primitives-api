@@ -29,11 +29,11 @@ public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      return intBits == ((FloatBasedDomainObject) object).intBits;
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    return intBits == ((FloatBasedDomainObject) object).intBits;
   }
 
   public float getValue() {
@@ -43,6 +43,14 @@ public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject
   @Override
   public int hashCode() {
     return intBits;
+  }
+
+  public boolean isSmaller(final FloatBasedDomainObject other) {
+    return value < other.value;
+  }
+
+  public boolean isSmallerOrEqaulTo(final FloatBasedDomainObject other) {
+    return value <= other.value;
   }
 
   @Override

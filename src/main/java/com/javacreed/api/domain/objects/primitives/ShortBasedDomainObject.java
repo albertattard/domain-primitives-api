@@ -27,11 +27,11 @@ public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      return value == ((ShortBasedDomainObject) object).value;
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    return value == ((ShortBasedDomainObject) object).value;
   }
 
   public short getValue() {
@@ -41,6 +41,14 @@ public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject
   @Override
   public int hashCode() {
     return value;
+  }
+
+  public boolean isSmaller(final ShortBasedDomainObject other) {
+    return value < other.value;
+  }
+
+  public boolean isSmallerOrEqaulTo(final ShortBasedDomainObject other) {
+    return value <= other.value;
   }
 
   @Override

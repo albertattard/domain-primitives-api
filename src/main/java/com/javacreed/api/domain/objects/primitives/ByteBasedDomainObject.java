@@ -27,11 +27,11 @@ public class ByteBasedDomainObject implements Comparable<ByteBasedDomainObject> 
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      return value == ((ByteBasedDomainObject) object).value;
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    return value == ((ByteBasedDomainObject) object).value;
   }
 
   public byte getValue() {
@@ -41,6 +41,14 @@ public class ByteBasedDomainObject implements Comparable<ByteBasedDomainObject> 
   @Override
   public int hashCode() {
     return value;
+  }
+
+  public boolean isSmaller(final ByteBasedDomainObject other) {
+    return value < other.value;
+  }
+
+  public boolean isSmallerOrEqaulTo(final ByteBasedDomainObject other) {
+    return value <= other.value;
   }
 
   @Override

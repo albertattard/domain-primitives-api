@@ -27,11 +27,11 @@ public class IntBasedDomainObject implements Comparable<IntBasedDomainObject> {
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      return value == ((IntBasedDomainObject) object).value;
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    return value == ((IntBasedDomainObject) object).value;
   }
 
   public int getValue() {
@@ -41,6 +41,14 @@ public class IntBasedDomainObject implements Comparable<IntBasedDomainObject> {
   @Override
   public int hashCode() {
     return value;
+  }
+
+  public boolean isSmaller(final IntBasedDomainObject other) {
+    return value < other.value;
+  }
+
+  public boolean isSmallerOrEqaulTo(final IntBasedDomainObject other) {
+    return value <= other.value;
   }
 
   @Override
