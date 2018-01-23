@@ -47,7 +47,7 @@ public class LongBasedDomainObject implements Comparable<LongBasedDomainObject> 
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaulTo(final LongBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final LongBasedDomainObject other) {
     return value <= other.value;
   }
 

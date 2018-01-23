@@ -49,7 +49,7 @@ public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaulTo(final FloatBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final FloatBasedDomainObject other) {
     return value <= other.value;
   }
 

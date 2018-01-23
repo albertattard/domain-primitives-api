@@ -47,7 +47,7 @@ public class ByteBasedDomainObject implements Comparable<ByteBasedDomainObject> 
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaulTo(final ByteBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final ByteBasedDomainObject other) {
     return value <= other.value;
   }
 

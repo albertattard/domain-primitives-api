@@ -49,7 +49,7 @@ public class DoubleBasedDomainObject implements Comparable<DoubleBasedDomainObje
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaulTo(final DoubleBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final DoubleBasedDomainObject other) {
     return value <= other.value;
   }
 

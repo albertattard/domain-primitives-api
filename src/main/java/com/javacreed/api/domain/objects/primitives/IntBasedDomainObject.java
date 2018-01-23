@@ -47,7 +47,7 @@ public class IntBasedDomainObject implements Comparable<IntBasedDomainObject> {
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaulTo(final IntBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final IntBasedDomainObject other) {
     return value <= other.value;
   }
 

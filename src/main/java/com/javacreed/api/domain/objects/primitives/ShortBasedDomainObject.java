@@ -47,7 +47,7 @@ public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaulTo(final ShortBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final ShortBasedDomainObject other) {
     return value <= other.value;
   }
 
