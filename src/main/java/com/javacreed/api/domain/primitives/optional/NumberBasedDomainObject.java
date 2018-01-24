@@ -10,5 +10,4 @@ public class NumberBasedDomainObject<T extends Number & Comparable<T>> extends C
   protected NumberBasedDomainObject(final Optional<T> value) throws NullPointerException {
     super(value);
   }
-
 }
