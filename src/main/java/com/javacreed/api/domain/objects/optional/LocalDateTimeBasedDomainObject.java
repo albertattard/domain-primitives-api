@@ -1,5 +1,6 @@
 package com.javacreed.api.domain.objects.optional;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -43,6 +44,10 @@ public class LocalDateTimeBasedDomainObject extends ObjectBasedDomainObject<Loca
   public Optional<String> format(final String pattern) throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(pattern);
     return format(DateTimeFormatter.ofPattern(pattern));
+  }
+
+  public Optional<Timestamp> toTimestamp() {
+    return map(Timestamp::valueOf);
   }
 
 }

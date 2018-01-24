@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject> {
 
   public static final Comparator<FloatBasedDomainObject> DESCENDING_ORDER = (a, b) -> Float.compare(b.getValue(),
-                                                                                                    a.getValue());
+      a.getValue());
 
   protected final float value;
   private final int intBits;

@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject> {
 
   public static final Comparator<ShortBasedDomainObject> DESCENDING_ORDER = (a, b) -> Short.compare(b.getValue(),
-                                                                                                    a.getValue());
+      a.getValue());
 
   protected final short value;
 
