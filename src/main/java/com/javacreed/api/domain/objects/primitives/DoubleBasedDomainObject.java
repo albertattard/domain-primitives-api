@@ -15,7 +15,7 @@ public class DoubleBasedDomainObject implements Comparable<DoubleBasedDomainObje
 
   protected DoubleBasedDomainObject(final double value) {
     this.value = value;
-    this.longBits = Double.doubleToLongBits(value);
+    longBits = Double.doubleToLongBits(value);
   }
 
   @Override

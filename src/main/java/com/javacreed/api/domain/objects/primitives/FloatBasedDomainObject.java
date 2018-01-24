@@ -15,7 +15,7 @@ public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject
 
   protected FloatBasedDomainObject(final int value) {
     this.value = value;
-    this.intBits = Float.floatToIntBits(value);
+    intBits = Float.floatToIntBits(value);
   }
 
   @Override
