@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.javacreed.api.domain.primitives.optional.ObjectBasedDomainObject;
-
 public class ObjectBasedDomainObjectTest {
 
   public static class T extends ObjectBasedDomainObject<String> {

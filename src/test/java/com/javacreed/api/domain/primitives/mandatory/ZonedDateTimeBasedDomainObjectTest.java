@@ -8,8 +8,6 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.javacreed.api.domain.primitives.mandatory.ZonedDateTimeBasedDomainObject;
-
 public class ZonedDateTimeBasedDomainObjectTest {
 
   private static class Testable extends ZonedDateTimeBasedDomainObject {

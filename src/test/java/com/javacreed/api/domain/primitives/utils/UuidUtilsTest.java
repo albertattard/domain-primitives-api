@@ -5,8 +5,6 @@ import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.javacreed.api.domain.primitives.utils.UuidUtils;
-
 public class UuidUtilsTest {
 
   /**
