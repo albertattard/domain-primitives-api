@@ -3,12 +3,12 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.javacreed.api</groupId>
-	<artifactId>domain-objects-api</artifactId>
+	<artifactId>domain-primitives-api</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
-	<name>Domain Objects API</name>
-	<description>This project provides base classes for domain objects</description>
-	<url>https://github.com/javacreed/domain-objects-api</url>
+	<name>Domain Primitives API</name>
+	<description>This project provides base classes for domain primitives</description>
+	<url>https://github.com/javacreed/domain-primitives-api</url>
 	<inceptionYear>2017</inceptionYear>
 
 	<contributors>
@@ -27,9 +27,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/javacreed/domain-objects-api.git</connection>
-		<developerConnection>scm:git:git://github.com/javacreed/domain-objects-api.git</developerConnection>
-		<url>https://github.com/javacreed/domain-objects-api</url>
+		<connection>scm:git:git://github.com/javacreed/domain-primitives-api.git</connection>
+		<developerConnection>scm:git:git://github.com/javacreed/domain-primitives-api.git</developerConnection>
+		<url>https://github.com/javacreed/domain-primitives-api</url>
 	</scm>
 
 	<properties>
