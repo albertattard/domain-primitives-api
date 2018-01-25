@@ -3,15 +3,15 @@ package com.javacreed.api.domain.primitives.mandatory;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class ComparableBasedDomainObject<T extends Comparable<T>> extends ObjectBasedDomainObject<T>
-    implements Comparable<ComparableBasedDomainObject<T>> {
+public class ComparableBasedDomainPrimitive<T extends Comparable<T>> extends ObjectBasedDomainPrimitive<T>
+    implements Comparable<ComparableBasedDomainPrimitive<T>> {
 
-  protected ComparableBasedDomainObject(final T value) throws NullPointerException {
+  protected ComparableBasedDomainPrimitive(final T value) throws NullPointerException {
     super(value);
   }
 
   @Override
-  public int compareTo(final ComparableBasedDomainObject<T> other) {
+  public int compareTo(final ComparableBasedDomainPrimitive<T> other) {
     return compareTo(other, (a, b) -> a.compareTo(b));
   }
 }

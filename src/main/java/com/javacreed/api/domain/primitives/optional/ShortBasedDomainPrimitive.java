@@ -5,9 +5,9 @@ import java.util.Optional;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class ShortBasedDomainObject extends NumberBasedDomainObject<Short> {
+public class ShortBasedDomainPrimitive extends NumberBasedDomainPrimitive<Short> {
 
-  protected ShortBasedDomainObject(final Optional<Short> value) {
+  protected ShortBasedDomainPrimitive(final Optional<Short> value) {
     super(value);
   }
 }

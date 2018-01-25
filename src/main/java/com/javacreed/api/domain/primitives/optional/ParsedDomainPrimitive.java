@@ -7,11 +7,11 @@ import javax.annotation.concurrent.Immutable;
 import com.google.common.base.Preconditions;
 
 @Immutable
-public class ParsedDomainObject<T> extends ValidatedDomainObject {
+public class ParsedDomainPrimitive<T> extends ValidatedDomainPrimitive {
 
   protected final Optional<T> object;
 
-  protected ParsedDomainObject(final Optional<String> value, final ParseResult<T> parseResult)
+  protected ParsedDomainPrimitive(final Optional<String> value, final ParseResult<T> parseResult)
       throws NullPointerException {
     super(value, parseResult.getValidationState());
     this.object = Preconditions.checkNotNull(parseResult.getObject());
@@ -23,7 +23,7 @@ public class ParsedDomainObject<T> extends ValidatedDomainObject {
    *             there may be a simpler option
    */
   @Deprecated
-  protected ParsedDomainObject(final Optional<String> value, final ValidationState validationState,
+  protected ParsedDomainPrimitive(final Optional<String> value, final ValidationState validationState,
       final Optional<T> object) throws NullPointerException {
     super(value, validationState);
     this.object = Preconditions.checkNotNull(object);

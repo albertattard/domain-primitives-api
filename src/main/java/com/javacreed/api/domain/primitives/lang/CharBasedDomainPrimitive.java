@@ -5,19 +5,19 @@ import java.util.Comparator;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class CharBasedDomainObject implements Comparable<CharBasedDomainObject> {
+public class CharBasedDomainPrimitive implements Comparable<CharBasedDomainPrimitive> {
 
-  public static final Comparator<CharBasedDomainObject> DESCENDING_ORDER = (a, b) -> Character.compare(b.getValue(),
+  public static final Comparator<CharBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Character.compare(b.getValue(),
       a.getValue());
 
   protected final char value;
 
-  protected CharBasedDomainObject(final char value) {
+  protected CharBasedDomainPrimitive(final char value) {
     this.value = value;
   }
 
   @Override
-  public int compareTo(final CharBasedDomainObject other) {
+  public int compareTo(final CharBasedDomainPrimitive other) {
     return Character.compare(value, other.value);
   }
 
@@ -28,7 +28,7 @@ public class CharBasedDomainObject implements Comparable<CharBasedDomainObject> 
     }
 
     if (object != null && getClass() == object.getClass()) {
-      return value == ((CharBasedDomainObject) object).value;
+      return value == ((CharBasedDomainPrimitive) object).value;
     }
 
     return false;

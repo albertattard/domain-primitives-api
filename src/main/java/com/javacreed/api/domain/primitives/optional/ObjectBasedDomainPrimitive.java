@@ -9,15 +9,15 @@ import javax.annotation.concurrent.Immutable;
 import com.google.common.base.Preconditions;
 
 @Immutable
-public class ObjectBasedDomainObject<T> {
+public class ObjectBasedDomainPrimitive<T> {
 
   protected final Optional<T> value;
 
-  protected ObjectBasedDomainObject(final Optional<T> value) throws NullPointerException {
+  protected ObjectBasedDomainPrimitive(final Optional<T> value) throws NullPointerException {
     this.value = Preconditions.checkNotNull(value);
   }
 
-  protected int compareTo(final ObjectBasedDomainObject<T> other, final Comparator<T> comparator) {
+  protected int compareTo(final ObjectBasedDomainPrimitive<T> other, final Comparator<T> comparator) {
     final T a = getNullable();
     final T b = other.getNullable();
 
@@ -44,7 +44,7 @@ public class ObjectBasedDomainObject<T> {
 
     if (object != null && getClass() == object.getClass()) {
       @SuppressWarnings("rawtypes")
-      final ObjectBasedDomainObject other = (ObjectBasedDomainObject) object;
+      final ObjectBasedDomainPrimitive other = (ObjectBasedDomainPrimitive) object;
       return value.equals(other.value);
     }
 

@@ -5,19 +5,19 @@ import java.util.Comparator;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class LongBasedDomainObject implements Comparable<LongBasedDomainObject> {
+public class LongBasedDomainPrimitive implements Comparable<LongBasedDomainPrimitive> {
 
-  public static final Comparator<LongBasedDomainObject> DESCENDING_ORDER = (a, b) -> Long.compare(b.getValue(),
+  public static final Comparator<LongBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Long.compare(b.getValue(),
       a.getValue());
 
   protected final long value;
 
-  protected LongBasedDomainObject(final long value) {
+  protected LongBasedDomainPrimitive(final long value) {
     this.value = value;
   }
 
   @Override
-  public int compareTo(final LongBasedDomainObject other) {
+  public int compareTo(final LongBasedDomainPrimitive other) {
     return Long.compare(value, other.getValue());
   }
 
@@ -31,7 +31,7 @@ public class LongBasedDomainObject implements Comparable<LongBasedDomainObject> 
       return false;
     }
 
-    return value == ((LongBasedDomainObject) object).value;
+    return value == ((LongBasedDomainPrimitive) object).value;
   }
 
   public long getValue() {
@@ -43,11 +43,11 @@ public class LongBasedDomainObject implements Comparable<LongBasedDomainObject> 
     return (int) (value ^ value >>> 32);
   }
 
-  public boolean isSmaller(final LongBasedDomainObject other) {
+  public boolean isSmaller(final LongBasedDomainPrimitive other) {
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaul(final LongBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final LongBasedDomainPrimitive other) {
     return value <= other.value;
   }
 

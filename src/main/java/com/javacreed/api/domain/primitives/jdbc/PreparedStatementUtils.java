@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Optional;
 
-import com.javacreed.api.domain.primitives.lang.ByteBasedDomainObject;
-import com.javacreed.api.domain.primitives.lang.IntBasedDomainObject;
-import com.javacreed.api.domain.primitives.lang.LongBasedDomainObject;
-import com.javacreed.api.domain.primitives.lang.ShortBasedDomainObject;
-import com.javacreed.api.domain.primitives.optional.StringBasedDomainObject;
-import com.javacreed.api.domain.primitives.optional.UuidBasedDomainObject;
+import com.javacreed.api.domain.primitives.lang.ByteBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.lang.IntBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.lang.LongBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.lang.ShortBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.optional.StringBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.optional.UuidBasedDomainPrimitive;
 
 public class PreparedStatementUtils {
 
@@ -23,13 +23,13 @@ public class PreparedStatementUtils {
     }
   }
 
-  public static void setByte(final PreparedStatement ps, final int column, final ByteBasedDomainObject object)
+  public static void setByte(final PreparedStatement ps, final int column, final ByteBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
     PreparedStatementUtils.setByte(ps, column, object == null ? null : object.getValue());
   }
 
   public static void setByte(final PreparedStatement ps, final int column,
-      final Optional<? extends ByteBasedDomainObject> object) throws SQLException, NullPointerException {
+      final Optional<? extends ByteBasedDomainPrimitive> object) throws SQLException, NullPointerException {
     PreparedStatementUtils.setByte(ps, column, object.orElse(null));
   }
 
@@ -43,16 +43,16 @@ public class PreparedStatementUtils {
   }
 
   public static void setBytes(final PreparedStatement ps, final int column,
-      final Optional<UuidBasedDomainObject> object) throws SQLException, NullPointerException {
+      final Optional<UuidBasedDomainPrimitive> object) throws SQLException, NullPointerException {
     PreparedStatementUtils.setBytes(ps, column, object.orElse(null));
   }
 
-  public static void setBytes(final PreparedStatement ps, final int column, final UuidBasedDomainObject object)
+  public static void setBytes(final PreparedStatement ps, final int column, final UuidBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
     PreparedStatementUtils.setBytes(ps, column, object == null ? null : object.getNullableBytes());
   }
 
-  public static void setInt(final PreparedStatement ps, final int column, final IntBasedDomainObject object)
+  public static void setInt(final PreparedStatement ps, final int column, final IntBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
     PreparedStatementUtils.setInt(ps, column, object == null ? null : object.getValue());
   }
@@ -67,7 +67,7 @@ public class PreparedStatementUtils {
   }
 
   public static void setInt(final PreparedStatement ps, final int column,
-      final Optional<? extends IntBasedDomainObject> object) throws SQLException, NullPointerException {
+      final Optional<? extends IntBasedDomainPrimitive> object) throws SQLException, NullPointerException {
     PreparedStatementUtils.setInt(ps, column, object.orElse(null));
   }
 
@@ -80,18 +80,18 @@ public class PreparedStatementUtils {
     }
   }
 
-  public static void setLong(final PreparedStatement ps, final int column, final LongBasedDomainObject object)
+  public static void setLong(final PreparedStatement ps, final int column, final LongBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
     PreparedStatementUtils.setLong(ps, column, object == null ? null : object.getValue());
   }
 
   public static void setLong(final PreparedStatement ps, final int column,
-      final Optional<? extends LongBasedDomainObject> object) throws SQLException, NullPointerException {
+      final Optional<? extends LongBasedDomainPrimitive> object) throws SQLException, NullPointerException {
     PreparedStatementUtils.setLong(ps, column, object.orElse(null));
   }
 
   public static void setShort(final PreparedStatement ps, final int column,
-      final Optional<? extends ShortBasedDomainObject> object) throws SQLException, NullPointerException {
+      final Optional<? extends ShortBasedDomainPrimitive> object) throws SQLException, NullPointerException {
     PreparedStatementUtils.setShort(ps, column, object.orElse(null));
   }
 
@@ -104,13 +104,13 @@ public class PreparedStatementUtils {
     }
   }
 
-  public static void setShort(final PreparedStatement ps, final int column, final ShortBasedDomainObject object)
+  public static void setShort(final PreparedStatement ps, final int column, final ShortBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
     PreparedStatementUtils.setShort(ps, column, object == null ? null : object.getValue());
   }
 
   public static void setString(final PreparedStatement ps, final int column,
-      final Optional<? extends StringBasedDomainObject> optional) throws SQLException, NullPointerException {
+      final Optional<? extends StringBasedDomainPrimitive> optional) throws SQLException, NullPointerException {
     PreparedStatementUtils.setString(ps, column, optional.orElse(null));
   }
 
@@ -123,7 +123,7 @@ public class PreparedStatementUtils {
     }
   }
 
-  public static void setString(final PreparedStatement ps, final int column, final StringBasedDomainObject object)
+  public static void setString(final PreparedStatement ps, final int column, final StringBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
     PreparedStatementUtils.setString(ps, column, object == null ? null : object.getNullable());
   }

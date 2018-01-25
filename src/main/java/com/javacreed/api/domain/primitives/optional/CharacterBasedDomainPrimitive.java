@@ -5,9 +5,9 @@ import java.util.Optional;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class CharacterBasedDomainObject extends ComparableBasedDomainObject<Character> {
+public class CharacterBasedDomainPrimitive extends ComparableBasedDomainPrimitive<Character> {
 
-  protected CharacterBasedDomainObject(final Optional<Character> value) {
+  protected CharacterBasedDomainPrimitive(final Optional<Character> value) {
     super(value);
   }
 }

@@ -5,21 +5,21 @@ import java.util.Comparator;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class DoubleBasedDomainObject implements Comparable<DoubleBasedDomainObject> {
+public class DoubleBasedDomainPrimitive implements Comparable<DoubleBasedDomainPrimitive> {
 
-  public static final Comparator<DoubleBasedDomainObject> DESCENDING_ORDER = (a, b) -> Double.compare(b.getValue(),
+  public static final Comparator<DoubleBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Double.compare(b.getValue(),
       a.getValue());
 
   protected final double value;
   private final long longBits;
 
-  protected DoubleBasedDomainObject(final double value) {
+  protected DoubleBasedDomainPrimitive(final double value) {
     this.value = value;
     longBits = Double.doubleToLongBits(value);
   }
 
   @Override
-  public int compareTo(final DoubleBasedDomainObject other) {
+  public int compareTo(final DoubleBasedDomainPrimitive other) {
     return Double.compare(value, other.value);
   }
 
@@ -33,7 +33,7 @@ public class DoubleBasedDomainObject implements Comparable<DoubleBasedDomainObje
       return false;
     }
 
-    return longBits == ((DoubleBasedDomainObject) object).longBits;
+    return longBits == ((DoubleBasedDomainPrimitive) object).longBits;
   }
 
   public double getValue() {
@@ -45,11 +45,11 @@ public class DoubleBasedDomainObject implements Comparable<DoubleBasedDomainObje
     return (int) (longBits ^ longBits >>> 32);
   }
 
-  public boolean isSmaller(final DoubleBasedDomainObject other) {
+  public boolean isSmaller(final DoubleBasedDomainPrimitive other) {
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaul(final DoubleBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final DoubleBasedDomainPrimitive other) {
     return value <= other.value;
   }
 

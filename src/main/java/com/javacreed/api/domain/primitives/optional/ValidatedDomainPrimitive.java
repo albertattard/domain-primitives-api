@@ -7,11 +7,11 @@ import javax.annotation.concurrent.Immutable;
 import com.google.common.base.Preconditions;
 
 @Immutable
-public class ValidatedDomainObject extends StringBasedDomainObject {
+public class ValidatedDomainPrimitive extends StringBasedDomainPrimitive {
 
   private final ValidationState validationState;
 
-  protected ValidatedDomainObject(final Optional<String> value, final ValidationState validationState)
+  protected ValidatedDomainPrimitive(final Optional<String> value, final ValidationState validationState)
       throws NullPointerException {
     super(value);
     this.validationState = Preconditions.checkNotNull(validationState);

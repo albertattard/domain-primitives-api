@@ -5,21 +5,21 @@ import java.util.Comparator;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject> {
+public class FloatBasedDomainPrimitive implements Comparable<FloatBasedDomainPrimitive> {
 
-  public static final Comparator<FloatBasedDomainObject> DESCENDING_ORDER = (a, b) -> Float.compare(b.getValue(),
+  public static final Comparator<FloatBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Float.compare(b.getValue(),
       a.getValue());
 
   protected final float value;
   private final int intBits;
 
-  protected FloatBasedDomainObject(final int value) {
+  protected FloatBasedDomainPrimitive(final int value) {
     this.value = value;
     intBits = Float.floatToIntBits(value);
   }
 
   @Override
-  public int compareTo(final FloatBasedDomainObject other) {
+  public int compareTo(final FloatBasedDomainPrimitive other) {
     return Float.compare(value, other.value);
   }
 
@@ -33,7 +33,7 @@ public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject
       return false;
     }
 
-    return intBits == ((FloatBasedDomainObject) object).intBits;
+    return intBits == ((FloatBasedDomainPrimitive) object).intBits;
   }
 
   public float getValue() {
@@ -45,11 +45,11 @@ public class FloatBasedDomainObject implements Comparable<FloatBasedDomainObject
     return intBits;
   }
 
-  public boolean isSmaller(final FloatBasedDomainObject other) {
+  public boolean isSmaller(final FloatBasedDomainPrimitive other) {
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaul(final FloatBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final FloatBasedDomainPrimitive other) {
     return value <= other.value;
   }
 

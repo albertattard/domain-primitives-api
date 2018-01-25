@@ -5,19 +5,19 @@ import java.util.Comparator;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject> {
+public class ShortBasedDomainPrimitive implements Comparable<ShortBasedDomainPrimitive> {
 
-  public static final Comparator<ShortBasedDomainObject> DESCENDING_ORDER = (a, b) -> Short.compare(b.getValue(),
+  public static final Comparator<ShortBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Short.compare(b.getValue(),
       a.getValue());
 
   protected final short value;
 
-  protected ShortBasedDomainObject(final short value) {
+  protected ShortBasedDomainPrimitive(final short value) {
     this.value = value;
   }
 
   @Override
-  public int compareTo(final ShortBasedDomainObject other) {
+  public int compareTo(final ShortBasedDomainPrimitive other) {
     return Short.compare(value, other.value);
   }
 
@@ -31,7 +31,7 @@ public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject
       return false;
     }
 
-    return value == ((ShortBasedDomainObject) object).value;
+    return value == ((ShortBasedDomainPrimitive) object).value;
   }
 
   public short getValue() {
@@ -43,11 +43,11 @@ public class ShortBasedDomainObject implements Comparable<ShortBasedDomainObject
     return value;
   }
 
-  public boolean isSmaller(final ShortBasedDomainObject other) {
+  public boolean isSmaller(final ShortBasedDomainPrimitive other) {
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaul(final ShortBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final ShortBasedDomainPrimitive other) {
     return value <= other.value;
   }
 

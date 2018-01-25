@@ -5,9 +5,9 @@ import java.util.Optional;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class BooleanBasedDomainObject extends ComparableBasedDomainObject<Boolean> {
+public class BooleanBasedDomainPrimitive extends ComparableBasedDomainPrimitive<Boolean> {
 
-  protected BooleanBasedDomainObject(final Optional<Boolean> value) {
+  protected BooleanBasedDomainPrimitive(final Optional<Boolean> value) {
     super(value);
   }
 }

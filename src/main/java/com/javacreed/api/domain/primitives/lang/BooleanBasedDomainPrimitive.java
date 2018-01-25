@@ -5,19 +5,19 @@ import java.util.Comparator;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class BooleanBasedDomainObject implements Comparable<BooleanBasedDomainObject> {
+public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomainPrimitive> {
 
-  public static final Comparator<BooleanBasedDomainObject> DESCENDING_ORDER = (a, b) -> Boolean.compare(b.getValue(),
+  public static final Comparator<BooleanBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Boolean.compare(b.getValue(),
       a.getValue());
 
   protected final boolean value;
 
-  protected BooleanBasedDomainObject(final boolean value) {
+  protected BooleanBasedDomainPrimitive(final boolean value) {
     this.value = value;
   }
 
   @Override
-  public int compareTo(final BooleanBasedDomainObject other) {
+  public int compareTo(final BooleanBasedDomainPrimitive other) {
     return Boolean.compare(value, other.value);
   }
 
@@ -28,7 +28,7 @@ public class BooleanBasedDomainObject implements Comparable<BooleanBasedDomainOb
     }
 
     if (object != null && getClass() == object.getClass()) {
-      return value == ((BooleanBasedDomainObject) object).value;
+      return value == ((BooleanBasedDomainPrimitive) object).value;
     }
 
     return false;

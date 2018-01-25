@@ -5,9 +5,9 @@ import java.util.Optional;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class NumberBasedDomainObject<T extends Number & Comparable<T>> extends ComparableBasedDomainObject<T> {
+public class NumberBasedDomainPrimitive<T extends Number & Comparable<T>> extends ComparableBasedDomainPrimitive<T> {
 
-  protected NumberBasedDomainObject(final Optional<T> value) throws NullPointerException {
+  protected NumberBasedDomainPrimitive(final Optional<T> value) throws NullPointerException {
     super(value);
   }
 

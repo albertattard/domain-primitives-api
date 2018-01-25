@@ -7,9 +7,9 @@ import javax.annotation.concurrent.Immutable;
 import com.javacreed.api.domain.primitives.utils.UuidUtils;
 
 @Immutable
-public class UuidBasedDomainObject extends ComparableBasedDomainObject<UUID> {
+public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUID> {
 
-  protected UuidBasedDomainObject(final UUID value) throws NullPointerException {
+  protected UuidBasedDomainPrimitive(final UUID value) throws NullPointerException {
     super(value);
   }
 

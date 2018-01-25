@@ -10,22 +10,22 @@ import javax.annotation.concurrent.Immutable;
 import com.google.common.base.Preconditions;
 
 @Immutable
-public class LocalDateTimeBasedDomainObject extends ObjectBasedDomainObject<LocalDateTime>
-    implements Comparable<LocalDateTimeBasedDomainObject> {
+public class LocalDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitive<LocalDateTime>
+    implements Comparable<LocalDateTimeBasedDomainPrimitive> {
 
   private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-  protected LocalDateTimeBasedDomainObject(final Optional<LocalDateTime> value) throws NullPointerException {
+  protected LocalDateTimeBasedDomainPrimitive(final Optional<LocalDateTime> value) throws NullPointerException {
     super(value);
   }
 
   @Override
-  public int compareTo(final LocalDateTimeBasedDomainObject other) {
+  public int compareTo(final LocalDateTimeBasedDomainPrimitive other) {
     return compareTo(other, LocalDateTime::compareTo);
   }
 
   public Optional<String> format() {
-    return format(LocalDateTimeBasedDomainObject.DEFAULT_FORMATTER);
+    return format(LocalDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
 
   public Optional<String> format(final DateTimeFormatter formatter) throws NullPointerException {

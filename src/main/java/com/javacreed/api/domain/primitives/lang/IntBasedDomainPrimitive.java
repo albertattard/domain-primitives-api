@@ -5,19 +5,19 @@ import java.util.Comparator;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class IntBasedDomainObject implements Comparable<IntBasedDomainObject> {
+public class IntBasedDomainPrimitive implements Comparable<IntBasedDomainPrimitive> {
 
-  public static final Comparator<IntBasedDomainObject> DESCENDING_ORDER = (a, b) -> Integer.compare(b.getValue(),
+  public static final Comparator<IntBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Integer.compare(b.getValue(),
       a.getValue());
 
   protected final int value;
 
-  protected IntBasedDomainObject(final int value) {
+  protected IntBasedDomainPrimitive(final int value) {
     this.value = value;
   }
 
   @Override
-  public int compareTo(final IntBasedDomainObject other) {
+  public int compareTo(final IntBasedDomainPrimitive other) {
     return Integer.compare(value, other.value);
   }
 
@@ -31,7 +31,7 @@ public class IntBasedDomainObject implements Comparable<IntBasedDomainObject> {
       return false;
     }
 
-    return value == ((IntBasedDomainObject) object).value;
+    return value == ((IntBasedDomainPrimitive) object).value;
   }
 
   public int getValue() {
@@ -43,11 +43,11 @@ public class IntBasedDomainObject implements Comparable<IntBasedDomainObject> {
     return value;
   }
 
-  public boolean isSmaller(final IntBasedDomainObject other) {
+  public boolean isSmaller(final IntBasedDomainPrimitive other) {
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaul(final IntBasedDomainObject other) {
+  public boolean isSmallerOrEqaul(final IntBasedDomainPrimitive other) {
     return value <= other.value;
   }
 

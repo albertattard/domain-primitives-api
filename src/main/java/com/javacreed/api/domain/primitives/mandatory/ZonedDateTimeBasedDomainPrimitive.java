@@ -14,19 +14,19 @@ import javax.annotation.concurrent.Immutable;
 import com.google.common.base.Preconditions;
 
 @Immutable
-public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<ZonedDateTime>
-    implements Comparable<ZonedDateTimeBasedDomainObject> {
+public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitive<ZonedDateTime>
+    implements Comparable<ZonedDateTimeBasedDomainPrimitive> {
 
   private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
 
   private static final ZoneId ZONE_UTC = ZoneId.of("UTC");
 
-  protected ZonedDateTimeBasedDomainObject(final ZonedDateTime value) throws NullPointerException {
+  protected ZonedDateTimeBasedDomainPrimitive(final ZonedDateTime value) throws NullPointerException {
     super(value);
   }
 
   @Override
-  public int compareTo(final ZonedDateTimeBasedDomainObject other) {
+  public int compareTo(final ZonedDateTimeBasedDomainPrimitive other) {
     return compareTo(other, ZonedDateTime::compareTo);
   }
 
@@ -66,11 +66,11 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
    * @throws NullPointerException
    *           if the given time is <code>null</code>
    */
-  public boolean isAfter(final ZonedDateTimeBasedDomainObject other) {
+  public boolean isAfter(final ZonedDateTimeBasedDomainPrimitive other) {
     return value.isAfter(other.value);
   }
 
-  public boolean isEqual(final ZonedDateTimeBasedDomainObject other) {
+  public boolean isEqual(final ZonedDateTimeBasedDomainPrimitive other) {
     return value.isEqual(other.value);
   }
 
@@ -83,11 +83,11 @@ public class ZonedDateTimeBasedDomainObject extends ObjectBasedDomainObject<Zone
   }
 
   public String toFormattedString() {
-    return format(ZonedDateTimeBasedDomainObject.DEFAULT_FORMATTER);
+    return format(ZonedDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
 
   public LocalDateTime toUtcLocalDateTime() {
-    return value.withZoneSameInstant(ZonedDateTimeBasedDomainObject.ZONE_UTC).toLocalDateTime();
+    return value.withZoneSameInstant(ZonedDateTimeBasedDomainPrimitive.ZONE_UTC).toLocalDateTime();
   }
 
   /**

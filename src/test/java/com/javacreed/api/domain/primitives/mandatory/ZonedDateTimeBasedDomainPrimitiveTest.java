@@ -8,9 +8,9 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ZonedDateTimeBasedDomainObjectTest {
+public class ZonedDateTimeBasedDomainPrimitiveTest {
 
-  private static class Testable extends ZonedDateTimeBasedDomainObject {
+  private static class Testable extends ZonedDateTimeBasedDomainPrimitive {
     protected Testable(final ZonedDateTime value) throws NullPointerException {
       super(value);
     }

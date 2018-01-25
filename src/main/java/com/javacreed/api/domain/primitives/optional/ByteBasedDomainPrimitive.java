@@ -5,9 +5,9 @@ import java.util.Optional;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class ByteBasedDomainObject extends NumberBasedDomainObject<Byte> {
+public class ByteBasedDomainPrimitive extends NumberBasedDomainPrimitive<Byte> {
 
-  protected ByteBasedDomainObject(final Optional<Byte> value) {
+  protected ByteBasedDomainPrimitive(final Optional<Byte> value) {
     super(value);
   }
 }
