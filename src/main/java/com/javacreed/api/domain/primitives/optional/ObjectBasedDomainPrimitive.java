@@ -3,6 +3,7 @@ package com.javacreed.api.domain.primitives.optional;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -106,6 +107,16 @@ public class ObjectBasedDomainPrimitive<T> {
    */
   public T orElse(final T other) {
     return value.orElse(other);
+  }
+
+  public T orElseGet(final Supplier<? extends T> supplier) throws NullPointerException {
+    Preconditions.checkNotNull(supplier);
+    return value.orElseGet(supplier);
+  }
+
+  public <X extends Throwable> T orElseThrow(final Supplier<? extends X> supplier) throws X {
+    Preconditions.checkNotNull(supplier);
+    return value.orElseThrow(supplier);
   }
 
   @Override
