@@ -19,8 +19,8 @@ public class ObjectBasedDomainPrimitive<T> {
   }
 
   protected int compareTo(final ObjectBasedDomainPrimitive<T> other, final Comparator<T> comparator) {
-    final T a = getNullable();
-    final T b = other.getNullable();
+    final T a = orNull();
+    final T b = other.orNull();
 
     if (a == b) {
       return 0;
@@ -50,16 +50,6 @@ public class ObjectBasedDomainPrimitive<T> {
     }
 
     return false;
-  }
-
-  /**
-   * Returns the value if one is present, otherwise <code>null</code>. Note that this method may return
-   * <code>null</code>
-   *
-   * @return the value if one is present, otherwise <code>null</code>
-   */
-  public T getNullable() {
-    return orElse(null);
   }
 
   public Optional<T> getValue() {
@@ -117,6 +107,16 @@ public class ObjectBasedDomainPrimitive<T> {
   public <X extends Throwable> T orElseThrow(final Supplier<? extends X> supplier) throws X {
     Preconditions.checkNotNull(supplier);
     return value.orElseThrow(supplier);
+  }
+
+  /**
+   * Returns the value if one is present, otherwise <code>null</code>. Note that this method may return
+   * <code>null</code>
+   *
+   * @return the value if one is present, otherwise <code>null</code>
+   */
+  public T orNull() {
+    return orElse(null);
   }
 
   @Override

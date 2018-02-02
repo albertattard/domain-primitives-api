@@ -39,7 +39,7 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
   }
 
   public boolean isEqual(final ZonedDateTimeBasedDomainPrimitive other) {
-    return other.isValuePresent() && map(v -> v.isEqual(other.getNullable())).orElse(false);
+    return other.isValuePresent() && map(v -> v.isEqual(other.orNull())).orElse(false);
   }
 
   public Optional<Boolean> isInPast() {

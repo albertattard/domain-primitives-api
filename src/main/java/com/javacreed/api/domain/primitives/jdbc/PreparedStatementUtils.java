@@ -125,7 +125,7 @@ public class PreparedStatementUtils {
 
   public static void setString(final PreparedStatement ps, final int column, final StringBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
-    PreparedStatementUtils.setString(ps, column, object == null ? null : object.getNullable());
+    PreparedStatementUtils.setString(ps, column, object == null ? null : object.orNull());
   }
 
   private PreparedStatementUtils() {}
