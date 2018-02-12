@@ -1,7 +1,7 @@
 package com.javacreed.api.domain.primitives.optional;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -10,22 +10,22 @@ import javax.annotation.concurrent.Immutable;
 import com.google.common.base.Preconditions;
 
 @Immutable
-public class LocalDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitive<LocalDateTime>
-    implements Comparable<LocalDateTimeBasedDomainPrimitive> {
+public class LocalDateBasedDomainPrimitive extends ObjectBasedDomainPrimitive<LocalDate>
+    implements Comparable<LocalDateBasedDomainPrimitive> {
 
-  private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-  protected LocalDateTimeBasedDomainPrimitive(final Optional<LocalDateTime> value) throws NullPointerException {
+  protected LocalDateBasedDomainPrimitive(final Optional<LocalDate> value) throws NullPointerException {
     super(value);
   }
 
   @Override
-  public int compareTo(final LocalDateTimeBasedDomainPrimitive other) {
-    return compareTo(other, LocalDateTime::compareTo);
+  public int compareTo(final LocalDateBasedDomainPrimitive other) {
+    return compareTo(other, LocalDate::compareTo);
   }
 
   public Optional<String> format() {
-    return format(LocalDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
+    return format(LocalDateBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
 
   public Optional<String> format(final DateTimeFormatter formatter) throws NullPointerException {
@@ -46,7 +46,8 @@ public class LocalDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return format(DateTimeFormatter.ofPattern(pattern));
   }
 
-  public Optional<Timestamp> toSqlTimestamp() {
-    return map(Timestamp::valueOf);
+  public Optional<Date> toSqlDate() {
+    return map(Date::valueOf);
   }
+
 }

@@ -63,7 +63,7 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
    * @see #toUtcLocalDateTime()
    * @see Timestamp#valueOf(LocalDateTime)
    */
-  public Optional<Timestamp> toUtcTimestamp() {
+  public Optional<Timestamp> toUtcSqlTimestamp() {
     return toUtcLocalDateTime().map(Timestamp::valueOf);
   }
 
