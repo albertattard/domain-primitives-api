@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomainPrimitive> {
 
   public static final Comparator<BooleanBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Boolean.compare(b.getValue(),
-      a.getValue());
+                                                                                                           a.getValue());
 
   protected final boolean value;
 

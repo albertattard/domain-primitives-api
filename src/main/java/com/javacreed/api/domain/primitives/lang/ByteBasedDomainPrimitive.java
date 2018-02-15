@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 public class ByteBasedDomainPrimitive implements Comparable<ByteBasedDomainPrimitive> {
 
   public static final Comparator<ByteBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Byte.compare(b.getValue(),
-      a.getValue());
+                                                                                                     a.getValue());
 
   protected final byte value;
 
