@@ -22,11 +22,11 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes
    * @see UuidUtils#toBytes(UUID)
    */
-  public Optional<byte[]> getBytes() {
+  public Optional<byte[]> toBytes() {
     return map(UuidUtils::toBytes);
   }
 
-  public Optional<String> getFormatted() {
+  public Optional<String> toFormattedString() {
     return map(UUID::toString);
   }
 
@@ -39,13 +39,13 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
    *
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes if available, otherwise
    *         <code>null</code>
-   * @see #getBytes()
+   * @see #toBytes()
    */
-  public byte[] getNullableBytes() {
-    return getBytes().orElse(null);
+  public byte[] toNullableBytes() {
+    return toBytes().orElse(null);
   }
 
-  public String getNullableFormatted() {
-    return getFormatted().orElse(null);
+  public String toNullableFormattedString() {
+    return toFormattedString().orElse(null);
   }
 }

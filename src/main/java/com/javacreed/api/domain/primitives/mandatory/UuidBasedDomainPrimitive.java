@@ -24,8 +24,4 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
   public byte[] toBytes() {
     return map(UuidUtils::toBytes);
   }
-
-  public String toFormattedString() {
-    return map(UUID::toString);
-  }
 }

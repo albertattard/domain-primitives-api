@@ -49,7 +49,7 @@ public class PreparedStatementUtils {
 
   public static void setBytes(final PreparedStatement ps, final int column, final UuidBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
-    PreparedStatementUtils.setBytes(ps, column, object == null ? null : object.getNullableBytes());
+    PreparedStatementUtils.setBytes(ps, column, object == null ? null : object.toNullableBytes());
   }
 
   public static void setInt(final PreparedStatement ps, final int column, final IntBasedDomainPrimitive object)
