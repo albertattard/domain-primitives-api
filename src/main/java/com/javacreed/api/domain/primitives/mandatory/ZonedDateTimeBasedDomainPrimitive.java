@@ -78,10 +78,6 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return value.isBefore(ZonedDateTime.now(value.getZone()));
   }
 
-  public Date toDate() {
-    return Date.from(value.toInstant());
-  }
-
   public String toFormattedString() {
     return format(ZonedDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
@@ -98,7 +94,11 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
    * @see #toUtcLocalDateTime()
    * @see Timestamp#valueOf(LocalDateTime)
    */
-  public Timestamp toUtcTimestamp() {
+  public Timestamp toUtcSqlTimestamp() {
     return Timestamp.valueOf(toUtcLocalDateTime());
+  }
+
+  public Date toUtilDate() {
+    return Date.from(value.toInstant());
   }
 }

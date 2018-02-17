@@ -2,6 +2,7 @@ package com.javacreed.api.domain.primitives.optional;
 
 import java.util.Comparator;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -59,6 +60,10 @@ public class ObjectBasedDomainPrimitive<T> {
   @Override
   public int hashCode() {
     return value.hashCode();
+  }
+
+  public void ifPresent(final Consumer<? super T> consumer) {
+    value.ifPresent(consumer);
   }
 
   /**
