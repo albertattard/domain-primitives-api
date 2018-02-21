@@ -15,7 +15,7 @@ import com.google.common.base.Preconditions;
 public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitive<ZonedDateTime>
     implements Comparable<ZonedDateTimeBasedDomainPrimitive> {
 
-  private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
+  private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm (z)");
 
   private static final ZoneId ZONE_UTC = ZoneId.of("UTC");
 
