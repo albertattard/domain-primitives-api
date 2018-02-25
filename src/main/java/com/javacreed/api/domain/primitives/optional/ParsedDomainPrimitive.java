@@ -18,9 +18,10 @@ public class ParsedDomainPrimitive<T> extends ValidatedDomainPrimitive {
   }
 
   /**
-   * @Deprecated The parse result simplifies the parsing of objects and should be preferred over this method. This
-   *             method has nothing wrong and archives the same result. It is included here simply to remind me that
-   *             there may be a simpler option
+   * @Deprecated The {@link ParseResult} simplifies the parsing of objects and should be preferred over this method.
+   *             This method has nothing wrong and archives the same result. It is included here simply to remind me
+   *             that there may be a simpler option
+   * @see ParseResult
    */
   @Deprecated
   protected ParsedDomainPrimitive(final Optional<String> value, final ValidationState validationState,
