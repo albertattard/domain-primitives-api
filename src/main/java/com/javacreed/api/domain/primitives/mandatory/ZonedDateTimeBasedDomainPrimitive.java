@@ -74,6 +74,10 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return value.isEqual(other.value);
   }
 
+  public boolean isInFuture() {
+    return value.isAfter(ZonedDateTime.now(value.getZone()));
+  }
+
   public boolean isInPast() {
     return value.isBefore(ZonedDateTime.now(value.getZone()));
   }
