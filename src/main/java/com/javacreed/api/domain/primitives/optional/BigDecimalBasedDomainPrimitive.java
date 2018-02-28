@@ -31,4 +31,9 @@ public class BigDecimalBasedDomainPrimitive extends ObjectBasedDomainPrimitive<B
     Preconditions.checkNotNull(format);
     return map(format::format);
   }
+
+  public Optional<Boolean> hasSameValue(final BigDecimal value) throws NullPointerException {
+    return map(v -> v.compareTo(value) == 0);
+  }
+
 }

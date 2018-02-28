@@ -35,4 +35,8 @@ public class BigDecimalBasedDomainPrimitive extends ObjectBasedDomainPrimitive<B
   public String format(final String pattern) throws NullPointerException, IllegalArgumentException {
     return format(new DecimalFormat(pattern));
   }
+
+  public boolean hasSameValue(final BigDecimal value) throws NullPointerException {
+    return this.value.compareTo(value) == 0;
+  }
 }
