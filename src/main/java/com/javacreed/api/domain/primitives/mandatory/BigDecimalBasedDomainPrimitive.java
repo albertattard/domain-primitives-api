@@ -36,7 +36,15 @@ public class BigDecimalBasedDomainPrimitive extends ObjectBasedDomainPrimitive<B
     return format(new DecimalFormat(pattern));
   }
 
+  public boolean hasLargerValue(final BigDecimal value) {
+    return this.value.compareTo(value) > 0;
+  }
+
   public boolean hasSameValue(final BigDecimal value) throws NullPointerException {
     return this.value.compareTo(value) == 0;
+  }
+
+  public boolean hasSmallerValue(final BigDecimal value) {
+    return this.value.compareTo(value) < 0;
   }
 }
