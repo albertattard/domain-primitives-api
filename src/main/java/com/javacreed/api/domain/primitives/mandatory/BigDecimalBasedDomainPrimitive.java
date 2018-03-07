@@ -3,6 +3,7 @@ package com.javacreed.api.domain.primitives.mandatory;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.function.Function;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -13,6 +14,23 @@ public class BigDecimalBasedDomainPrimitive extends ObjectBasedDomainPrimitive<B
     implements Comparable<BigDecimalBasedDomainPrimitive> {
 
   private static final NumberFormat DEFAULT_FORMAT = NumberFormat.getNumberInstance();
+
+  public static BigDecimal parseValue(final String value,
+      final Function<Exception, String> errorHandler)
+      throws IllegalArgumentException {
+    return BigDecimalBasedDomainPrimitive.parseValue(value, "#,###.00", errorHandler);
+  }
+
+  public static BigDecimal parseValue(final String value, final String pattern,
+      final Function<Exception, String> errorTransformation) throws IllegalArgumentException {
+    try {
+      final DecimalFormat format = new DecimalFormat(pattern);
+      format.setParseBigDecimal(true);
+      return (BigDecimal) format.parse(value);
+    } catch (final Exception e) {
+      throw new IllegalArgumentException(errorTransformation.apply(e));
+    }
+  }
 
   protected BigDecimalBasedDomainPrimitive(final BigDecimal value) throws NullPointerException {
     super(value);
