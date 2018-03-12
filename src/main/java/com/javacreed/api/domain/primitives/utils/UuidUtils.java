@@ -25,7 +25,9 @@ public class UuidUtils {
   public static String checkArgument(final String value, final String name)
       throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(value, name + " is null");
-    Preconditions.checkArgument(value.length() == 36, name + " is of invalid length");
+    Preconditions.checkArgument(value.length() == 36,
+                                name + " is of invalid length.  Expected 36 characters but found %s characters '%s'",
+                                value.length(), value);
     Preconditions.checkArgument(UuidUtils.REGEX.matcher(value).matches(),
                                 name + " contains invalid letters or is in invalid format");
     return value;

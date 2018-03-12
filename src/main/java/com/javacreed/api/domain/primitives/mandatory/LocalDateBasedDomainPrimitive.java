@@ -45,6 +45,14 @@ public class LocalDateBasedDomainPrimitive extends ObjectBasedDomainPrimitive<Lo
     return format(DateTimeFormatter.ofPattern(pattern));
   }
 
+  public boolean isAfter(final LocalDateBasedDomainPrimitive other) {
+    return value.isAfter(other.value);
+  }
+
+  public boolean isBefore(final LocalDateBasedDomainPrimitive other) {
+    return value.isBefore(other.value);
+  }
+
   public Date toSqlDate() {
     return map(Date::valueOf);
   }
