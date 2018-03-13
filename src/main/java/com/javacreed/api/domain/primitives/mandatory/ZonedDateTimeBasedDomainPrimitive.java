@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.primitives.mandatory;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
@@ -84,6 +85,10 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
 
   public String toFormattedString() {
     return format(ZonedDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
+  }
+
+  public LocalDate toUtcLocalDate() {
+    return value.withZoneSameInstant(ZonedDateTimeBasedDomainPrimitive.ZONE_UTC).toLocalDate();
   }
 
   public LocalDateTime toUtcLocalDateTime() {
