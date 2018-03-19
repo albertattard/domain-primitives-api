@@ -45,6 +45,10 @@ public class LocalDateBasedDomainPrimitive extends ObjectBasedDomainPrimitive<Lo
     return format(DateTimeFormatter.ofPattern(pattern));
   }
 
+  public int getYear() {
+    return value.getYear();
+  }
+
   public boolean isAfter(final LocalDateBasedDomainPrimitive other) {
     return value.isAfter(other.value);
   }
