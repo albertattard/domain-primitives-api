@@ -19,6 +19,10 @@ public class ObjectBasedDomainPrimitive<T> {
     this.value = Preconditions.checkNotNull(value);
   }
 
+  protected ObjectBasedDomainPrimitive(final T value) {
+    this(Optional.ofNullable(value));
+  }
+
   protected int compareTo(final ObjectBasedDomainPrimitive<T> other, final Comparator<T> comparator) {
     final T a = orNull();
     final T b = other.orNull();

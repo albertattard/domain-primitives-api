@@ -12,6 +12,10 @@ public class ComparableBasedDomainPrimitive<T extends Comparable<T>> extends Obj
     super(value);
   }
 
+  protected ComparableBasedDomainPrimitive(final T value) throws NullPointerException {
+    super(value);
+  }
+
   @Override
   public int compareTo(final ComparableBasedDomainPrimitive<T> other) {
     return compareTo(other, (a, b) -> a.compareTo(b));

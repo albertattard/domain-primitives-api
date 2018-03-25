@@ -14,6 +14,10 @@ public class StringBasedDomainPrimitive extends ComparableBasedDomainPrimitive<S
     super(value);
   }
 
+  protected StringBasedDomainPrimitive(final String value) throws NullPointerException {
+    super(value);
+  }
+
   public int compareToIgnoreCase(final StringBasedDomainPrimitive other) {
     return compareTo(other, (a, b) -> a.compareToIgnoreCase(b));
   }
