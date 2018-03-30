@@ -1,5 +1,6 @@
 package com.javacreed.api.domain.primitives.mandatory;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 import javax.annotation.concurrent.Immutable;
@@ -13,6 +14,10 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
     super(value);
   }
 
+  public boolean sameValue(final byte[] bytes) {
+    return bytes != null && bytes.length == 16 && Arrays.equals(toBytes(), bytes);
+  }
+
   /**
    * Converts the UUID to bytes. Note that this is incompatible with the {@link UUID#nameUUIDFromBytes()}. The returned
    * bytes array can be converted back to UUID using the {@link UuidUtils#toUuid(byte[])} method defined within this
@@ -24,4 +29,5 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
   public byte[] toBytes() {
     return map(UuidUtils::toBytes);
   }
+
 }
