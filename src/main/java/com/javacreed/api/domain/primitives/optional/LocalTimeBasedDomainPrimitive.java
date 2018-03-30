@@ -49,4 +49,9 @@ public class LocalTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitive<Lo
   public Optional<Time> toSqlTime() {
     return map(Time::valueOf);
   }
+
+  public Time toSqlTimeOrNull() {
+    return toSqlTime().orElse(null);
+  }
+
 }
