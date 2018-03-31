@@ -59,6 +59,10 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
                 .map(ZonedDateTime::toLocalDateTime);
   }
 
+  public LocalDateTime toUtcLocalDateTimeOrNull() {
+    return toUtcLocalDateTime().orElse(null);
+  }
+
   /**
    * Returns the timestamp at the UTC time zone. This is equivalent as creating the
    * {@link Timestamp#valueOf(LocalDateTime)} and passing the {@link #toUtcLocalDateTime()} as parameter
@@ -71,4 +75,7 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return toUtcLocalDateTime().map(Timestamp::valueOf);
   }
 
+  public Timestamp toUtcSqlTimestampOrNull() {
+    return toUtcSqlTimestamp().orElse(null);
+  }
 }
