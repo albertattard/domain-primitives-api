@@ -50,4 +50,7 @@ public class LocalDateBasedDomainPrimitive extends ObjectBasedDomainPrimitive<Lo
     return map(Date::valueOf);
   }
 
+  public Date toSqlDateOrNull() {
+    return toSqlDate().orElse(null);
+  }
 }
