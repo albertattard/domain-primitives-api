@@ -26,10 +26,6 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
     return map(UuidUtils::toBytes);
   }
 
-  public Optional<String> toFormattedString() {
-    return map(UUID::toString);
-  }
-
   /**
    * This method is a shortcut to <code>getBytes().orElse(null)</code>
    * <p>
@@ -41,11 +37,15 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
    *         <code>null</code>
    * @see #toBytes()
    */
-  public byte[] toNullableBytes() {
+  public byte[] toBytesOrNull() {
     return toBytes().orElse(null);
   }
 
-  public String toNullableFormattedString() {
+  public Optional<String> toFormattedString() {
+    return map(UUID::toString);
+  }
+
+  public String toFormattedStringOrNull() {
     return toFormattedString().orElse(null);
   }
 }
