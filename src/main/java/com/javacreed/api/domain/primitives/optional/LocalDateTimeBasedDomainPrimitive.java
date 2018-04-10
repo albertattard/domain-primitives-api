@@ -49,4 +49,8 @@ public class LocalDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
   public Optional<Timestamp> toSqlTimestamp() {
     return map(Timestamp::valueOf);
   }
+
+  public Timestamp toSqlTimestampOrNull() {
+    return toSqlTimestamp().orElse(null);
+  }
 }
