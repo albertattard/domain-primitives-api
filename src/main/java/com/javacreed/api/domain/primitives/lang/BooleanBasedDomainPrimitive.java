@@ -43,6 +43,10 @@ public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomai
     return value ? 1231 : 1237;
   }
 
+  public byte toByte() {
+    return (byte) (value ? 1 : 0);
+  }
+
   @Override
   public String toString() {
     return String.valueOf(value);
