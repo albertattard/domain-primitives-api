@@ -57,6 +57,10 @@ public class LocalDateBasedDomainPrimitive extends ObjectBasedDomainPrimitive<Lo
     return value.isBefore(other.value);
   }
 
+  public boolean isSameOrBefore(final LocalDateBasedDomainPrimitive other) {
+    return value.isEqual(other.value) || value.isBefore(other.value);
+  }
+
   public Date toSqlDate() {
     return map(Date::valueOf);
   }
