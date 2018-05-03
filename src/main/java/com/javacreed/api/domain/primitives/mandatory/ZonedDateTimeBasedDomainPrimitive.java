@@ -83,6 +83,10 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return value.isBefore(ZonedDateTime.now(value.getZone()));
   }
 
+  public long toEpochMilli() {
+    return value.toInstant().toEpochMilli();
+  }
+
   public String toFormattedString() {
     return format(ZonedDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
