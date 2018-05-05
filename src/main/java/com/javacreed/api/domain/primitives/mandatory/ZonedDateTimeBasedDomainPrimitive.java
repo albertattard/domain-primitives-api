@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -19,8 +20,6 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     implements Comparable<ZonedDateTimeBasedDomainPrimitive> {
 
   private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm (z)");
-
-  private static final ZoneId ZONE_UTC = ZoneId.of("UTC");
 
   protected ZonedDateTimeBasedDomainPrimitive(final ZonedDateTime value) throws NullPointerException {
     super(value);
@@ -91,12 +90,22 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return format(ZonedDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
 
+  /**
+   * Returns the timestamp from this time instant
+   *
+   * @return the timestamp from this time instant
+   * @see #toUtcSqlTimestamp()
+   */
+  public Timestamp toSqlTimestamp() {
+    return Timestamp.from(value.toInstant());
+  }
+
   public LocalDate toUtcLocalDate() {
-    return value.withZoneSameInstant(ZonedDateTimeBasedDomainPrimitive.ZONE_UTC).toLocalDate();
+    return value.withZoneSameInstant(ZoneOffset.UTC).toLocalDate();
   }
 
   public LocalDateTime toUtcLocalDateTime() {
-    return value.withZoneSameInstant(ZonedDateTimeBasedDomainPrimitive.ZONE_UTC).toLocalDateTime();
+    return value.withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
   }
 
   /**

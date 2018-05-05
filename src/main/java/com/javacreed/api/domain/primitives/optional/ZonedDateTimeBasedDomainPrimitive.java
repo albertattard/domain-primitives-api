@@ -54,6 +54,14 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return format(ZonedDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
 
+  public Optional<Timestamp> toSqlTimestamp() {
+    return map(v -> v.toInstant()).map(Timestamp::from);
+  }
+
+  public Timestamp toSqlTimestampOrNull() {
+    return toSqlTimestamp().orElse(null);
+  }
+
   public Optional<LocalDateTime> toUtcLocalDateTime() {
     return value.map(z -> z.withZoneSameInstant(ZonedDateTimeBasedDomainPrimitive.ZONE_UTC))
                 .map(ZonedDateTime::toLocalDateTime);
