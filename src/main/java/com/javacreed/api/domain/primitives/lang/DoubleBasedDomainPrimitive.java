@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.primitives.lang;
 
 import java.util.Comparator;
+import java.util.function.DoubleFunction;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -51,6 +52,10 @@ public class DoubleBasedDomainPrimitive implements Comparable<DoubleBasedDomainP
 
   public boolean isSmallerOrEqaul(final DoubleBasedDomainPrimitive other) {
     return value <= other.value;
+  }
+
+  public <T> T map(final DoubleFunction<T> map) throws NullPointerException {
+    return map.apply(value);
   }
 
   @Override

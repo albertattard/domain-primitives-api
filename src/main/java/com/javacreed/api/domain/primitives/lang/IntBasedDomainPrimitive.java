@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.primitives.lang;
 
 import java.util.Comparator;
+import java.util.function.IntFunction;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -43,12 +44,16 @@ public class IntBasedDomainPrimitive implements Comparable<IntBasedDomainPrimiti
     return value;
   }
 
-  public boolean isSmaller(final IntBasedDomainPrimitive other) {
+  public boolean isSmaller(final IntBasedDomainPrimitive other) throws NullPointerException {
     return value < other.value;
   }
 
-  public boolean isSmallerOrEqaul(final IntBasedDomainPrimitive other) {
+  public boolean isSmallerOrEqaul(final IntBasedDomainPrimitive other) throws NullPointerException {
     return value <= other.value;
+  }
+
+  public <T> T map(final IntFunction<T> map) throws NullPointerException {
+    return map.apply(value);
   }
 
   @Override

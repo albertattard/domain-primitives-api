@@ -1,11 +1,34 @@
 package com.javacreed.api.domain.primitives.lang;
 
 import java.util.Comparator;
+import java.util.function.Function;
 
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
 public class ByteBasedDomainPrimitive implements Comparable<ByteBasedDomainPrimitive> {
+
+  /**
+   * Represents a function that accepts a byte-valued argument and produces a result. This is the {@code byte}-consuming
+   * primitive specialization for {@link Function}.
+   *
+   * @param <R>
+   *          the type of the result of the function
+   *
+   * @see Function
+   */
+  @FunctionalInterface
+  public interface ByteFunction<R> {
+
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param value
+     *          the function argument
+     * @return the function result
+     */
+    R apply(byte value);
+  }
 
   public static final Comparator<ByteBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Byte.compare(b.getValue(),
                                                                                                      a.getValue());
@@ -49,6 +72,10 @@ public class ByteBasedDomainPrimitive implements Comparable<ByteBasedDomainPrimi
 
   public boolean isSmallerOrEqaul(final ByteBasedDomainPrimitive other) {
     return value <= other.value;
+  }
+
+  public <T> T map(final ByteFunction<T> map) throws NullPointerException {
+    return map.apply(value);
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.primitives.lang;
 
 import java.util.Comparator;
+import java.util.function.LongFunction;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -49,6 +50,10 @@ public class LongBasedDomainPrimitive implements Comparable<LongBasedDomainPrimi
 
   public boolean isSmallerOrEqaul(final LongBasedDomainPrimitive other) {
     return value <= other.value;
+  }
+
+  public <T> T map(final LongFunction<T> map) throws NullPointerException {
+    return map.apply(value);
   }
 
   @Override

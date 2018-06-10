@@ -1,11 +1,34 @@
 package com.javacreed.api.domain.primitives.lang;
 
 import java.util.Comparator;
+import java.util.function.Function;
 
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
 public class ShortBasedDomainPrimitive implements Comparable<ShortBasedDomainPrimitive> {
+
+  /**
+   * Represents a function that accepts a short-valued argument and produces a result. This is the
+   * {@code short}-consuming primitive specialization for {@link Function}.
+   *
+   * @param <R>
+   *          the type of the result of the function
+   *
+   * @see Function
+   */
+  @FunctionalInterface
+  public interface ShortFunction<R> {
+
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param value
+     *          the function argument
+     * @return the function result
+     */
+    R apply(short value);
+  }
 
   public static final Comparator<ShortBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Short.compare(b.getValue(),
                                                                                                        a.getValue());
@@ -49,6 +72,10 @@ public class ShortBasedDomainPrimitive implements Comparable<ShortBasedDomainPri
 
   public boolean isSmallerOrEqaul(final ShortBasedDomainPrimitive other) {
     return value <= other.value;
+  }
+
+  public <T> T map(final ShortFunction<T> map) throws NullPointerException {
+    return map.apply(value);
   }
 
   @Override
