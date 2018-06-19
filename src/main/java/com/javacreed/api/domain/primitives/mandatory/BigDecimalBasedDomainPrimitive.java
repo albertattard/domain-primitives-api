@@ -12,7 +12,6 @@ import com.google.common.base.Preconditions;
 @Immutable
 public class BigDecimalBasedDomainPrimitive extends ObjectBasedDomainPrimitive<BigDecimal>
     implements Comparable<BigDecimalBasedDomainPrimitive> {
-
   private static final NumberFormat DEFAULT_FORMAT = NumberFormat.getNumberInstance();
 
   public static BigDecimal parseValue(final String value,
