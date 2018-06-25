@@ -2,6 +2,8 @@ package com.javacreed.api.domain.primitives.mandatory;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.annotation.concurrent.Immutable;
@@ -47,5 +49,9 @@ public class LocalDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
 
   public Timestamp toSqlTimestamp() {
     return map(Timestamp::valueOf);
+  }
+
+  public ZonedDateTime toZone(final ZoneId zoneId) throws NullPointerException {
+    return ZonedDateTime.of(value, zoneId);
   }
 }
