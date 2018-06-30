@@ -1,37 +1,16 @@
 package com.javacreed.api.domain.primitives.lang;
 
 import java.util.Comparator;
-import java.util.function.Function;
 
 import javax.annotation.concurrent.Immutable;
+
+import com.javacreed.api.domain.primitives.function.FloatFunction;
 
 @Immutable
 public class FloatBasedDomainPrimitive implements Comparable<FloatBasedDomainPrimitive> {
 
-  /**
-   * Represents a function that accepts a float-valued argument and produces a result. This is the
-   * {@code float}-consuming primitive specialization for {@link Function}.
-   *
-   * @param <R>
-   *          the type of the result of the function
-   *
-   * @see Function
-   */
-  @FunctionalInterface
-  public static interface FloatFunction<R> {
-
-    /**
-     * Applies this function to the given argument.
-     *
-     * @param value
-     *          the function argument
-     * @return the function result
-     */
-    R apply(float value);
-  }
-
   public static final Comparator<FloatBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Float.compare(b.getValue(),
-                                                                                                       a.getValue());
+      a.getValue());
 
   protected final float value;
   private final int intBits;

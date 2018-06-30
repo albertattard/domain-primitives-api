@@ -14,7 +14,8 @@ import com.google.common.base.Preconditions;
  */
 public class UuidUtils {
 
-  private static final Pattern REGEX = Pattern.compile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
+  private static final Pattern REGEX = Pattern
+      .compile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
 
   public static String checkArgument(final String value) throws NullPointerException, IllegalArgumentException {
     return UuidUtils.checkArgument(value, "UUID value");
@@ -24,10 +25,9 @@ public class UuidUtils {
       throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(value, name + " is null");
     Preconditions.checkArgument(value.length() == 36,
-                                name + " is of invalid length.  Expected 36 characters but found %s characters '%s'",
-                                value.length(), value);
+        name + " is of invalid length.  Expected 36 characters but found %s characters '%s'", value.length(), value);
     Preconditions.checkArgument(UuidUtils.REGEX.matcher(value).matches(),
-                                name + " contains invalid letters or is in invalid format");
+        name + " contains invalid letters or is in invalid format");
     return value;
   }
 

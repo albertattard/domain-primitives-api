@@ -16,8 +16,7 @@ public class BigDecimalBasedDomainPrimitive extends ObjectBasedDomainPrimitive<B
 
   private static final NumberFormat DEFAULT_FORMAT = NumberFormat.getNumberInstance();
 
-  public static BigDecimal parseValue(final String value,
-      final Function<Exception, String> errorHandler)
+  public static BigDecimal parseValue(final String value, final Function<Exception, String> errorHandler)
       throws IllegalArgumentException {
     return BigDecimalBasedDomainPrimitive.parseValue(value, "#,###.00", errorHandler);
   }
