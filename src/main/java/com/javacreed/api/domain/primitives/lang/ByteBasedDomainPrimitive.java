@@ -18,7 +18,7 @@ public class ByteBasedDomainPrimitive implements Comparable<ByteBasedDomainPrimi
    * @see Function
    */
   @FunctionalInterface
-  public interface ByteFunction<R> {
+  public static interface ByteFunction<R> {
 
     /**
      * Applies this function to the given argument.

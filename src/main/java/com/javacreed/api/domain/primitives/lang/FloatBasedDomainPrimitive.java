@@ -18,7 +18,7 @@ public class FloatBasedDomainPrimitive implements Comparable<FloatBasedDomainPri
    * @see Function
    */
   @FunctionalInterface
-  public interface FloatFunction<R> {
+  public static interface FloatFunction<R> {
 
     /**
      * Applies this function to the given argument.

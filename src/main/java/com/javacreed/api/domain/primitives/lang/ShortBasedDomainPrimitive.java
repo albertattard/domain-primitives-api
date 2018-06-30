@@ -18,7 +18,7 @@ public class ShortBasedDomainPrimitive implements Comparable<ShortBasedDomainPri
    * @see Function
    */
   @FunctionalInterface
-  public interface ShortFunction<R> {
+  public static interface ShortFunction<R> {
 
     /**
      * Applies this function to the given argument.

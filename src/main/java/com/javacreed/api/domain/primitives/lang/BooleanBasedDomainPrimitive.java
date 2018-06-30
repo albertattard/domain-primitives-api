@@ -18,7 +18,7 @@ public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomai
    * @see Function
    */
   @FunctionalInterface
-  public interface BooleanFunction<R> {
+  public static interface BooleanFunction<R> {
 
     /**
      * Applies this function to the given argument.

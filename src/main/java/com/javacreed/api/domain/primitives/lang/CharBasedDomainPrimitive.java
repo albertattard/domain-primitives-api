@@ -18,7 +18,7 @@ public class CharBasedDomainPrimitive implements Comparable<CharBasedDomainPrimi
    * @see Function
    */
   @FunctionalInterface
-  public interface CharFunction<R> {
+  public static interface CharFunction<R> {
 
     /**
      * Applies this function to the given argument.
