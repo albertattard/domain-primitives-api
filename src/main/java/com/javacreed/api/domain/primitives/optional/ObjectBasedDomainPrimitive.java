@@ -97,6 +97,10 @@ public class ObjectBasedDomainPrimitive<T> {
     return value.map(mapper);
   }
 
+  public <U> U mapOrNull(final Function<? super T, ? extends U> mapper) throws NullPointerException {
+    return map(mapper).orElse(null);
+  }
+
   /**
    * Returns the value if present, otherwise return <code>other</code>.
    *

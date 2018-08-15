@@ -10,7 +10,7 @@ import com.javacreed.api.domain.primitives.function.FloatFunction;
 public class FloatBasedDomainPrimitive implements Comparable<FloatBasedDomainPrimitive> {
 
   public static final Comparator<FloatBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Float.compare(b.getValue(),
-      a.getValue());
+                                                                                                       a.getValue());
 
   protected final float value;
   private final int intBits;

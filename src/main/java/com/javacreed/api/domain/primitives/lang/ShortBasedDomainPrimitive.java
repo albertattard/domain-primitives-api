@@ -10,7 +10,7 @@ import com.javacreed.api.domain.primitives.function.ShortFunction;
 public class ShortBasedDomainPrimitive implements Comparable<ShortBasedDomainPrimitive> {
 
   public static final Comparator<ShortBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Short.compare(b.getValue(),
-      a.getValue());
+                                                                                                       a.getValue());
 
   protected final short value;
 

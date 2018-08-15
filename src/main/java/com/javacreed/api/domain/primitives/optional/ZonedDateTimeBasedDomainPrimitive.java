@@ -64,7 +64,7 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
 
   public Optional<LocalDateTime> toUtcLocalDateTime() {
     return value.map(z -> z.withZoneSameInstant(ZonedDateTimeBasedDomainPrimitive.ZONE_UTC))
-        .map(ZonedDateTime::toLocalDateTime);
+                .map(ZonedDateTime::toLocalDateTime);
   }
 
   public LocalDateTime toUtcLocalDateTimeOrNull() {
