@@ -45,6 +45,14 @@ public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomai
     return value ? 1231 : 1237;
   }
 
+  public boolean isFalse() {
+    return false == value;
+  }
+
+  public boolean isTrue() {
+    return value;
+  }
+
   public <T> T map(final BooleanFunction<T> map) throws NullPointerException {
     return map.apply(value);
   }
