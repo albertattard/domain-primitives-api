@@ -89,6 +89,6 @@ public class ReadOnlyByteArray {
       }
     }
 
-    Files.write(path, data, StandardOpenOption.CREATE);
+    Files.write(path, data, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
   }
 }

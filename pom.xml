@@ -42,7 +42,7 @@
 		<surefire.version>2.20.1</surefire.version>
 		<jacoco.version>0.7.9</jacoco.version>
 		<reports.version>2.9</reports.version>
-		<google.guava.version>25.1-jre</google.guava.version>
+		<google.guava.version>26.0-jre</google.guava.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 
