@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 	<name>Domain Primitives API</name>
 	<description>This project provides base classes for domain primitives</description>
-	<url>https://github.com/javacreed/domain-primitives-api</url>
+	<url>https://github.com/javacreed/${project.artifactId}</url>
 	<inceptionYear>2017</inceptionYear>
 
 	<contributors>
@@ -28,9 +28,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/javacreed/domain-primitives-api.git</connection>
-		<developerConnection>scm:git:git://github.com/javacreed/domain-primitives-api.git</developerConnection>
-		<url>https://github.com/javacreed/domain-primitives-api</url>
+		<connection>scm:git:git://github.com/javacreed/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:git://github.com/javacreed/${project.artifactId}.git</developerConnection>
+		<url>https://github.com/javacreed/${project.artifactId}</url>
 	</scm>
 
 	<properties>
