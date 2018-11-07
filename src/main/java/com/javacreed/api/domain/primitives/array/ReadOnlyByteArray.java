@@ -34,6 +34,7 @@ public class ReadOnlyByteArray {
 
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
+
   private transient boolean lazyHashCodeComputed = false;
 
   private ReadOnlyByteArray(final byte[] data) {

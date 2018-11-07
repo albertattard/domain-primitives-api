@@ -1,10 +1,11 @@
 package com.javacreed.api.domain.primitives.array;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 import com.google.common.base.Preconditions;
 
-public class ReadOnlyIntArray {
+public class ReadOnlyIntArray implements Iterable<Integer> {
 
   public static ReadOnlyIntArray of(final int[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
@@ -12,7 +13,6 @@ public class ReadOnlyIntArray {
   }
 
   private final int[] data;
-
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
   private transient boolean lazyHashCodeComputed = false;
@@ -44,8 +44,16 @@ public class ReadOnlyIntArray {
     return lazyHashCode;
   }
 
+  @Override
+  public Iterator<Integer> iterator() {
+    return IntIterator.create(data);
+  }
+
   public int length() {
     return data.length;
   }
 
+  public int valueAt(final int index) {
+    return data[index];
+  }
 }
