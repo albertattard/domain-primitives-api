@@ -13,7 +13,7 @@ The lang set of base classes represents domain primitives that are based on the 
 
 For example, say we have a class that has two fields, `title` and `name`.  The `title` field is optional while the `name` field is mandatory, 
 
-```
+```java
 public class Person {
   private final PersonTitle title;
   private final PersonName name;
@@ -23,7 +23,7 @@ public class Person {
 
 The `Person` uses two domain primitive classes, the `PersonTitle` and the `PersonName`.  The `PersonTitle` should accept `null`s and thus it is optional.
 
-```
+```java
 import com.javacreed.api.domain.primitives.optional.StringBasedDomainPrimitive;
 
 public class PersonTitle extends StringBasedDomainPrimitive {
@@ -32,7 +32,7 @@ public class PersonTitle extends StringBasedDomainPrimitive {
 
 The `PersonName` class, on the other hand, is mandatory.
 
-```
+```java
 import com.javacreed.api.domain.primitives.mandatory.StringBasedDomainPrimitive;
 
 public class PersonName extends StringBasedDomainPrimitive {
