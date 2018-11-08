@@ -8,19 +8,19 @@ import javax.annotation.concurrent.Immutable;
 import com.google.common.base.Preconditions;
 
 @Immutable
-public class ReadOnlyShortArray implements Iterable<Short> {
+public class ReadOnlyObjectArray<T> implements Iterable<T> {
 
-  public static ReadOnlyShortArray of(final short[] data) throws NullPointerException {
+  public static <E> ReadOnlyObjectArray of(final E[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
-    return new ReadOnlyShortArray(Arrays.copyOf(data, data.length));
+    return new ReadOnlyObjectArray(Arrays.copyOf(data, data.length));
   }
 
-  private final short[] data;
+  private final T[] data;
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
   private transient boolean lazyHashCodeComputed = false;
 
-  private ReadOnlyShortArray(final short[] data) {
+  private ReadOnlyObjectArray(final T[] data) {
     this.data = data;
   }
 
@@ -34,7 +34,7 @@ public class ReadOnlyShortArray implements Iterable<Short> {
       return false;
     }
 
-    final ReadOnlyShortArray other = (ReadOnlyShortArray) object;
+    final ReadOnlyObjectArray other = (ReadOnlyObjectArray) object;
     return Arrays.equals(data, other.data);
   }
 
@@ -48,20 +48,20 @@ public class ReadOnlyShortArray implements Iterable<Short> {
   }
 
   @Override
-  public Iterator<Short> iterator() {
-    return ShortArrayIterator.create(data);
+  public Iterator<T> iterator() {
+    return ObjectArrayIterator.create(data);
   }
 
   public int length() {
     return data.length;
   }
 
-  public boolean sameAs(final short[] other) throws NullPointerException {
+  public boolean sameAs(final T[] other) throws NullPointerException {
     Preconditions.checkNotNull(other);
     return Arrays.equals(data, other);
   }
 
-  public short valueAt(final int index) {
+  public T valueAt(final int index) {
     return data[index];
   }
 }

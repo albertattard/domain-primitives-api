@@ -11,8 +11,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import javax.annotation.concurrent.Immutable;
+
 import com.google.common.base.Preconditions;
 
+@Immutable
 public class ReadOnlyByteArray implements Iterable<Byte> {
 
   public static ReadOnlyByteArray of(final byte[] data) throws NullPointerException {

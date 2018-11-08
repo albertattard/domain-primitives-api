@@ -3,8 +3,11 @@ package com.javacreed.api.domain.primitives.array;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import javax.annotation.concurrent.Immutable;
+
 import com.google.common.base.Preconditions;
 
+@Immutable
 public class ReadOnlyLongArray implements Iterable<Long> {
 
   public static ReadOnlyLongArray of(final long[] data) throws NullPointerException {

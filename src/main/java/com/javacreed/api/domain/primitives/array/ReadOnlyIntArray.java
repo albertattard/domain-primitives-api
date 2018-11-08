@@ -3,8 +3,11 @@ package com.javacreed.api.domain.primitives.array;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import javax.annotation.concurrent.Immutable;
+
 import com.google.common.base.Preconditions;
 
+@Immutable
 public class ReadOnlyIntArray implements Iterable<Integer> {
 
   public static ReadOnlyIntArray of(final int[] data) throws NullPointerException {

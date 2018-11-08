@@ -3,8 +3,11 @@ package com.javacreed.api.domain.primitives.array;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import javax.annotation.concurrent.Immutable;
+
 import com.google.common.base.Preconditions;
 
+@Immutable
 public class ReadOnlyCharArray implements Iterable<Character> {
 
   public static ReadOnlyCharArray of(final char[] data) throws NullPointerException {
