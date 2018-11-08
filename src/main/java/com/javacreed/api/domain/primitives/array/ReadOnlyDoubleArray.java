@@ -5,19 +5,19 @@ import java.util.Iterator;
 
 import com.google.common.base.Preconditions;
 
-public class ReadOnlyLongArray implements Iterable<Long> {
+public class ReadOnlyDoubleArray implements Iterable<Double> {
 
-  public static ReadOnlyLongArray of(final long[] data) throws NullPointerException {
+  public static ReadOnlyDoubleArray of(final double[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
-    return new ReadOnlyLongArray(Arrays.copyOf(data, data.length));
+    return new ReadOnlyDoubleArray(Arrays.copyOf(data, data.length));
   }
 
-  private final long[] data;
+  private final double[] data;
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
   private transient boolean lazyHashCodeComputed = false;
 
-  private ReadOnlyLongArray(final long[] data) {
+  private ReadOnlyDoubleArray(final double[] data) {
     this.data = data;
   }
 
@@ -31,7 +31,7 @@ public class ReadOnlyLongArray implements Iterable<Long> {
       return false;
     }
 
-    final ReadOnlyLongArray other = (ReadOnlyLongArray) object;
+    final ReadOnlyDoubleArray other = (ReadOnlyDoubleArray) object;
     return Arrays.equals(data, other.data);
   }
 
@@ -45,16 +45,20 @@ public class ReadOnlyLongArray implements Iterable<Long> {
   }
 
   @Override
-  public Iterator<Long> iterator() {
-    return LongArrayIterator.create(data);
+  public Iterator<Double> iterator() {
+    return DoubleArrayIterator.create(data);
   }
 
   public int length() {
     return data.length;
   }
 
-  public long valueAt(final int index) {
-    return data[index];
+  public boolean sameAs(final double[] other) throws NullPointerException {
+    Preconditions.checkNotNull(other);
+    return Arrays.equals(data, other);
   }
 
+  public double valueAt(final int index) {
+    return data[index];
+  }
 }

@@ -4,17 +4,17 @@ import java.util.Iterator;
 
 import com.google.common.base.Preconditions;
 
-public class IntIterator implements Iterator<Integer> {
+public class IntArrayIterator implements Iterator<Integer> {
 
-  public static IntIterator create(final int[] data) throws NullPointerException {
+  public static IntArrayIterator create(final int[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
-    return new IntIterator(data);
+    return new IntArrayIterator(data);
   }
 
   private final int[] data;
   private int index;
 
-  private IntIterator(final int[] data) {
+  private IntArrayIterator(final int[] data) {
     this.data = data;
   }
 

@@ -46,11 +46,16 @@ public class ReadOnlyIntArray implements Iterable<Integer> {
 
   @Override
   public Iterator<Integer> iterator() {
-    return IntIterator.create(data);
+    return IntArrayIterator.create(data);
   }
 
   public int length() {
     return data.length;
+  }
+
+  public boolean sameAs(final int[] other) throws NullPointerException {
+    Preconditions.checkNotNull(other);
+    return Arrays.equals(data, other);
   }
 
   public int valueAt(final int index) {

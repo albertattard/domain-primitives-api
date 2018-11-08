@@ -9,10 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import com.google.common.base.Preconditions;
 
-public class ReadOnlyByteArray {
+public class ReadOnlyByteArray implements Iterable<Byte> {
 
   public static ReadOnlyByteArray of(final byte[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
@@ -34,7 +35,6 @@ public class ReadOnlyByteArray {
 
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
-
   private transient boolean lazyHashCodeComputed = false;
 
   private ReadOnlyByteArray(final byte[] data) {
@@ -65,6 +65,11 @@ public class ReadOnlyByteArray {
     return lazyHashCode;
   }
 
+  @Override
+  public Iterator<Byte> iterator() {
+    return ByteArrayIterator.create(data);
+  }
+
   public int length() {
     return data.length;
   }
@@ -72,6 +77,10 @@ public class ReadOnlyByteArray {
   public boolean sameAs(final byte[] other) throws NullPointerException {
     Preconditions.checkNotNull(other);
     return Arrays.equals(data, other);
+  }
+
+  public byte valueAt(final int index) {
+    return data[index];
   }
 
   public void writeTo(final File file) throws NullPointerException, IOException {

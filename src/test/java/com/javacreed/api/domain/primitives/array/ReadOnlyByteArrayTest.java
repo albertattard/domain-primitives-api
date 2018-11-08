@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ReadOnlyByteArrayTest {
 
   @Test
-  public void test() throws Exception {
+  public void readBytesFromPathUsingFileChannel() throws Exception {
     /* The sample file that is checked */
     final Path path = Paths.get(ReadOnlyByteArrayTest.class.getResource("/samples/files/java.jpg").toURI());
 
