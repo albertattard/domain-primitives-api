@@ -24,18 +24,55 @@ public class Person {
 The `Person` uses two domain primitive classes, the `PersonTitle` and the `PersonName`.  The `PersonTitle` should accept `null`s and thus it is optional.
 
 ```java
+import java.util.Optional;
+import com.google.common.base.Preconditions;
+
 import com.javacreed.api.domain.primitives.optional.StringBasedDomainPrimitive;
 
 public class PersonTitle extends StringBasedDomainPrimitive {
+    
+    private static final PersonTitle EMPTY = new PersonTitle(Optional.empty());
+    
+    public static PersonTitle empty() {
+        return EMPTY;
+    }
+    
+    public static PersonTitle ofNullable(String value) {
+        if(value == null){
+            return empty();
+        }
+        
+        return of(value);
+    }
+    
+    public static PersonTitle of(String value) throws NullPointerException {
+        Preconditions.checkNotNull(value);
+        return new PersonTitle(Optional.of(value));
+    }
+    
+    private PersonTitle(Optional<String> value) {
+        super(value);
+    }
 }
 ```
 
 The `PersonName` class, on the other hand, is mandatory.
 
 ```java
+import com.google.common.base.Preconditions;
+
 import com.javacreed.api.domain.primitives.mandatory.StringBasedDomainPrimitive;
 
 public class PersonName extends StringBasedDomainPrimitive {
+    
+    public static PersonName of(String value) throws NullPointerException {
+        Preconditions.checkNotNull(value);
+        return new PersonName(value);
+    }
+    
+    private PersonName(String value) {
+        super(value);
+    }
 }
 ```
 
