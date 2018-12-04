@@ -35,8 +35,9 @@ jobs:
       - store_test_results:
           path: target/surefire-reports
 
-      # - store_artifacts:
-      #     path: target/surefire-reports
+      - store_artifacts:
+          path: target/surefire-reports
+          destination: $CIRCLE_TEST_REPORTS
 
       - store_artifacts:
           path: target/domain-primitives-api-1.0.0.jar
