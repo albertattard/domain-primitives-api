@@ -25,18 +25,19 @@ jobs:
 
       - run: mvn package
 
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
-          when: always
+      # - run:
+      #     name: Save test results
+      #     command: |
+      #       mkdir -p ~/junit/
+      #       find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+      #     when: always
 
       - store_test_results:
-          path: ~/junit
+          path: target/surefire-reports
 
-      - store_artifacts:
-          path: ~/junit
+      # - store_artifacts:
+      #     path: target/surefire-reports
 
       - store_artifacts:
           path: target/domain-primitives-api-1.0.0.jar
+          destination: ~/domain-primitives-api-1.0.0.jar
