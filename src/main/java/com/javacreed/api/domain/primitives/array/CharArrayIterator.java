@@ -1,9 +1,13 @@
 package com.javacreed.api.domain.primitives.array;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.google.common.base.Preconditions;
 
+@NotThreadSafe
 public class CharArrayIterator implements Iterator<Character> {
 
   public static CharArrayIterator create(final char[] data) throws NullPointerException {
@@ -24,11 +28,15 @@ public class CharArrayIterator implements Iterator<Character> {
   }
 
   @Override
-  public Character next() {
+  public Character next() throws NoSuchElementException {
     return nextChar();
   }
 
-  public char nextChar() {
+  public char nextChar() throws NoSuchElementException {
+    if (index == data.length) {
+      throw new NoSuchElementException("No more elements are available");
+    }
+
     return data[index++];
   }
 }

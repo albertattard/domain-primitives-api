@@ -6,7 +6,10 @@ import javax.annotation.concurrent.Immutable;
 
 import com.google.common.base.Preconditions;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 @Immutable
+@SuppressFBWarnings(value = "EQ_DOESNT_OVERRIDE_EQUALS", justification = "The parsed value is not important to the equals method")
 public class ValidatedDomainPrimitive extends StringBasedDomainPrimitive {
 
   private final ValidationState validationState;

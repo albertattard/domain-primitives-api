@@ -1,9 +1,13 @@
 package com.javacreed.api.domain.primitives.array;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.google.common.base.Preconditions;
 
+@NotThreadSafe
 public class ByteArrayIterator implements Iterator<Byte> {
 
   public static ByteArrayIterator create(final byte[] data) throws NullPointerException {
@@ -24,11 +28,15 @@ public class ByteArrayIterator implements Iterator<Byte> {
   }
 
   @Override
-  public Byte next() {
+  public Byte next() throws NoSuchElementException {
     return nextByte();
   }
 
-  public byte nextByte() {
+  public byte nextByte() throws NoSuchElementException {
+    if (index == data.length) {
+      throw new NoSuchElementException("No more elements are available");
+    }
+
     return data[index++];
   }
 }

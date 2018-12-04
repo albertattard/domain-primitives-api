@@ -95,10 +95,10 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
     Preconditions.checkNotNull(path);
 
     final Path parent = path.getParent();
-    if (false == Files.isDirectory(parent)) {
+    if (parent != null && false == Files.isDirectory(parent)) {
       Files.createDirectories(parent);
       if (false == Files.isDirectory(parent)) {
-        throw new IOException("Failed to create the parent directory");
+        throw new IOException("Failed to create the parent directory " + parent);
       }
     }
 
