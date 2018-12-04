@@ -27,7 +27,7 @@ jobs:
       - run: mvn package
 
       - store_test_results:
-          path: target/surefire-reports
+          path: target/surefire
 
       - store_artifacts:
           path: target/domain-primitives-api-1.0.0.jar
