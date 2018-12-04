@@ -29,5 +29,5 @@ jobs:
           path: target/surefire-reports
 
       - store_artifacts:
-          - path: target/domain-primitives-api-1.0.0.jar
-          - path: target/surefire-reports
+          # path: target/domain-primitives-api-1.0.0.jar
+          path: target/surefire-reports
