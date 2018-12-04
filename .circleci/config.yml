@@ -24,7 +24,7 @@ jobs:
             - ~/.m2
           key: domain-primitives-api-{{ checksum "pom.xml" }}
 
-      - run: mvn clean package
+      - run: mvn clean package -DskipTests
 
       - store_test_results:
           path: target/surefire-reports
