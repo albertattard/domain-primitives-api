@@ -7,6 +7,14 @@ import org.junit.Test;
 
 public class UuidUtilsTest {
 
+  @Test
+  public void checkArgument() {
+    final String uuid = "92f53821-01c5-4020-85c7-86cc2f0211ff";
+    Assert.assertEquals(uuid, UuidUtils.checkArgument(uuid));
+
+    Assert.assertThrows(NullPointerException.class, () -> UuidUtils.checkArgument(null));
+  }
+
   /**
    * The UUID utils is not compatible with the {@link UUID#nameUUIDFromBytes()} method. Verifies the incompatibility
    * between these two
@@ -24,11 +32,13 @@ public class UuidUtilsTest {
   public void isValid() {
     Assert.assertTrue(UuidUtils.isValid(UUID.randomUUID().toString()));
 
-    Assert.assertFalse(UuidUtils.isValid("0123456-89ab-cdef-0123-456789abcedf"));
-    Assert.assertFalse(UuidUtils.isValid("01234567-89a-cdef-0123-456789abcedf"));
-    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cde-0123-456789abcedf"));
-    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cdef-012-456789abcedf"));
-    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cdef-0123-456789abced"));
+    Assert.assertFalse(UuidUtils.isValid(null));
+    Assert.assertFalse(UuidUtils.isValid("123456789-123456789-123456789-12345"));
+    Assert.assertFalse(UuidUtils.isValid("123456789-123456789-123456789-1234567"));
+    Assert.assertFalse(UuidUtils.isValid("0123456-89ab-cdef-0123-456789abcdef0"));
+    Assert.assertFalse(UuidUtils.isValid("01234567-89a-cdef-0123-456789abcdef0"));
+    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cde-0123-456789abcdef0"));
+    Assert.assertFalse(UuidUtils.isValid("01234567-89ab-cdef-012-456789abcdef0"));
   }
 
   /**
@@ -39,5 +49,11 @@ public class UuidUtilsTest {
     final UUID expected = UUID.randomUUID();
     final UUID actual = UuidUtils.toUuid(UuidUtils.toBytes(expected));
     Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void toUuid() {
+    Assert.assertThrows(NullPointerException.class, () -> UuidUtils.toUuid(null));
+    Assert.assertThrows(IllegalArgumentException.class, () -> UuidUtils.toUuid(new byte[10]));
   }
 }
