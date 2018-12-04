@@ -9,6 +9,7 @@ jobs:
 
     environment:
       MAVEN_OPTS: -Xmx3200m
+      TEST_REPORTS: ~/domain-primitives-api/target/surefire-reports
 
     steps:
       - checkout
@@ -27,7 +28,7 @@ jobs:
       - run: mvn package
 
       - store_test_results:
-          path: target/surefire
+          path: target/surefire-reports
 
       - store_artifacts:
           path: target/domain-primitives-api-1.0.0.jar
