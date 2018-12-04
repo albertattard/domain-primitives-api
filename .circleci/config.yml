@@ -37,8 +37,7 @@ jobs:
 
       - store_test_results:
           # path: target/surefire-reports
-          path: test-results/junit
+          path: test-results
 
       - store_artifacts:
           path: target/domain-primitives-api-1.0.0.jar
-          destination: domain-primitives-api-1.0.0.jar
