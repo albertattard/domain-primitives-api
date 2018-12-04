@@ -9,7 +9,6 @@ jobs:
 
     environment:
       MAVEN_OPTS: -Xmx3200m
-      CIRCLE_TEST_REPORTS: ~/domain-primitives-api/target/surefire-reports
 
     steps:
       - checkout
