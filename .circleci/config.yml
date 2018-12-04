@@ -4,7 +4,8 @@ jobs:
     working_directory: ~/domain-primitives-api
 
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
+      # - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/openjdk@sha256:fe4d6616301d22e0167ec194307862b419e380381626840fc6e6dfab424b6e15
 
     steps:
       - checkout
