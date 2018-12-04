@@ -2,27 +2,27 @@ version: 2
 jobs:
   build:
 
-    working_directory: ~/repo
+    working_directory: ~/domain-primitives-api
 
     docker:
       - image: circleci/openjdk:8-jdk-browsers
 
     environment:
       MAVEN_OPTS: -Xmx3200m
-    
+
     steps:
       - checkout
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
+          - domain-primitives-api-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+          key: domain-primitives-api-{{ checksum "pom.xml" }}
 
       - run: mvn package
 
