@@ -1,21 +1,16 @@
 version: 2
 jobs:
   build:
-
     working_directory: ~/domain-primitives-api
 
     docker:
       - image: circleci/openjdk:8-jdk-browsers
 
-    environment:
-      MAVEN_OPTS: -Xmx3200m
-
     steps:
       - checkout
 
       - restore_cache:
-          keys:
-          - domain-primitives-api-{{ checksum "pom.xml" }}
+          key: domain-primitives-api-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
@@ -24,7 +19,7 @@ jobs:
             - ~/.m2
           key: domain-primitives-api-{{ checksum "pom.xml" }}
 
-      - run: mvn package -DskipTests=true
+      - run: mvn package
 
       - store_test_results:
           path: target/surefire-reports
