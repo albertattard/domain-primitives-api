@@ -9,7 +9,7 @@ jobs:
 
     environment:
       MAVEN_OPTS: -Xmx3200m
-      TEST_REPORTS: ~/domain-primitives-api/target/surefire-reports
+      CIRCLE_TEST_REPORTS: ~/domain-primitives-api/target/surefire-reports
 
     steps:
       - checkout
@@ -25,7 +25,7 @@ jobs:
             - ~/.m2
           key: domain-primitives-api-{{ checksum "pom.xml" }}
 
-      - run: mvn package
+      - run: mvn clean package
 
       - store_test_results:
           path: target/surefire-reports
