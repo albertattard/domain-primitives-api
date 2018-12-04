@@ -80,7 +80,8 @@
         <configuration>
           <!-- <argLine>${surefireArgLine}</argLine> -->
           <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-          <skipTests>${skip.unit.tests}</skipTests>
+          <!-- <skipTests>${skip.unit.tests}</skipTests> -->
+          <skipTests>true</skipTests>
         </configuration>
       </plugin>
 
