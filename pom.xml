@@ -78,10 +78,8 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire.version}</version>
         <configuration>
-          <!-- <argLine>${surefireArgLine}</argLine> -->
-          <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-          <!-- <skipTests>${skip.unit.tests}</skipTests> -->
-          <skipTests>false</skipTests>
+          <argLine>${surefireArgLine}</argLine>
+          <skipTests>${skip.unit.tests}</skipTests>
         </configuration>
       </plugin>
 

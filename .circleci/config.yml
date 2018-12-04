@@ -4,6 +4,9 @@ jobs:
     working_directory: ~/domain-primitives-api
 
     docker:
+      # At one point the build stopped working.  This was due to the new JDK.
+      # Restored to an older version, and worked.  Not sure why the latest
+      # version fails.
       # - image: circleci/openjdk:8-jdk-browsers
       - image: circleci/openjdk@sha256:fe4d6616301d22e0167ec194307862b419e380381626840fc6e6dfab424b6e15
 
