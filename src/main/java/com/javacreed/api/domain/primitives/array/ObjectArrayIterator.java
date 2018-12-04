@@ -6,9 +6,9 @@ import com.google.common.base.Preconditions;
 
 public class ObjectArrayIterator<T> implements Iterator<T> {
 
-  public static <E> ObjectArrayIterator create(final E[] data) throws NullPointerException {
+  public static <E> ObjectArrayIterator<E> create(final E[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
-    return new ObjectArrayIterator(data);
+    return new ObjectArrayIterator<>(data);
   }
 
   private final T[] data;

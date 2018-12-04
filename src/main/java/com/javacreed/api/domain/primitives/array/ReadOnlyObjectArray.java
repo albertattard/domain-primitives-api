@@ -10,9 +10,9 @@ import com.google.common.base.Preconditions;
 @Immutable
 public class ReadOnlyObjectArray<T> implements Iterable<T> {
 
-  public static <E> ReadOnlyObjectArray of(final E[] data) throws NullPointerException {
+  public static <E> ReadOnlyObjectArray<E> of(final E[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
-    return new ReadOnlyObjectArray(Arrays.copyOf(data, data.length));
+    return new ReadOnlyObjectArray<>(Arrays.copyOf(data, data.length));
   }
 
   private final T[] data;
@@ -34,6 +34,7 @@ public class ReadOnlyObjectArray<T> implements Iterable<T> {
       return false;
     }
 
+    @SuppressWarnings("rawtypes")
     final ReadOnlyObjectArray other = (ReadOnlyObjectArray) object;
     return Arrays.equals(data, other.data);
   }
