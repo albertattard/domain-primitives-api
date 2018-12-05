@@ -1,6 +1,9 @@
-# Domain Primitives API 
+# Domain Primitives API
 
-Build status: [![CircleCI](https://circleci.com/gh/javacreed/domain-primitives-api.svg?style=svg)](https://circleci.com/gh/javacreed/domain-primitives-api)
+|Name|Sate|
+|------------|----------------------------------|
+|Build status|[![CircleCI](https://circleci.com/gh/javacreed/domain-primitives-api.svg?style=svg)](https://circleci.com/gh/javacreed/domain-primitives-api)|
+|Code Smells|[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=code_smells)](https://sonarcloud.io/dashboard?id=javacreed_domain-primitives-api)|
 
 
 This project provides a set of base classes that can be used when building domain primitives.  The base classes come into three flavours:
@@ -11,7 +14,7 @@ This project provides a set of base classes that can be used when building domai
 
 The lang set of base classes represents domain primitives that are based on the Java primitives, such as `int` and `long`.  The optional and mandatory set of base classes represents options such as `Integer` or `String`, where the optional version allows `null`s while the mandatory peer does not allow `null`s.
 
-For example, say we have a class that has two fields, `title` and `name`.  The `title` field is optional while the `name` field is mandatory, 
+For example, say we have a class that has two fields, `title` and `name`.  The `title` field is optional while the `name` field is mandatory,
 
 ```java
 public class Person {
@@ -30,26 +33,26 @@ import com.google.common.base.Preconditions;
 import com.javacreed.api.domain.primitives.optional.StringBasedDomainPrimitive;
 
 public class PersonTitle extends StringBasedDomainPrimitive {
-    
+
     private static final PersonTitle EMPTY = new PersonTitle(Optional.empty());
-    
+
     public static PersonTitle empty() {
         return EMPTY;
     }
-    
+
     public static PersonTitle ofNullable(String value) {
         if(value == null){
             return empty();
         }
-        
+
         return of(value);
     }
-    
+
     public static PersonTitle of(String value) throws NullPointerException {
         Preconditions.checkNotNull(value);
         return new PersonTitle(Optional.of(value));
     }
-    
+
     private PersonTitle(Optional<String> value) {
         super(value);
     }
@@ -64,12 +67,12 @@ import com.google.common.base.Preconditions;
 import com.javacreed.api.domain.primitives.mandatory.StringBasedDomainPrimitive;
 
 public class PersonName extends StringBasedDomainPrimitive {
-    
+
     public static PersonName of(String value) throws NullPointerException {
         Preconditions.checkNotNull(value);
         return new PersonName(value);
     }
-    
+
     private PersonName(String value) {
         super(value);
     }
