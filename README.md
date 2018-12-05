@@ -1,7 +1,7 @@
 # Domain Primitives API
 
-|Name|Sate|
-|------------|----------------------------------|
+|Name        |Sate                                                             |
+|------------|-----------------------------------------------------------------|
 |[CircleCI](https://circleci.com/gh/javacreed/domain-primitives-api)|![CircleCI](https://circleci.com/gh/javacreed/domain-primitives-api.svg?style=svg)|
 |[SonarQube](https://sonarcloud.io/dashboard?id=javacreed_domain-primitives-api)|![Quality](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=alert_status) ![Bugs](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=bugs) ![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=code_smells)|
 
