@@ -43,8 +43,7 @@ jobs:
 
       - run:
             name: SonarQube
-            command: |
-              mvn sonar:sonar
+            command: mvn sonar:sonar
               -Dsonar.projectKey=javacreed_domain-primitives-api
               -Dsonar.organization=javacreed-github
               -Dsonar.host.url=https://sonarcloud.io
