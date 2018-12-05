@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 import javax.annotation.concurrent.Immutable;
 
 import com.google.common.base.Preconditions;
+import com.javacreed.api.domain.primitives.utils.ComparatorUtils;
 
 @Immutable
 public class ObjectBasedDomainPrimitive<T> {
@@ -24,22 +25,7 @@ public class ObjectBasedDomainPrimitive<T> {
   }
 
   protected int compareTo(final ObjectBasedDomainPrimitive<T> other, final Comparator<T> comparator) {
-    final T a = orNull();
-    final T b = other.orNull();
-
-    if (a == b) {
-      return 0;
-    }
-
-    if (a == null) {
-      return -1;
-    }
-
-    if (b == null) {
-      return 1;
-    }
-
-    return comparator.compare(a, b);
+    return ComparatorUtils.compare(orNull(), other.orNull(), comparator);
   }
 
   @Override
