@@ -40,3 +40,11 @@ jobs:
 
       - store_artifacts:
           path: target/domain-primitives-api-1.0.0.jar
+
+      - run:
+            name: SonarQube
+            command: mvn sonar:sonar \
+              -Dsonar.projectKey=javacreed_domain-primitives-api \
+              -Dsonar.organization=javacreed-github \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=$SONAR_LOGIN

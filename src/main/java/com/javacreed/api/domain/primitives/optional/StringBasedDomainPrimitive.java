@@ -23,11 +23,7 @@ public class StringBasedDomainPrimitive extends ComparableBasedDomainPrimitive<S
   }
 
   public boolean equalsIgnoreCase(final StringBasedDomainPrimitive other) {
-    if (isValuePresent() && other.isValuePresent()) {
-      return value.get().equalsIgnoreCase(other.value.get());
-    }
-
-    return false;
+    return value.map(a -> other.map(b -> a.equalsIgnoreCase(b)).orElse(false)).orElse(false);
   }
 
   public String orBlank() {
