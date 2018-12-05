@@ -45,6 +45,7 @@
     <reports.version>2.9</reports.version>
     <checkstyle.version>3.0.0</checkstyle.version>
     <spotbugs.version>3.1.9</spotbugs.version>
+    <jdepend.version>2.0</jdepend.version>
     <google.guava.version>27.0.1-jre</google.guava.version>
     <junit.version>4.13-beta-1</junit.version>
   </properties>
@@ -152,7 +153,6 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${checkstyle.version}</version>
         <configuration>
-          <!-- <configLocation>google_checks.xml</configLocation> -->
           <configLocation>src/main/checkstyle/metrics.xml</configLocation>
           <encoding>UTF-8</encoding>
         </configuration>
@@ -163,6 +163,12 @@
             </reports>
           </reportSet>
         </reportSets>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jdepend-maven-plugin</artifactId>
+        <version>${jdepend.version}</version>
       </plugin>
     </plugins>
   </reporting>
