@@ -3,9 +3,7 @@
 |Name|Sate|
 |------------|----------------------------------|
 |[CircleCI](https://circleci.com/gh/javacreed/domain-primitives-api)|![CircleCI](https://circleci.com/gh/javacreed/domain-primitives-api.svg?style=svg)|
-|[SonarQube](https://sonarcloud.io/dashboard?id=javacreed_domain-primitives-api)|\
-![Bugs](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=bugs)\
-![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=code_smells)|
+|[SonarQube](https://sonarcloud.io/dashboard?id=javacreed_domain-primitives-api)|![Bugs](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=bugs)![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=javacreed_domain-primitives-api&metric=code_smells)|
 
 
 This project provides a set of base classes that can be used when building domain primitives.  The base classes come into three flavours:
