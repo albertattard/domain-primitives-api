@@ -1,34 +1,82 @@
 package com.javacreed.api.domain.primitives.array;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
-import java.util.Iterator;
 
 import javax.annotation.concurrent.Immutable;
 
 import com.google.common.base.Preconditions;
 
+/**
+ * Arrays in Java are mutable and anyone can change their contents. This wrapper class addresses this issue by providing
+ * read-only operations to the array, maintaining the primitive types.
+ *
+ * @author Albert Attard
+ */
 @Immutable
 public class ReadOnlyByteArray implements Iterable<Byte> {
 
-  public static ReadOnlyByteArray of(final byte[] data) throws NullPointerException {
+  private static final ReadOnlyByteArray EMPTY = new ReadOnlyByteArray(new byte[0]);
+
+  /**
+   * Returns the empty array. This is a shared instance and the same empty array is always returned.
+   *
+   * @return the empty array
+   */
+  public static ReadOnlyByteArray empty() {
+    return ReadOnlyByteArray.EMPTY;
+  }
+
+  /**
+   * Copies the given array and returns a new instance of this class. Any changes to the given array will not affect
+   * this class.
+   *
+   * @param data
+   *          the array (which cannot be {@code null})
+   * @return an instance of this class for the given array
+   * @throws NullPointerException
+   *           if the given array is {@code null}
+   */
+  public static ReadOnlyByteArray of(final byte[] data) {
     Preconditions.checkNotNull(data);
+
+    if (data.length == 0) {
+      return ReadOnlyByteArray.empty();
+    }
+
     return new ReadOnlyByteArray(Arrays.copyOf(data, data.length));
   }
 
+  /**
+   * Reads the given channel and returns an instance of this class with the bytes read from the given channel. The
+   * contents read from the channel need to fit the array as otherwise an Exception is thrown. Note that the channel is
+   * not closed and the caller is responsible from closing it.
+   *
+   * @param channel
+   *          the channel to be read
+   * @return an instance of this class
+   * @throws NullPointerException
+   *           if the given {@code channel} is {@code null}
+   * @throws IOException
+   *           if it fails to read the bytes from the given channel
+   */
   public static ReadOnlyByteArray read(final FileChannel channel) throws IOException {
     final ByteArrayOutputStream output = new ByteArrayOutputStream();
     final ByteBuffer buffer = ByteBuffer.allocate(4096);
     for (int read; (read = channel.read(buffer)) != -1;) {
       buffer.flip();
       output.write(buffer.array(), 0, read);
+    }
+
+    if (output.size() == 0) {
+      return ReadOnlyByteArray.empty();
     }
 
     return new ReadOnlyByteArray(output.toByteArray());
@@ -38,7 +86,7 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
 
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
-  private transient boolean lazyHashCodeComputed = false;
+  private transient boolean lazyHashCodeComputed;
 
   private ReadOnlyByteArray(final byte[] data) {
     this.data = data;
@@ -69,39 +117,109 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
   }
 
   @Override
-  public Iterator<Byte> iterator() {
+  public ByteArrayIterator iterator() {
     return ByteArrayIterator.create(data);
   }
 
+  /**
+   * Returns the length of this array
+   *
+   * @return the length of this array
+   */
   public int length() {
     return data.length;
   }
 
-  public boolean sameAs(final byte[] other) throws NullPointerException {
+  /**
+   * Returns {@code true} if the contents of the given arrays is the same as the content of this array, {@code false}
+   * otherwise.
+   *
+   * @param other
+   *          the array to compare with (which cannot be {@code null})
+   * @return {@code true} if the contents of the given arrays is the same as the content of this array, {@code false}
+   *         otherwise
+   * @throws NullPointerException
+   *           if the given array is {@code null}
+   */
+  public boolean sameAs(final byte[] other) {
     Preconditions.checkNotNull(other);
     return Arrays.equals(data, other);
   }
 
+  /**
+   * Returns the value at the given {@code index}
+   *
+   * @param index
+   *          the index (which must be between 0 and the {@code array.length() - 1}, both inclusive)
+   * @return the value at the given {@code index}
+   * @throws ArrayIndexOutOfBoundsException
+   *           if the given index is less than 0 or greater than or equal to {@code array.length()};
+   */
   public byte valueAt(final int index) {
     return data[index];
   }
 
-  public void writeTo(final File file) throws NullPointerException, IOException {
+  /**
+   * Writes the content of the array to the given file. The file is created if it does not exist, together with any
+   * missing parent directories. An IOException is thrown in the event that the parent directories cannot be created or
+   * an error occurs while writing the files. Note that this operation is not atomic and any created directories are not
+   * deleted should this operation fail.
+   *
+   * @param file
+   *          the file where the byte array is written (which cannot be {@code null})
+   * @throws NullPointerException
+   *           if the given {@code file} is {@code null}
+   * @throws IOException
+   *           if an error occurs while writing to the given {@code file}
+   */
+  public void writeTo(final File file) throws IOException {
     Preconditions.checkNotNull(file);
-    writeTo(file.toPath());
-  }
 
-  public void writeTo(final Path path) throws NullPointerException, IOException {
-    Preconditions.checkNotNull(path);
-
-    final Path parent = path.getParent();
-    if (parent != null && false == Files.isDirectory(parent)) {
-      Files.createDirectories(parent);
-      if (false == Files.isDirectory(parent)) {
+    final File parent = file.getParentFile();
+    if (parent != null && false == parent.isDirectory()) {
+      parent.mkdirs();
+      if (false == parent.isDirectory()) {
         throw new IOException("Failed to create the parent directory " + parent);
       }
     }
 
-    Files.write(path, data, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    try (final BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
+      output.write(data);
+    }
+  }
+
+  /**
+   * Writes the content of the array to the given file. The file is created if it does not exist, together with any
+   * missing parent directories. An IOException is thrown in the event that the parent directories cannot be created or
+   * an error occurs while writing the files. Note that this operation is not atomic and any created directories are not
+   * deleted should this operation fail.
+   *
+   * @param path
+   *          the file where the byte array is written (which cannot be {@code null})
+   * @throws NullPointerException
+   *           if the given {@code file} is {@code null}
+   * @throws IOException
+   *           if an error occurs while writing to the given {@code file}
+   * @see #writeTo(File)
+   */
+  public void writeTo(final Path path) throws IOException {
+    Preconditions.checkNotNull(path);
+
+    /*
+     * This was converted to the older File version based on a recommendation made by Sonar. It seems that in Java 8,
+     * the Files.exists() method has noticeably poor performance and can slow an application significantly when used to
+     * check files that don't actually exist. The same goes for Files.notExists(), Files.isDirectory() and
+     * Files.isRegularFile().
+     */
+    // final Path parent = path.getParent();
+    // if (parent != null && false == Files.isDirectory(parent)) {
+    // Files.createDirectories(parent);
+    // if (false == Files.isDirectory(parent)) {
+    // throw new IOException("Failed to create the parent directory " + parent);
+    // }
+    // }
+    //
+    // Files.write(path, data, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    writeTo(path.toFile());
   }
 }
