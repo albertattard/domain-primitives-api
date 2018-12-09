@@ -9,17 +9,18 @@ public class ObjectBasedDomainPrimitiveTest {
   public void generalTests() {
     final ObjectBasedDomainPrimitive<String> a = new ObjectBasedDomainPrimitive<>("a");
     final ObjectBasedDomainPrimitive<String> b = new ObjectBasedDomainPrimitive<>("a");
+    final ObjectBasedDomainPrimitive<String> c = new ObjectBasedDomainPrimitive<>("A");
 
     Assert.assertEquals(a, b);
+    Assert.assertNotEquals(a, c);
     Assert.assertEquals(a.hashCode(), b.hashCode());
+    Assert.assertNotEquals(a.hashCode(), c.hashCode());
     Assert.assertEquals("a", a.getValue());
     Assert.assertEquals("a", a.toString());
-
   }
 
   @Test
   public void handleNulls() {
     Assert.assertThrows(NullPointerException.class, () -> new ObjectBasedDomainPrimitive<>(null));
-
   }
 }
