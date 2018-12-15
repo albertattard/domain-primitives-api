@@ -57,9 +57,21 @@ public class ObjectBasedDomainPrimitive<T> {
   }
 
   /**
+   * Returns <code>true</code> if there is NO value present, otherwise <code>false</code>. This is the opposite of
+   * {@link #isValuePresent()}.
+   *
+   * @return <code>true</code> if there is NO value present, otherwise <code>false</code>
+   * @see #isValuePresent()
+   */
+  public boolean isValueMissing() {
+    return value.isPresent() == false;
+  }
+
+  /**
    * Returns <code>true</code> if there is a value present, otherwise <code>false</code>.
    *
    * @return <code>true</code> if there is a value present, otherwise <code>false</code>
+   * @see #isValueMissing()
    */
   public boolean isValuePresent() {
     return value.isPresent();

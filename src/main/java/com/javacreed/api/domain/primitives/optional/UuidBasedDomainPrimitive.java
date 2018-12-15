@@ -17,6 +17,22 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
   }
 
   /**
+   * Compares the given byte array to the byte equivalent value of this UUID ({@link #toBytes()}) and returns
+   * {@code true}, if the value is set and the given byte array has the same content as this UUID byte value,
+   * {@code false} otherwise.
+   *
+   * @param other
+   *          the array to compare to (which cannot be {@code null})
+   * @return {@code true} if the given array has the same byte value of this UUID, {@code false} otherwise
+   * @throws NullPointerException
+   *           if the given parameter is {@code null}
+   */
+  public boolean sameValue(final byte[] other) {
+    Preconditions.checkNotNull(other);
+    return toBytes().map(b -> Arrays.equals(b, other)).orElse(false);
+  }
+
+  /**
    * Converts the UUID to bytes. Note that this is incompatible with the {@link UUID#nameUUIDFromBytes()}. The returned
    * bytes array can be converted back to UUID using the {@link UuidUtils#toUuid(byte[])} method defined within this
    * class.
@@ -49,21 +65,5 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
 
   public String toFormattedStringOrNull() {
     return toFormattedString().orElse(null);
-  }
-
-  /**
-   * Compares the given byte array to the byte equivalent value of this UUID ({@link #toBytes()}) and returns
-   * {@code true}, if the value is set and the given byte array has the same content as this UUID byte value,
-   * {@code false} otherwise.
-   * 
-   * @param other
-   *          the array to compare to (which cannot be {@code null})
-   * @return {@code true} if the given array has the same byte value of this UUID, {@code false} otherwise
-   * @throws NullPointerException
-   *           if the given parameter is {@code null}
-   */
-  public boolean sameValue(byte[] other) {
-    Preconditions.checkNotNull(other);
-    return toBytes().map(b -> Arrays.equals(b, other)).orElse(false);
   }
 }
