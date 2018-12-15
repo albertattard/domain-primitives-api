@@ -14,13 +14,40 @@ import com.google.common.base.Preconditions;
  */
 public class UuidUtils {
 
+  /* The REGEX pattern representing a valid V4 UUID */
   private static final Pattern REGEX = Pattern.compile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
 
-  public static String checkArgument(final String value) throws NullPointerException, IllegalArgumentException {
+  /**
+   * Checks the given UUID string and returns the same value only if it is valid. A {@link NullPointerException} or
+   * {@link IllegalArgumentException} is thrown if the given UUID is <code>null</code> or not a valid UUID string.
+   *
+   * @param value
+   *          the UUID to be checked (which needs to be a valid UUID string and cannot be <code>null</code>)
+   * @return the given UUID value only if is valid
+   * @throws NullPointerException
+   *           if the given <code>value</code> is <code>null</code>
+   * @throws IllegalArgumentException
+   *           if the given <code>value</code> is not a valid UUID string
+   */
+  public static String checkArgument(final String value) {
     return UuidUtils.checkArgument(value, "UUID value");
   }
 
-  public static String checkArgument(final String value, final String name) throws NullPointerException, IllegalArgumentException {
+  /**
+   * Checks the given UUID string and returns the same value only if it is valid. A {@link NullPointerException} or
+   * {@link IllegalArgumentException} is thrown if the given UUID is <code>null</code> or not a valid UUID string.
+   *
+   * @param value
+   *          the UUID to be checked (which needs to be a valid UUID string and cannot be <code>null</code>)
+   * @param name
+   *          the name to be used in the error message (which cannot be <code>null</code>)
+   * @return the given UUID value only if is valid
+   * @throws NullPointerException
+   *           if the given <code>value</code> is <code>null</code>
+   * @throws IllegalArgumentException
+   *           if the given <code>value</code> is not a valid UUID string
+   */
+  public static String checkArgument(final String value, final String name) {
     Preconditions.checkNotNull(value, name + " cannot be null");
     Preconditions.checkArgument(value.length() == 36, name + " is of invalid length.  Expected 36 characters but found %s characters '%s'", value.length(),
                                 value);
@@ -28,6 +55,13 @@ public class UuidUtils {
     return value;
   }
 
+  /**
+   * Returns <code>true</code> if the given <code>value</code> is a valid UUID, <code>false</code> otherwise.
+   *
+   * @param value
+   *          the value to be checked (which can be <code>null</code>)
+   * @return <code>true</code> if the given <code>value</code> is a valid UUID, <code>false</code> otherwise
+   */
   public static boolean isValid(final String value) {
     if (value == null || value.length() != 36) {
       return false;
@@ -48,7 +82,7 @@ public class UuidUtils {
    *           if the given <code>uuid</code> is <code>null</code>
    * @see UuidUtils#toUuid(byte[])
    */
-  public static byte[] toBytes(final UUID uuid) throws NullPointerException {
+  public static byte[] toBytes(final UUID uuid) {
     final ByteBuffer buffer = ByteBuffer.wrap(new byte[16]);
     buffer.putLong(uuid.getMostSignificantBits());
     buffer.putLong(uuid.getLeastSignificantBits());
@@ -61,14 +95,14 @@ public class UuidUtils {
    *
    * @param bytes
    *          the bytes array (which cannot be <code>null</code> and must be of length 16)
-   * @return
+   * @return the UUID
    * @throws NullPointerException
    *           if the given <code>bytes</code> are <code>null</code>
    * @throws IllegalArgumentException
    *           if the given <code>bytes</code> are not 16 elements long
    * @see UuidUtils#toBytes(UUID)
    */
-  public static UUID toUuid(final byte[] bytes) throws NullPointerException, IllegalArgumentException {
+  public static UUID toUuid(final byte[] bytes) {
     Preconditions.checkNotNull(bytes);
     Preconditions.checkArgument(bytes.length == 16, "The byte array needs to be 16 elements long");
     final ByteBuffer buffer = ByteBuffer.wrap(bytes);
