@@ -35,9 +35,21 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return map(formatter::format);
   }
 
+  public String format(final DateTimeFormatter formatter, final ZoneId zoneId) throws NullPointerException {
+    Preconditions.checkNotNull(formatter);
+    Preconditions.checkNotNull(zoneId);
+    return formatter.format(get().withZoneSameInstant(zoneId));
+  }
+
   public String format(final String pattern) throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(pattern);
     return format(DateTimeFormatter.ofPattern(pattern));
+  }
+
+  public String format(final String pattern, final ZoneId zoneId) throws NullPointerException, IllegalArgumentException {
+    Preconditions.checkNotNull(pattern);
+    Preconditions.checkNotNull(zoneId);
+    return format(DateTimeFormatter.ofPattern(pattern), zoneId);
   }
 
   public Month getMonth() {
@@ -80,6 +92,15 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
 
   public boolean isInPast() {
     return value.isBefore(ZonedDateTime.now(value.getZone()));
+  }
+
+  public boolean sameValueUpToSecond(final ZonedDateTime other) {
+    final ZonedDateTime o = other.withZoneSameInstant(getZone());
+    return get().getSecond() == o.getSecond() &&
+           get().getMinute() == o.getMinute() &&
+           get().getHour() == o.getHour() &&
+           get().getDayOfYear() == o.getDayOfYear() &&
+           get().getYear() == o.getYear();
   }
 
   public long toEpochMilli() {
