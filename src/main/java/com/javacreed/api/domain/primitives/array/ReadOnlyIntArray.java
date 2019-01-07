@@ -24,6 +24,17 @@ public class ReadOnlyIntArray implements Iterable<Integer> {
     this.data = data;
   }
 
+  /**
+   * Returns a copy array every time this method is called. This is a defensive copy in order to protect the array
+   * enclosed by this class. Any changes made to the returned array do not have any effects on the array enclosed by
+   * this class.
+   *
+   * @return a copy of the array enclosed by this class
+   */
+  public int[] copyArray() {
+    return Arrays.copyOf(data, data.length);
+  }
+
   @Override
   public boolean equals(final Object object) {
     if (this == object) {
