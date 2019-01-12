@@ -34,13 +34,13 @@ public class ObjectBasedDomainPrimitive<T> {
       return true;
     }
 
-    if (object != null && getClass() == object.getClass()) {
-      @SuppressWarnings("rawtypes")
-      final ObjectBasedDomainPrimitive other = (ObjectBasedDomainPrimitive) object;
-      return value.equals(other.value);
+    if (object == null || getClass() != object.getClass()) {
+      return false;
     }
 
-    return false;
+    @SuppressWarnings("rawtypes")
+    final ObjectBasedDomainPrimitive other = (ObjectBasedDomainPrimitive) object;
+    return value.equals(other.value);
   }
 
   public Optional<T> getValue() {
