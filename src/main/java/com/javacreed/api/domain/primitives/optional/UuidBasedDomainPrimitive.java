@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.google.common.base.Preconditions;
 import com.javacreed.api.domain.primitives.utils.UuidUtils;
 
 @Immutable
@@ -24,12 +23,13 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
    * @param other
    *          the array to compare to (which cannot be {@code null})
    * @return {@code true} if the given array has the same byte value of this UUID, {@code false} otherwise
-   * @throws NullPointerException
-   *           if the given parameter is {@code null}
    */
   public boolean sameValue(final byte[] other) {
-    Preconditions.checkNotNull(other);
-    return toBytes().map(b -> Arrays.equals(b, other)).orElse(false);
+    return other != null && other.length == 16 && toBytes().map(b -> Arrays.equals(b, other)).orElse(false);
+  }
+
+  public boolean sameValue(final String other) {
+    return UuidUtils.isValid(other) && toFormattedString().map(s -> s.equalsIgnoreCase(other)).orElse(false);
   }
 
   /**

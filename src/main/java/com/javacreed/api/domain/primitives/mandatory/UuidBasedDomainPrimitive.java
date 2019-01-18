@@ -14,8 +14,12 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
     super(value);
   }
 
-  public boolean sameValue(final byte[] bytes) {
-    return bytes != null && bytes.length == 16 && Arrays.equals(toBytes(), bytes);
+  public boolean sameValue(final byte[] other) {
+    return other != null && other.length == 16 && Arrays.equals(toBytes(), other);
+  }
+
+  public boolean sameValue(final String other) {
+    return UuidUtils.isValid(other) && toString().equalsIgnoreCase(other);
   }
 
   /**

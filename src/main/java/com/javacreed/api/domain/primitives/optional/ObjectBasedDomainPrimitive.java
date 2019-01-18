@@ -12,7 +12,7 @@ import com.google.common.base.Preconditions;
 import com.javacreed.api.domain.primitives.utils.ComparatorUtils;
 
 @Immutable
-public class ObjectBasedDomainPrimitive<T> {
+public class ObjectBasedDomainPrimitive<T> implements Supplier<Optional<T>> {
 
   protected final Optional<T> value;
 
@@ -43,6 +43,12 @@ public class ObjectBasedDomainPrimitive<T> {
     return value.equals(other.value);
   }
 
+  @Override
+  public Optional<T> get() {
+    return value;
+  }
+
+  @Deprecated
   public Optional<T> getValue() {
     return value;
   }
