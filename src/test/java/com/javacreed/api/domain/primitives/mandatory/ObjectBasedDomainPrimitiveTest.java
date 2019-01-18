@@ -15,7 +15,7 @@ public class ObjectBasedDomainPrimitiveTest {
     Assert.assertNotEquals(a, c);
     Assert.assertEquals(a.hashCode(), b.hashCode());
     Assert.assertNotEquals(a.hashCode(), c.hashCode());
-    Assert.assertEquals("a", a.getValue());
+    Assert.assertEquals("a", a.get());
     Assert.assertEquals("a", a.toString());
   }
 

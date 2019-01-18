@@ -13,7 +13,7 @@ public class ObjectBasedDomainPrimitiveTest {
       return new T(Optional.ofNullable(value));
     }
 
-    protected T(final Optional<String> value) throws NullPointerException {
+    private T(final Optional<String> value) throws NullPointerException {
       super(value);
     }
   }
@@ -23,5 +23,4 @@ public class ObjectBasedDomainPrimitiveTest {
     Assert.assertEquals(T.ofNullable(null), T.ofNullable(null));
     Assert.assertEquals(T.ofNullable(""), T.ofNullable(""));
   }
-
 }
