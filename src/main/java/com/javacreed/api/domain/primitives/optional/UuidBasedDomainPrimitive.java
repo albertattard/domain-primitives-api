@@ -16,23 +16,6 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
   }
 
   /**
-   * Compares the given byte array to the byte equivalent value of this UUID ({@link #toBytes()}) and returns
-   * {@code true}, if the value is set and the given byte array has the same content as this UUID byte value,
-   * {@code false} otherwise.
-   *
-   * @param other
-   *          the array to compare to (which cannot be {@code null})
-   * @return {@code true} if the given array has the same byte value of this UUID, {@code false} otherwise
-   */
-  public boolean sameValue(final byte[] other) {
-    return other != null && other.length == 16 && toBytes().map(b -> Arrays.equals(b, other)).orElse(false);
-  }
-
-  public boolean sameValue(final String other) {
-    return UuidUtils.isValid(other) && toFormattedString().map(s -> s.equalsIgnoreCase(other)).orElse(false);
-  }
-
-  /**
    * Converts the UUID to bytes. Note that this is incompatible with the {@link UUID#nameUUIDFromBytes()}. The returned
    * bytes array can be converted back to UUID using the {@link UuidUtils#toUuid(byte[])} method defined within this
    * class.
@@ -40,7 +23,7 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes
    * @see UuidUtils#toBytes(UUID)
    */
-  public Optional<byte[]> toBytes() {
+  public Optional<byte[]> asBytes() {
     return map(UuidUtils::toBytes);
   }
 
@@ -53,17 +36,34 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
    *
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes if available, otherwise
    *         {@code null}
-   * @see #toBytes()
+   * @see #asBytes()
    */
-  public byte[] toBytesOrNull() {
-    return toBytes().orElse(null);
+  public byte[] asBytesOrNull() {
+    return asBytes().orElse(null);
   }
 
-  public Optional<String> toFormattedString() {
+  public Optional<String> asString() {
     return map(UUID::toString);
   }
 
-  public String toFormattedStringOrNull() {
-    return toFormattedString().orElse(null);
+  public String asStringOrNull() {
+    return asString().orElse(null);
+  }
+
+  /**
+   * Compares the given byte array to the byte equivalent value of this UUID ({@link #asBytes()}) and returns
+   * {@code true}, if the value is set and the given byte array has the same content as this UUID byte value,
+   * {@code false} otherwise.
+   *
+   * @param other
+   *          the array to compare to (which cannot be {@code null})
+   * @return {@code true} if the given array has the same byte value of this UUID, {@code false} otherwise
+   */
+  public boolean sameValue(final byte[] other) {
+    return other != null && other.length == 16 && asBytes().map(b -> Arrays.equals(b, other)).orElse(false);
+  }
+
+  public boolean sameValue(final String other) {
+    return UuidUtils.isValid(other) && asString().map(s -> s.equalsIgnoreCase(other)).orElse(false);
   }
 }

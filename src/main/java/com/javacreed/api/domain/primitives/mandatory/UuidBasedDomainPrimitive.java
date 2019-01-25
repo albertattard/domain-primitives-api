@@ -14,14 +14,6 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
     super(value);
   }
 
-  public boolean sameValue(final byte[] other) {
-    return other != null && other.length == 16 && Arrays.equals(toBytes(), other);
-  }
-
-  public boolean sameValue(final String other) {
-    return UuidUtils.isValid(other) && toString().equalsIgnoreCase(other);
-  }
-
   /**
    * Converts the UUID to bytes. Note that this is incompatible with the {@link UUID#nameUUIDFromBytes()}. The returned
    * bytes array can be converted back to UUID using the {@link UuidUtils#toUuid(byte[])} method defined within this
@@ -30,8 +22,20 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes
    * @see UuidUtils#toBytes(UUID)
    */
-  public byte[] toBytes() {
+  public byte[] asBytes() {
     return map(UuidUtils::toBytes);
+  }
+
+  public String asString() {
+    return map(UUID::toString);
+  }
+
+  public boolean sameValue(final byte[] other) {
+    return other != null && other.length == 16 && Arrays.equals(asBytes(), other);
+  }
+
+  public boolean sameValue(final String other) {
+    return UuidUtils.isValid(other) && toString().equalsIgnoreCase(other);
   }
 
 }
