@@ -1,10 +1,13 @@
 package com.javacreed.api.domain.primitives.array;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
@@ -55,12 +58,39 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
   }
 
   /**
+   * Reads the given file and returns an instance of this class with the bytes read from the given file. The contents
+   * read from the file need to fit the array as otherwise an Exception is thrown. Note that the file is not closed and
+   * the caller is responsible from closing it.
+   *
+   * @param file
+   *          the file to be read (which cannot be {@code null} and must fit within an array)
+   * @return an instance of this class
+   * @throws IOException
+   * @throws NullPointerException
+   *           if the given {@code file} is {@code null}
+   * @throws IllegalArgumentException
+   *           if the given {@code file} cannot be read or is too large
+   */
+  public static ReadOnlyByteArray read(final File file) throws IOException {
+    Preconditions.checkNotNull(file);
+    Preconditions.checkArgument(file.canRead());
+
+    /* http://hg.openjdk.java.net/jdk7/jdk7/jdk/rev/ec45423a4700#l3.1 */
+    final long size = file.length();
+    Preconditions.checkArgument(size < Integer.MAX_VALUE - 8);
+
+    try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
+      return ReadOnlyByteArray.read(in, (int) size);
+    }
+  }
+
+  /**
    * Reads the given channel and returns an instance of this class with the bytes read from the given channel. The
    * contents read from the channel need to fit the array as otherwise an Exception is thrown. Note that the channel is
    * not closed and the caller is responsible from closing it.
    *
    * @param channel
-   *          the channel to be read
+   *          the channel to be read (which cannot be {@code null})
    * @return an instance of this class
    * @throws NullPointerException
    *           if the given {@code channel} is {@code null}
@@ -68,6 +98,8 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
    *           if it fails to read the bytes from the given channel
    */
   public static ReadOnlyByteArray read(final FileChannel channel) throws IOException {
+    Preconditions.checkNotNull(channel);
+
     final ByteArrayOutputStream output = new ByteArrayOutputStream();
     final ByteBuffer buffer = ByteBuffer.allocate(4096);
     for (int read; (read = channel.read(buffer)) != -1;) {
@@ -82,10 +114,63 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
     return new ReadOnlyByteArray(output.toByteArray());
   }
 
-  private final byte[] data;
+  /**
+   * Reads the given input stream and returns an instance of this class with the bytes read from the given input stream.
+   * The contents read from the input stream need to fit the array as otherwise an Exception is thrown. Note that the
+   * input stream is not closed and the caller is responsible from closing it.
+   *
+   * @param inputStream
+   *          the input stream to be read (which cannot be {@code null})
+   * @return an instance of this class
+   * @throws NullPointerException
+   *           if the given {@code inputStream} is {@code null}
+   * @throws IOException
+   *           if it fails to read the bytes from the given input stream
+   */
+  public static ReadOnlyByteArray read(final InputStream inputStream) throws IOException {
+    Preconditions.checkNotNull(inputStream);
+    return ReadOnlyByteArray.read(inputStream, 4096);
+  }
 
+  /**
+   * Reads the given input stream and returns an instance of this class with the bytes read from the given input stream.
+   * The contents read from the input stream need to fit the array as otherwise an Exception is thrown. Note that the
+   * input stream is not closed and the caller is responsible from closing it.
+   * <p>
+   * This method also takes the buffer initial size. This is good to have as otherwise the buffer needs to be expanded
+   * everytime it fills up.
+   *
+   * @param inputStream
+   *          the input stream to be read (which cannot be {@code null})
+   * @param size
+   *          the initial buffer size (which cannot be negative)
+   * @return an instance of this class
+   * @throws NullPointerException
+   *           if the given {@code inputStream} is {@code null}
+   * @throws IOException
+   *           if it fails to read the bytes from the given input stream
+   */
+  public static ReadOnlyByteArray read(final InputStream inputStream, final int size) throws IOException {
+    Preconditions.checkNotNull(inputStream);
+    Preconditions.checkArgument(size > 0);
+
+    final ByteArrayOutputStream output = new ByteArrayOutputStream(size);
+    final byte[] buffer = new byte[4096];
+    for (int read; (read = inputStream.read(buffer)) != -1;) {
+      output.write(buffer, 0, read);
+    }
+
+    if (output.size() == 0) {
+      return ReadOnlyByteArray.empty();
+    }
+
+    return new ReadOnlyByteArray(output.toByteArray());
+  }
+
+  private final byte[] data;
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
+
   private transient boolean lazyHashCodeComputed;
 
   private ReadOnlyByteArray(final byte[] data) {

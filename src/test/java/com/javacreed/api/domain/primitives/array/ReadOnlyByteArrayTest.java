@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.primitives.array;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,7 +31,10 @@ public class ReadOnlyByteArrayTest {
   @Test
   public void handlingOfNulls() {
     Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.of(null));
-    Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.read(null));
+    Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.read((File) null));
+    Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.read((FileChannel) null));
+    Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.read((InputStream) null));
+    Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.read((InputStream) null, 0));
     Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.empty().sameAs(null));
     Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.empty().writeTo((File) null));
     Assert.assertThrows(NullPointerException.class, () -> ReadOnlyByteArray.empty().writeTo((Path) null));
