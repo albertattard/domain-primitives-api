@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.primitives.mandatory;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.UUID;
 
 import javax.annotation.concurrent.Immutable;
@@ -12,6 +13,10 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
 
   protected UuidBasedDomainPrimitive(final UUID value) throws NullPointerException {
     super(value);
+  }
+
+  public String asBase64String() {
+    return Base64.getEncoder().encodeToString(asBytes());
   }
 
   /**

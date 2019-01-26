@@ -1,6 +1,7 @@
 package com.javacreed.api.domain.primitives.optional;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,6 +14,14 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
 
   protected UuidBasedDomainPrimitive(final Optional<UUID> value) throws NullPointerException {
     super(value);
+  }
+
+  public Optional<String> asBase64String() {
+    return asBytes().map(b -> Base64.getEncoder().encodeToString(b));
+  }
+
+  public String asBase64StringOrNull() {
+    return asBase64String().orElse(null);
   }
 
   /**

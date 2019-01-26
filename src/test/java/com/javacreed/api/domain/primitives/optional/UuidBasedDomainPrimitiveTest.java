@@ -24,9 +24,15 @@ public class UuidBasedDomainPrimitiveTest {
   }
 
   @Test
+  public void asBase64StringShouldEncode() {
+    final T t = T.of("003c3872-f74a-4d4e-98e9-674a287575ca");
+    Assert.assertEquals("ADw4cvdKTU6Y6WdKKHV1yg==", t.asBase64StringOrNull());
+  }
+
+  @Test
   public void toStringShouldFormatted() {
     final String uuid = "7a9837c2-de8c-4e38-a603-cdad4d157838";
     final T t = T.of(uuid);
-    Assert.assertEquals(uuid, t.toString());
+    Assert.assertEquals(uuid, t.asStringOrNull());
   }
 }
