@@ -8,6 +8,12 @@ import org.junit.Test;
 public class UuidUtilsTest {
 
   @Test
+  public void asUuid() {
+    Assert.assertThrows(NullPointerException.class, () -> UuidUtils.asUuid(null));
+    Assert.assertThrows(IllegalArgumentException.class, () -> UuidUtils.asUuid(new byte[10]));
+  }
+
+  @Test
   public void checkArgument() {
     final String uuid = "92f53821-01c5-4020-85c7-86cc2f0211ff";
     Assert.assertEquals(uuid, UuidUtils.checkArgument(uuid));
@@ -24,7 +30,7 @@ public class UuidUtilsTest {
   @Test
   public void incompatibility() {
     final UUID expected = UUID.randomUUID();
-    final UUID incompatible = UUID.nameUUIDFromBytes(UuidUtils.toBytes(expected));
+    final UUID incompatible = UUID.nameUUIDFromBytes(UuidUtils.asBytes(expected));
     Assert.assertNotEquals(expected, incompatible);
   }
 
@@ -47,13 +53,7 @@ public class UuidUtilsTest {
   @Test
   public void readWrite() {
     final UUID expected = UUID.randomUUID();
-    final UUID actual = UuidUtils.toUuid(UuidUtils.toBytes(expected));
+    final UUID actual = UuidUtils.asUuid(UuidUtils.asBytes(expected));
     Assert.assertEquals(expected, actual);
-  }
-
-  @Test
-  public void toUuid() {
-    Assert.assertThrows(NullPointerException.class, () -> UuidUtils.toUuid(null));
-    Assert.assertThrows(IllegalArgumentException.class, () -> UuidUtils.toUuid(new byte[10]));
   }
 }

@@ -26,21 +26,21 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
 
   /**
    * Converts the UUID to bytes. Note that this is incompatible with the {@link UUID#nameUUIDFromBytes()}. The returned
-   * bytes array can be converted back to UUID using the {@link UuidUtils#toUuid(byte[])} method defined within this
+   * bytes array can be converted back to UUID using the {@link UuidUtils#asUuid(byte[])} method defined within this
    * class.
    *
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes
-   * @see UuidUtils#toBytes(UUID)
+   * @see UuidUtils#asBytes(UUID)
    */
   public Optional<byte[]> asBytes() {
-    return map(UuidUtils::toBytes);
+    return map(UuidUtils::asBytes);
   }
 
   /**
    * This method is a shortcut to <code>getBytes().orElse(null)</code>
    * <p>
    * Converts the UUID to bytes. Note that this is incompatible with the {@link UUID#nameUUIDFromBytes()}. The returned
-   * bytes array can be converted back to UUID using the {@link UuidUtils#toUuid(byte[])} method defined within this
+   * bytes array can be converted back to UUID using the {@link UuidUtils#asUuid(byte[])} method defined within this
    * class.
    *
    * @return the converted (incompatible with the {@link UUID#nameUUIDFromBytes()}) bytes if available, otherwise
