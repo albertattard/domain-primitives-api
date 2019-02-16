@@ -55,6 +55,10 @@ public class UuidBasedDomainPrimitive extends ComparableBasedDomainPrimitive<UUI
     return map(UUID::toString);
   }
 
+  public String asStringOrBlank() {
+    return asString().orElse("");
+  }
+
   public String asStringOrNull() {
     return asString().orElse(null);
   }
