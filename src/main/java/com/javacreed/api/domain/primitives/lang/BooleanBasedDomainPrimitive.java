@@ -9,8 +9,7 @@ import com.javacreed.api.domain.primitives.function.BooleanFunction;
 @Immutable
 public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomainPrimitive> {
 
-  public static final Comparator<BooleanBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Boolean.compare(b.getValue(),
-                                                                                                           a.getValue());
+  public static final Comparator<BooleanBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Boolean.compare(b.get(), a.get());
 
   protected final boolean value;
 
@@ -36,6 +35,11 @@ public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomai
     return false;
   }
 
+  public boolean get() {
+    return value;
+  }
+
+  @Deprecated
   public boolean getValue() {
     return value;
   }

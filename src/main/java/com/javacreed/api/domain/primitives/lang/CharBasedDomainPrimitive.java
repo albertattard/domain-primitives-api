@@ -9,8 +9,7 @@ import com.javacreed.api.domain.primitives.function.CharFunction;
 @Immutable
 public class CharBasedDomainPrimitive implements Comparable<CharBasedDomainPrimitive> {
 
-  public static final Comparator<CharBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Character.compare(b.getValue(),
-                                                                                                          a.getValue());
+  public static final Comparator<CharBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Character.compare(b.get(), a.get());
 
   protected final char value;
 
@@ -36,6 +35,11 @@ public class CharBasedDomainPrimitive implements Comparable<CharBasedDomainPrimi
     return false;
   }
 
+  public char get() {
+    return value;
+  }
+
+  @Deprecated
   public char getValue() {
     return value;
   }

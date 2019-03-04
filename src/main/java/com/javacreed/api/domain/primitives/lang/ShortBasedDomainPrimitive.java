@@ -9,8 +9,7 @@ import com.javacreed.api.domain.primitives.function.ShortFunction;
 @Immutable
 public class ShortBasedDomainPrimitive implements Comparable<ShortBasedDomainPrimitive> {
 
-  public static final Comparator<ShortBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Short.compare(b.getValue(),
-                                                                                                       a.getValue());
+  public static final Comparator<ShortBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Short.compare(b.get(), a.get());
 
   protected final short value;
 
@@ -36,6 +35,11 @@ public class ShortBasedDomainPrimitive implements Comparable<ShortBasedDomainPri
     return value == ((ShortBasedDomainPrimitive) object).value;
   }
 
+  public short get() {
+    return value;
+  }
+
+  @Deprecated
   public short getValue() {
     return value;
   }

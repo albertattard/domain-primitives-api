@@ -9,8 +9,7 @@ import com.javacreed.api.domain.primitives.function.ByteFunction;
 @Immutable
 public class ByteBasedDomainPrimitive implements Comparable<ByteBasedDomainPrimitive> {
 
-  public static final Comparator<ByteBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Byte.compare(b.getValue(),
-                                                                                                     a.getValue());
+  public static final Comparator<ByteBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Byte.compare(b.get(), a.get());
 
   protected final byte value;
 
@@ -36,6 +35,11 @@ public class ByteBasedDomainPrimitive implements Comparable<ByteBasedDomainPrimi
     return value == ((ByteBasedDomainPrimitive) object).value;
   }
 
+  public byte get() {
+    return value;
+  }
+
+  @Deprecated
   public byte getValue() {
     return value;
   }

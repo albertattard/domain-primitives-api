@@ -9,8 +9,7 @@ import com.javacreed.api.domain.primitives.function.FloatFunction;
 @Immutable
 public class FloatBasedDomainPrimitive implements Comparable<FloatBasedDomainPrimitive> {
 
-  public static final Comparator<FloatBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Float.compare(b.getValue(),
-                                                                                                       a.getValue());
+  public static final Comparator<FloatBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Float.compare(b.get(), a.get());
 
   protected final float value;
   private final int intBits;
@@ -38,6 +37,11 @@ public class FloatBasedDomainPrimitive implements Comparable<FloatBasedDomainPri
     return intBits == ((FloatBasedDomainPrimitive) object).intBits;
   }
 
+  public float get() {
+    return value;
+  }
+
+  @Deprecated
   public float getValue() {
     return value;
   }

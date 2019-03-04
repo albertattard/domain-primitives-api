@@ -8,8 +8,7 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public class DoubleBasedDomainPrimitive implements Comparable<DoubleBasedDomainPrimitive> {
 
-  public static final Comparator<DoubleBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Double.compare(b.getValue(),
-                                                                                                         a.getValue());
+  public static final Comparator<DoubleBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Double.compare(b.get(), a.get());
 
   protected final double value;
   private final long longBits;
@@ -37,6 +36,11 @@ public class DoubleBasedDomainPrimitive implements Comparable<DoubleBasedDomainP
     return longBits == ((DoubleBasedDomainPrimitive) object).longBits;
   }
 
+  public double get() {
+    return value;
+  }
+
+  @Deprecated
   public double getValue() {
     return value;
   }

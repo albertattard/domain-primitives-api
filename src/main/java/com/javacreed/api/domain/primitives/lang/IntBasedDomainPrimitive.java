@@ -2,14 +2,14 @@ package com.javacreed.api.domain.primitives.lang;
 
 import java.util.Comparator;
 import java.util.function.IntFunction;
+import java.util.function.IntSupplier;
 
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class IntBasedDomainPrimitive implements Comparable<IntBasedDomainPrimitive> {
+public class IntBasedDomainPrimitive implements Comparable<IntBasedDomainPrimitive>, IntSupplier {
 
-  public static final Comparator<IntBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Integer.compare(b.getValue(),
-                                                                                                       a.getValue());
+  public static final Comparator<IntBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Integer.compare(b.get(), a.get());
 
   protected final int value;
 
@@ -35,6 +35,16 @@ public class IntBasedDomainPrimitive implements Comparable<IntBasedDomainPrimiti
     return value == ((IntBasedDomainPrimitive) object).value;
   }
 
+  public int get() {
+    return value;
+  }
+
+  @Override
+  public int getAsInt() {
+    return get();
+  }
+
+  @Deprecated
   public int getValue() {
     return value;
   }
