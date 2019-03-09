@@ -11,10 +11,18 @@ public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomai
 
   public static final Comparator<BooleanBasedDomainPrimitive> DESCENDING_ORDER = (a, b) -> Boolean.compare(b.get(), a.get());
 
+  public static boolean trueIfNotNullAndPositive(final Byte value) {
+    return value != null && value > 0;
+  }
+
   protected final boolean value;
 
   protected BooleanBasedDomainPrimitive(final boolean value) {
     this.value = value;
+  }
+
+  public byte asByte() {
+    return (byte) (value ? 1 : 0);
   }
 
   @Override
@@ -59,10 +67,6 @@ public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomai
 
   public <T> T map(final BooleanFunction<T> map) throws NullPointerException {
     return map.apply(value);
-  }
-
-  public byte toByte() {
-    return (byte) (value ? 1 : 0);
   }
 
   @Override

@@ -20,16 +20,15 @@ public class LocalDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     super(value);
   }
 
-  @Override
-  public int compareTo(final LocalDateTimeBasedDomainPrimitive other) {
-    return compareTo(other, LocalDateTime::compareTo);
+  public Timestamp asSqlTimestamp() {
+    return map(Timestamp::valueOf);
   }
 
-  public String format() {
-    return format(LocalDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
+  public String asString() {
+    return asString(LocalDateTimeBasedDomainPrimitive.DEFAULT_FORMATTER);
   }
 
-  public String format(final DateTimeFormatter formatter) throws NullPointerException {
+  public String asString(final DateTimeFormatter formatter) throws NullPointerException {
     Preconditions.checkNotNull(formatter);
     return map(formatter::format);
   }
@@ -42,16 +41,17 @@ public class LocalDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
    * @throws IllegalArgumentException
    *           if the pattern is invalid
    */
-  public String format(final String pattern) throws NullPointerException, IllegalArgumentException {
+  public String asString(final String pattern) throws NullPointerException, IllegalArgumentException {
     Preconditions.checkNotNull(pattern);
-    return format(DateTimeFormatter.ofPattern(pattern));
+    return asString(DateTimeFormatter.ofPattern(pattern));
   }
 
-  public Timestamp toSqlTimestamp() {
-    return map(Timestamp::valueOf);
-  }
-
-  public ZonedDateTime toZone(final ZoneId zoneId) throws NullPointerException {
+  public ZonedDateTime asZone(final ZoneId zoneId) throws NullPointerException {
     return ZonedDateTime.of(value, zoneId);
+  }
+
+  @Override
+  public int compareTo(final LocalDateTimeBasedDomainPrimitive other) {
+    return compareTo(other, LocalDateTime::compareTo);
   }
 }
