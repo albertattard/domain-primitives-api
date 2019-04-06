@@ -44,10 +44,10 @@
     <jacoco.version>0.7.9</jacoco.version>
     <reports.version>2.9</reports.version>
     <checkstyle.version>3.0.0</checkstyle.version>
-    <spotbugs.version>3.1.12</spotbugs.version>
+    <spotbugs.version>4.0.0-beta1</spotbugs.version>
     <spotbugs.plugin.version>3.1.10</spotbugs.plugin.version>
     <!-- <jdepend.version>2.0</jdepend.version> -->
-    <google.guava.version>27.0.1-jre</google.guava.version>
+    <google.guava.version>27.1-jre</google.guava.version>
     <junit.version>4.13-beta-2</junit.version>
   </properties>
 

@@ -10,6 +10,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.function.Supplier;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -94,7 +95,13 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
     return value.isBefore(ZonedDateTime.now(value.getZone()));
   }
 
+  public boolean sameValueUpToSecond(final Supplier<ZonedDateTime> supplier) {
+    Preconditions.checkNotNull(supplier);
+    return sameValueUpToSecond(supplier.get());
+  }
+
   public boolean sameValueUpToSecond(final ZonedDateTime other) {
+    Preconditions.checkNotNull(other);
     final ZonedDateTime o = other.withZoneSameInstant(getZone());
     return get().getSecond() == o.getSecond() &&
            get().getMinute() == o.getMinute() &&
