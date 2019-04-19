@@ -25,7 +25,7 @@ public class PreparedStatementUtils {
 
   public static void setByte(final PreparedStatement ps, final int column, final ByteBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
-    PreparedStatementUtils.setByte(ps, column, object == null ? null : object.getValue());
+    PreparedStatementUtils.setByte(ps, column, object == null ? null : object.get());
   }
 
   public static void setByte(final PreparedStatement ps, final int column,
@@ -54,7 +54,7 @@ public class PreparedStatementUtils {
 
   public static void setInt(final PreparedStatement ps, final int column, final IntBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
-    PreparedStatementUtils.setInt(ps, column, object == null ? null : object.getValue());
+    PreparedStatementUtils.setInt(ps, column, object == null ? null : object.get());
   }
 
   public static void setInt(final PreparedStatement ps, final int column, final Integer param)
@@ -82,7 +82,7 @@ public class PreparedStatementUtils {
 
   public static void setLong(final PreparedStatement ps, final int column, final LongBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
-    PreparedStatementUtils.setLong(ps, column, object == null ? null : object.getValue());
+    PreparedStatementUtils.setLong(ps, column, object == null ? null : object.get());
   }
 
   public static void setLong(final PreparedStatement ps, final int column,
@@ -106,7 +106,7 @@ public class PreparedStatementUtils {
 
   public static void setShort(final PreparedStatement ps, final int column, final ShortBasedDomainPrimitive object)
       throws SQLException, NullPointerException {
-    PreparedStatementUtils.setShort(ps, column, object == null ? null : object.getValue());
+    PreparedStatementUtils.setShort(ps, column, object == null ? null : object.get());
   }
 
   public static void setString(final PreparedStatement ps, final int column,
