@@ -10,6 +10,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import javax.annotation.concurrent.Immutable;
@@ -101,13 +102,22 @@ public class ZonedDateTimeBasedDomainPrimitive extends ObjectBasedDomainPrimitiv
   }
 
   public boolean sameValueUpToSecond(final ZonedDateTime other) {
+    return similarValueUpToSecond(other, 0);
+  }
+
+  public boolean similarValueUpToSecond(final Supplier<ZonedDateTime> supplier, final int deltaInSeconds) {
+    Preconditions.checkNotNull(supplier);
+    return similarValueUpToSecond(supplier.get(), deltaInSeconds);
+  }
+
+  public boolean similarValueUpToSecond(final ZonedDateTime other, final int deltaInSeconds) {
     Preconditions.checkNotNull(other);
-    final ZonedDateTime o = other.withZoneSameInstant(getZone());
-    return get().getSecond() == o.getSecond() &&
-           get().getMinute() == o.getMinute() &&
-           get().getHour() == o.getHour() &&
-           get().getDayOfYear() == o.getDayOfYear() &&
-           get().getYear() == o.getYear();
+    Preconditions.checkArgument(deltaInSeconds >= 0);
+
+    final long a = TimeUnit.MILLISECONDS.toSeconds(toEpochMilli());
+    final long b = TimeUnit.MILLISECONDS.toSeconds(other.withZoneSameInstant(getZone()).toInstant().toEpochMilli());
+
+    return Math.abs(a - b) <= deltaInSeconds;
   }
 
   public long toEpochMilli() {

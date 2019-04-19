@@ -49,4 +49,14 @@ public class ZonedDateTimeBasedDomainPrimitiveTest {
     Assert.assertTrue(a.sameValueUpToSecond(b));
     Assert.assertNotEquals(a.get().getNano(), b.get().getNano());
   }
+
+  @Test
+  public void similarValueUpToSecond() {
+    final Testable a = new Testable(ZonedDateTime.of(2018, 1, 5, 10, 0, 0, 1000000, ZoneId.of("Europe/Malta")));
+    final Testable b = new Testable(ZonedDateTime.of(2018, 1, 5, 8, 59, 59, 0, ZoneId.of("Europe/London")));
+
+    Assert.assertTrue(a.similarValueUpToSecond(b, 1));
+    Assert.assertNotEquals(a.get().getNano(), b.get().getNano());
+    Assert.assertEquals(1001L, a.toEpochMilli() - b.toEpochMilli());
+  }
 }
