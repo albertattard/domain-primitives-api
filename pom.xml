@@ -44,11 +44,12 @@
     <jacoco.version>0.7.9</jacoco.version>
     <reports.version>2.9</reports.version>
     <checkstyle.version>3.0.0</checkstyle.version>
-    <spotbugs.version>4.0.0-beta1</spotbugs.version>
+    <spotbugs.version>4.0.0-beta4</spotbugs.version>
     <spotbugs.plugin.version>3.1.10</spotbugs.plugin.version>
     <!-- <jdepend.version>2.0</jdepend.version> -->
-    <google.guava.version>27.1-jre</google.guava.version>
-    <junit.version>4.13-beta-2</junit.version>
+    <google.guava.version>28.1-jre</google.guava.version>
+    <junit.version>4.13-rc-2</junit.version>
+    <pitest.version>1.4.10</pitest.version>
   </properties>
 
   <dependencies>
@@ -72,7 +73,7 @@
   </dependencies>
 
   <build>
-    <defaultGoal>clean install site versions:display-dependency-updates</defaultGoal>
+    <defaultGoal>clean install versions:display-dependency-updates org.pitest:pitest-maven:mutationCoverage site</defaultGoal>
 
     <plugins>
       <plugin>
@@ -161,6 +162,19 @@
           <reportSet>
             <reports>
               <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>${pitest.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>report</report>
             </reports>
           </reportSet>
         </reportSets>

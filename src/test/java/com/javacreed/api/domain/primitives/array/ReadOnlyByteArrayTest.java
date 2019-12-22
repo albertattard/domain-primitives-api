@@ -6,12 +6,12 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ReadOnlyByteArrayTest {
-
   @Test
   public void contentIntegrity() {
     final byte[] actual = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -57,5 +57,17 @@ public class ReadOnlyByteArrayTest {
     /* Verify content */
     Assert.assertEquals(bytes.length, array.length());
     Assert.assertTrue(array.sameAs(bytes));
+  }
+
+  @Test
+  public void shouldReturnEmptyInstance() {
+    Assert.assertSame(ReadOnlyByteArray.empty(), ReadOnlyByteArray.of(new byte[0]));
+  }
+
+  @Test
+  public void shouldThrowIllegalArgumentExceptionWhenGivenAFileThatCannotBeRead() {
+    final File file = new File("target/non-existing/" + UUID.randomUUID());
+    Assert.assertFalse(file.canRead());
+    Assert.assertThrows(IllegalArgumentException.class, () -> ReadOnlyByteArray.read(file));
   }
 }
