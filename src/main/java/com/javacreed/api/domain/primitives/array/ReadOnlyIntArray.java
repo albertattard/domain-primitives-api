@@ -10,8 +10,24 @@ import com.google.common.base.Preconditions;
 @Immutable
 public class ReadOnlyIntArray implements Iterable<Integer> {
 
+  private static final ReadOnlyIntArray EMPTY = new ReadOnlyIntArray(new int[0]);
+
+  /**
+   * Returns the empty array. This is a shared instance and the same empty array is always returned.
+   *
+   * @return the empty array
+   */
+  public static ReadOnlyIntArray empty() {
+    return ReadOnlyIntArray.EMPTY;
+  }
+
   public static ReadOnlyIntArray of(final int[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
+
+    if (data.length == 0) {
+      return ReadOnlyIntArray.empty();
+    }
+
     return new ReadOnlyIntArray(Arrays.copyOf(data, data.length));
   }
 
