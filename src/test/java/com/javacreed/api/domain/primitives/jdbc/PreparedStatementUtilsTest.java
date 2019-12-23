@@ -12,6 +12,7 @@ import com.javacreed.api.domain.primitives.lang.ByteBasedDomainPrimitive;
 import com.javacreed.api.domain.primitives.lang.IntBasedDomainPrimitive;
 import com.javacreed.api.domain.primitives.lang.LongBasedDomainPrimitive;
 import com.javacreed.api.domain.primitives.lang.ShortBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.optional.StringBasedDomainPrimitive;
 
 public class PreparedStatementUtilsTest {
 
@@ -166,12 +167,52 @@ public class PreparedStatementUtilsTest {
   }
 
   @Test
+  public void should_invoke_setNull_with_VARCHAR_when_given_an_empty_StringBasedDomainPrimitive_optional() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setString(ps, 1, Optional.empty());
+
+    Mockito.verify(ps).setNull(1, Types.VARCHAR);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setNull_with_VARCHAR_when_given_Long_value_is_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setString(ps, 1, (String) null);
+
+    Mockito.verify(ps).setNull(1, Types.VARCHAR);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setNull_with_VARCHAR_when_given_StringBasedDomainPrimitive_value_is_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setString(ps, 1, (StringBasedDomainPrimitive) null);
+
+    Mockito.verify(ps).setNull(1, Types.VARCHAR);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
   public void should_invoke_setShort_when_given_Short_value_is_not_null() throws SQLException {
     final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
 
     PreparedStatementUtils.setShort(ps, 1, Short.valueOf(String.valueOf(2)));
 
     Mockito.verify(ps).setShort(1, (short) 2);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setString_when_given_String_value_is_not_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setString(ps, 1, "2");
+
+    Mockito.verify(ps).setString(1, "2");
     Mockito.verifyNoMoreInteractions(ps);
   }
 
