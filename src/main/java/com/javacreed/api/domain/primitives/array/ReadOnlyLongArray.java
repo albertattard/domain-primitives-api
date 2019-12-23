@@ -10,12 +10,29 @@ import com.google.common.base.Preconditions;
 @Immutable
 public class ReadOnlyLongArray implements Iterable<Long> {
 
+  private static final ReadOnlyLongArray EMPTY = new ReadOnlyLongArray(new long[0]);
+
+  /**
+   * Returns the empty array. This is a shared instance and the same empty array is always returned.
+   *
+   * @return the empty array
+   */
+  public static ReadOnlyLongArray empty() {
+    return ReadOnlyLongArray.EMPTY;
+  }
+
   public static ReadOnlyLongArray of(final long[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
+
+    if (data.length == 0) {
+      return ReadOnlyLongArray.empty();
+    }
+
     return new ReadOnlyLongArray(Arrays.copyOf(data, data.length));
   }
 
   private final long[] data;
+
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
   private transient boolean lazyHashCodeComputed = false;
@@ -65,6 +82,11 @@ public class ReadOnlyLongArray implements Iterable<Long> {
 
   public int length() {
     return data.length;
+  }
+
+  public boolean sameAs(final long[] other) throws NullPointerException {
+    Preconditions.checkNotNull(other);
+    return Arrays.equals(data, other);
   }
 
   public long valueAt(final int index) {
