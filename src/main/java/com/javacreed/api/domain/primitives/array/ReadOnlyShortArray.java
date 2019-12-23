@@ -10,8 +10,34 @@ import com.google.common.base.Preconditions;
 @Immutable
 public class ReadOnlyShortArray implements Iterable<Short> {
 
+  private static final ReadOnlyShortArray EMPTY = new ReadOnlyShortArray(new short[0]);
+
+  /**
+   * Returns the empty array. This is a shared instance and the same empty array is always returned.
+   *
+   * @return the empty array
+   */
+  public static ReadOnlyShortArray empty() {
+    return ReadOnlyShortArray.EMPTY;
+  }
+
+  /**
+   * Copies the given array and returns a new instance of this class. Any changes to the given array will not affect
+   * this class.
+   *
+   * @param data
+   *          the array (which cannot be {@code null})
+   * @return an instance of this class for the given array
+   * @throws NullPointerException
+   *           if the given array is {@code null}
+   */
   public static ReadOnlyShortArray of(final short[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
+
+    if (data.length == 0) {
+      return ReadOnlyShortArray.empty();
+    }
+
     return new ReadOnlyShortArray(Arrays.copyOf(data, data.length));
   }
 
