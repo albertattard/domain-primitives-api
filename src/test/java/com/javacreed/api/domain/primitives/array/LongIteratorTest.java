@@ -8,20 +8,20 @@ import org.junit.Test;
 public class LongIteratorTest {
 
   @Test
-  public void retrievingMoreElementsThanAvailable() {
-    final LongArrayIterator iterator = LongArrayIterator.create(new long[] { 1 });
-    Assert.assertTrue(iterator.hasNext());
-    Assert.assertEquals(1, iterator.nextLong());
+  public void shouldReturnTheElementsInTheProperOrder() {
+    final long[] source = new long[] { 1, 2, 3, 4 };
+    final LongArrayIterator iterator = LongArrayIterator.create(source);
+    for (int i = 0; i < source.length; i++) {
+      Assert.assertTrue(iterator.hasNext());
+      Assert.assertEquals(source[i], iterator.next().longValue());
+    }
     Assert.assertFalse(iterator.hasNext());
-    Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
   }
 
   @Test
-  public void runIterator() {
-    final LongArrayIterator iterator = LongArrayIterator.create(new long[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-    for (int i = 0; i < 10; i++) {
-      Assert.assertTrue(iterator.hasNext());
-      Assert.assertEquals(i, iterator.nextLong());
-    }
+  public void shouldThrowNoSuchElementExceptionWhenAccessingMoreElementsThanAvailable() {
+    final LongArrayIterator iterator = LongArrayIterator.create(new long[0]);
+    Assert.assertFalse(iterator.hasNext());
+    Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
   }
 }

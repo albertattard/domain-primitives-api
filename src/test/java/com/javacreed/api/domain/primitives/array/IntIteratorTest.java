@@ -8,20 +8,20 @@ import org.junit.Test;
 public class IntIteratorTest {
 
   @Test
-  public void retrievingMoreElementsThanAvailable() {
-    final IntArrayIterator iterator = IntArrayIterator.create(new int[] { 1 });
-    Assert.assertTrue(iterator.hasNext());
-    Assert.assertEquals(1, iterator.nextInt());
+  public void shouldReturnTheElementsInTheProperOrder() {
+    final int[] source = new int[] { 1, 2, 3, 4 };
+    final IntArrayIterator iterator = IntArrayIterator.create(source);
+    for (int i = 0; i < source.length; i++) {
+      Assert.assertTrue(iterator.hasNext());
+      Assert.assertEquals(source[i], iterator.next().intValue());
+    }
     Assert.assertFalse(iterator.hasNext());
-    Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
   }
 
   @Test
-  public void runIterator() {
-    final IntArrayIterator iterator = IntArrayIterator.create(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-    for (int i = 0; i < 10; i++) {
-      Assert.assertTrue(iterator.hasNext());
-      Assert.assertEquals(i, iterator.nextInt());
-    }
+  public void shouldThrowNoSuchElementExceptionWhenAccessingMoreElementsThanAvailable() {
+    final IntArrayIterator iterator = IntArrayIterator.create(new int[0]);
+    Assert.assertFalse(iterator.hasNext());
+    Assert.assertThrows(NoSuchElementException.class, () -> iterator.next());
   }
 }
