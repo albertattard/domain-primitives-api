@@ -10,12 +10,29 @@ import com.google.common.base.Preconditions;
 @Immutable
 public class ReadOnlyDoubleArray implements Iterable<Double> {
 
+  private static final ReadOnlyDoubleArray EMPTY = new ReadOnlyDoubleArray(new double[0]);
+
+  /**
+   * Returns the empty array. This is a shared instance and the same empty array is always returned.
+   *
+   * @return the empty array
+   */
+  public static ReadOnlyDoubleArray empty() {
+    return ReadOnlyDoubleArray.EMPTY;
+  }
+
   public static ReadOnlyDoubleArray of(final double[] data) throws NullPointerException {
     Preconditions.checkNotNull(data);
+
+    if (data.length == 0) {
+      return ReadOnlyDoubleArray.empty();
+    }
+
     return new ReadOnlyDoubleArray(Arrays.copyOf(data, data.length));
   }
 
   private final double[] data;
+
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
   private transient boolean lazyHashCodeComputed = false;
