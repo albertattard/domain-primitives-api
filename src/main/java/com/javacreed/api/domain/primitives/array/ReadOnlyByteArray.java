@@ -168,9 +168,9 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
   }
 
   private final byte[] data;
+
   /* Compute the hash code when requested */
   private transient int lazyHashCode;
-
   private transient boolean lazyHashCodeComputed;
 
   private ReadOnlyByteArray(final byte[] data) {
@@ -273,8 +273,7 @@ public class ReadOnlyByteArray implements Iterable<Byte> {
 
     final File parent = file.getParentFile();
     if (parent != null && false == parent.isDirectory()) {
-      parent.mkdirs();
-      if (false == parent.isDirectory()) {
+      if (false == parent.mkdirs() || false == parent.isDirectory()) {
         throw new IOException("Failed to create the parent directory " + parent);
       }
     }

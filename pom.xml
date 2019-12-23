@@ -49,6 +49,7 @@
     <!-- <jdepend.version>2.0</jdepend.version> -->
     <google.guava.version>28.1-jre</google.guava.version>
     <junit.version>4.13-rc-2</junit.version>
+    <mokito.version>2.0.2-beta</mokito.version>
     <pitest.version>1.4.10</pitest.version>
   </properties>
 
@@ -68,6 +69,12 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>${mokito.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
