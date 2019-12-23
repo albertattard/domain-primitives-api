@@ -18,6 +18,14 @@ public class BooleanBasedDomainPrimitiveTest {
   }
 
   @Test
+  public void should_return_the_same_hashcode_for_the_same_source() {
+    Assert.assertEquals(1231, new Subject(true).hashCode());
+    Assert.assertEquals(1237, new Subject(false).hashCode());
+    Assert.assertEquals(new Subject(true).hashCode(), new Subject(true).hashCode());
+    Assert.assertEquals(new Subject(false).hashCode(), new Subject(false).hashCode());
+  }
+
+  @Test
   public void should_return_true_if_not_null_and_positive_false_otherwise() {
     Assert.assertFalse(BooleanBasedDomainPrimitive.trueIfNotNullAndPositive(null));
     Assert.assertFalse(BooleanBasedDomainPrimitive.trueIfNotNullAndPositive(Byte.valueOf((byte) 0)));
