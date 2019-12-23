@@ -5,12 +5,13 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Optional;
 
-import com.javacreed.api.domain.primitives.lang.LongBasedDomainPrimitive;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.javacreed.api.domain.primitives.lang.ByteBasedDomainPrimitive;
 import com.javacreed.api.domain.primitives.lang.IntBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.lang.LongBasedDomainPrimitive;
+import com.javacreed.api.domain.primitives.lang.ShortBasedDomainPrimitive;
 
 public class PreparedStatementUtilsTest {
 
@@ -31,6 +32,46 @@ public class PreparedStatementUtilsTest {
     PreparedStatementUtils.setInt(ps, 1, Integer.valueOf(2));
 
     Mockito.verify(ps).setInt(1, 2);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setLong_when_given_Long_value_is_not_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setLong(ps, 1, Long.valueOf(2));
+
+    Mockito.verify(ps).setLong(1, 2);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setNull_with_BIGINT_when_given_an_empty_LongBasedDomainPrimitive_optional() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setLong(ps, 1, Optional.empty());
+
+    Mockito.verify(ps).setNull(1, Types.BIGINT);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setNull_with_BIGINT_when_given_Long_value_is_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setLong(ps, 1, (Long) null);
+
+    Mockito.verify(ps).setNull(1, Types.BIGINT);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setNull_with_BIGINT_when_given_LongBasedDomainPrimitive_value_is_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setLong(ps, 1, (LongBasedDomainPrimitive) null);
+
+    Mockito.verify(ps).setNull(1, Types.BIGINT);
     Mockito.verifyNoMoreInteractions(ps);
   }
 
@@ -65,6 +106,36 @@ public class PreparedStatementUtilsTest {
   }
 
   @Test
+  public void should_invoke_setNull_with_SMALLINT_when_given_an_empty_ShortBasedDomainPrimitive_optional() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setShort(ps, 1, Optional.empty());
+
+    Mockito.verify(ps).setNull(1, Types.SMALLINT);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setNull_with_SMALLINT_when_given_Short_value_is_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setShort(ps, 1, (Short) null);
+
+    Mockito.verify(ps).setNull(1, Types.SMALLINT);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
+  public void should_invoke_setNull_with_SMALLINT_when_given_ShortBasedDomainPrimitive_value_is_null() throws SQLException {
+    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+
+    PreparedStatementUtils.setShort(ps, 1, (ShortBasedDomainPrimitive) null);
+
+    Mockito.verify(ps).setNull(1, Types.SMALLINT);
+    Mockito.verifyNoMoreInteractions(ps);
+  }
+
+  @Test
   public void should_invoke_setNull_with_TINYINT_when_given_an_empty_ByteBasedDomainPrimitive_optional() throws SQLException {
     final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
 
@@ -93,44 +164,14 @@ public class PreparedStatementUtilsTest {
     Mockito.verify(ps).setNull(1, Types.TINYINT);
     Mockito.verifyNoMoreInteractions(ps);
   }
-  
-  @Test
-  public void should_invoke_setLong_when_given_Long_value_is_not_null() throws SQLException {
-    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
-
-    PreparedStatementUtils.setLong(ps, 1, Long.valueOf(2));
-
-    Mockito.verify(ps).setLong(1, 2);
-    Mockito.verifyNoMoreInteractions(ps);
-  }
 
   @Test
-  public void should_invoke_setNull_with_BIGINT_when_given_an_empty_LongBasedDomainPrimitive_optional() throws SQLException {
+  public void should_invoke_setShort_when_given_Short_value_is_not_null() throws SQLException {
     final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
 
-    PreparedStatementUtils.setLong(ps, 1, Optional.empty());
+    PreparedStatementUtils.setShort(ps, 1, Short.valueOf(String.valueOf(2)));
 
-    Mockito.verify(ps).setNull(1, Types.BIGINT);
-    Mockito.verifyNoMoreInteractions(ps);
-  }
-
-  @Test
-  public void should_invoke_setNull_with_BIGINT_when_given_byte_value_is_null() throws SQLException {
-    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
-
-    PreparedStatementUtils.setLong(ps, 1, (Long) null);
-
-    Mockito.verify(ps).setNull(1, Types.BIGINT);
-    Mockito.verifyNoMoreInteractions(ps);
-  }
-
-  @Test
-  public void should_invoke_setNull_with_BIGINT_when_given_LongBasedDomainPrimitive_value_is_null() throws SQLException {
-    final PreparedStatement ps = Mockito.mock(PreparedStatement.class);
-
-    PreparedStatementUtils.setLong(ps, 1, (LongBasedDomainPrimitive) null);
-
-    Mockito.verify(ps).setNull(1, Types.BIGINT);
+    Mockito.verify(ps).setShort(1, (short) 2);
     Mockito.verifyNoMoreInteractions(ps);
   }
 
