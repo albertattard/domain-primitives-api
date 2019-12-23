@@ -28,6 +28,18 @@ public class BooleanBasedDomainPrimitiveTest {
   }
 
   @Test
+  public void should_return_true_only_when_equals_another_instance_with_the_same_value() {
+    final Subject subject = new Subject(false);
+
+    Assert.assertFalse(subject.equals(null));
+    Assert.assertFalse(subject.equals(new Object()));
+    Assert.assertFalse(subject.equals(new Subject(true)));
+
+    Assert.assertTrue(subject.equals(subject));
+    Assert.assertTrue(subject.equals(new Subject(false)));
+  }
+
+  @Test
   public void should_sort_in_descending_order() {
     final Subject a = new Subject(false);
     final Subject b = new Subject(true);

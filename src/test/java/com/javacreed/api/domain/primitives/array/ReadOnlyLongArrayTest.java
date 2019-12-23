@@ -78,7 +78,7 @@ public class ReadOnlyLongArrayTest {
   }
 
   @Test
-  public void should_return_true_only_when_equals_another_instance_of_the_same_content() {
+  public void should_return_true_only_when_equals_another_instance_with_the_same_content() {
     final long[] source = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     final ReadOnlyLongArray array = ReadOnlyLongArray.of(source);
 

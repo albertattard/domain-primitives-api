@@ -78,7 +78,7 @@ public class ReadOnlyDoubleArrayTest {
   }
 
   @Test
-  public void should_return_true_only_when_equals_another_instance_of_the_same_content() {
+  public void should_return_true_only_when_equals_another_instance_with_the_same_content() {
     final double[] source = { 0.0, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9 };
     final ReadOnlyDoubleArray array = ReadOnlyDoubleArray.of(source);
 

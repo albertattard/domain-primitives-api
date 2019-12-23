@@ -78,7 +78,7 @@ public class ReadOnlyFloatArrayTest {
   }
 
   @Test
-  public void should_return_true_only_when_equals_another_instance_of_the_same_content() {
+  public void should_return_true_only_when_equals_another_instance_with_the_same_content() {
     final float[] source = { 0.0F, 1.1F, 2.2F, 3.3F, 4.4F, 5.5F, 6.6F, 7.7F, 8.8F, 9.9F };
     final ReadOnlyFloatArray array = ReadOnlyFloatArray.of(source);
 
