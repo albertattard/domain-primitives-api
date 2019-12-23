@@ -36,7 +36,7 @@ public class BooleanBasedDomainPrimitiveTest {
     Assert.assertEquals(1, BooleanBasedDomainPrimitive.DESCENDING_ORDER.compare(a, b));
     Assert.assertEquals(-1, BooleanBasedDomainPrimitive.DESCENDING_ORDER.compare(b, a));
 
-    Assert.assertEquals(0, a.compareTo( a ));
+    Assert.assertEquals(0, a.compareTo(a));
     Assert.assertEquals(-1, a.compareTo(b));
     Assert.assertEquals(1, b.compareTo(a));
   }

@@ -47,11 +47,6 @@ public class BooleanBasedDomainPrimitive implements Comparable<BooleanBasedDomai
     return value;
   }
 
-  @Deprecated
-  public boolean getValue() {
-    return value;
-  }
-
   @Override
   public int hashCode() {
     return value ? 1231 : 1237;
